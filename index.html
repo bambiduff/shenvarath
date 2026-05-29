@@ -170,6 +170,46 @@
     .citation-search:focus { border-color:var(--purple); }
     .citation-count { font-size:12px; color:var(--muted); text-align:right; margin-bottom:8px; font-style:italic; }
 
+
+    /* ── ÉQUIPEMENT ──────────────────── */
+    .money-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .money-item { background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); padding:14px 8px; text-align:center; }
+    .money-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+    .money-input { text-align:center; width:100%; font-family:'Cinzel',serif; font-size:24px; font-weight:700; background:none; border:none; color:var(--text); outline:none; display:block; margin-bottom:10px; }
+    .money-input:focus { color:var(--purple); }
+    .money-btns { display:flex; justify-content:center; gap:8px; }
+    .money-btn { width:30px; height:30px; border-radius:50%; border:1px solid var(--border2); background:var(--card); color:var(--text); cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; }
+    .money-btn:active { background:var(--border); }
+    .money-total { font-size:11px; color:var(--muted); margin-top:6px; font-style:italic; }
+
+    .equip-cat { margin-bottom:12px; }
+    .equip-cat-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .equip-cat-icon { font-size:18px; width:24px; text-align:center; }
+    .equip-cat-title { font-family:'Cinzel',serif; font-size:10px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); flex:1; }
+    .equip-cat-header::after { content:''; flex:1; height:1px; background:var(--border); }
+    .add-item-btn { display:flex; align-items:center; justify-content:center; gap:6px; padding:8px; border:1.5px dashed var(--border2); border-radius:var(--rs); background:none; color:var(--muted); cursor:pointer; font-size:13px; width:100%; margin-top:4px; transition:all .15s; }
+    .add-item-btn:hover { border-color:var(--purple); color:var(--purple); background:var(--purple-bg); }
+
+    .item-row { display:flex; align-items:flex-start; gap:10px; padding:9px 0; border-bottom:1px solid var(--border); }
+    .item-row:last-child { border-bottom:none; }
+    .item-content { flex:1; min-width:0; }
+    .item-name { font-size:14px; font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .item-desc { font-size:12px; color:var(--muted); margin-top:2px; line-height:1.4; }
+    .item-qty-badge { font-family:'Cinzel',serif; font-size:11px; color:var(--purple); background:var(--purple-bg); border:1px solid var(--border2); border-radius:20px; padding:2px 8px; flex-shrink:0; white-space:nowrap; }
+    .item-actions { display:flex; gap:4px; flex-shrink:0; }
+    .ibtn { width:28px; height:28px; border-radius:var(--rs); border:1px solid var(--border); background:var(--surface); cursor:pointer; font-size:13px; display:flex; align-items:center; justify-content:center; color:var(--muted); -webkit-tap-highlight-color:transparent; }
+    .ibtn:active { background:var(--border); }
+    .ibtn.del { color:var(--coral); border-color:var(--coral-bg); background:var(--coral-bg); }
+
+    .item-edit-wrap { flex:1; display:flex; flex-direction:column; gap:6px; }
+    .iedit { padding:7px 10px; border:1px solid var(--border2); border-radius:var(--rs); background:var(--surface); color:var(--text); font-family:'Crimson Pro',serif; font-size:14px; outline:none; width:100%; }
+    .iedit:focus { border-color:var(--purple); }
+    .iedit.qty { width:64px; font-family:'Cinzel',serif; }
+    .iedit-row { display:flex; gap:6px; align-items:center; }
+    .iedit-label { font-size:12px; color:var(--muted); white-space:nowrap; }
+    .isave { padding:6px 14px; border:none; border-radius:var(--rs); background:var(--purple); color:#fff; font-family:'Cinzel',serif; font-size:12px; cursor:pointer; }
+    .icancel { padding:6px 12px; border:1px solid var(--border); border-radius:var(--rs); background:var(--surface); color:var(--muted); font-size:12px; cursor:pointer; }
+    .no-items { font-size:13px; color:var(--muted); font-style:italic; text-align:center; padding:8px 0; }
     @keyframes fadein { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
     @keyframes pop { 0%{transform:scale(.7);opacity:.4} 60%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
     @keyframes lvlup { 0%{transform:scale(.8);opacity:0} 60%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
@@ -284,11 +324,11 @@
         <div class="card-title">Jets de sauvegarde</div>
         <div class="saves-grid">
           <div class="save-item"><div class="prof-dot prof"></div><span class="skill-attr">FOR</span><span class="save-val" data-save="str">+1</span></div>
-          <div class="save-item"><div class="prof-dot prof"></div><span class="skill-attr">DEX</span><span class="save-val" data-save="dex">+6</span></div>
-          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">CON</span><span class="save-val" data-save="con">+2</span></div>
-          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">INT</span><span class="save-val" data-save="int">+0</span></div>
+          <div class="save-item"><div class="prof-dot prof" data-save-dot="dex"></div><span class="skill-attr">DEX</span><span class="save-val" data-save="dex">+6</span></div>
+          <div class="save-item"><div class="prof-dot" data-save-dot="con"></div><span class="skill-attr">CON</span><span class="save-val" data-save="con">+2</span></div>
+          <div class="save-item"><div class="prof-dot" data-save-dot="int"></div><span class="skill-attr">INT</span><span class="save-val" data-save="int">+0</span></div>
           <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">SAG</span><span class="save-val" data-save="wis">+3</span></div>
-          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">CHA</span><span class="save-val" data-save="cha">+0</span></div>
+          <div class="save-item"><div class="prof-dot" data-save-dot="cha"></div><span class="skill-attr">CHA</span><span class="save-val" data-save="cha">+0</span></div>
         </div>
       </div>
       <div class="card">
@@ -300,6 +340,7 @@
         <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Religion</span><span class="skill-attr">INT</span><span class="skill-val" data-skill="religion">+2</span></div>
         <div class="skill-row"><div class="prof-dot"></div><span class="skill-name">Athlétisme</span><span class="skill-attr">FOR</span><span class="skill-val" data-skill="athletics">−1</span></div>
       </div>
+      <div id="feats-display"></div>
       <div class="card">
         <div class="card-title">Progression</div>
         <button class="levelup-btn" id="levelup-btn" onclick="startLevelUp()">⬆ Passer au niveau 4</button>
@@ -329,7 +370,7 @@
         <div class="combat-row">
           <div class="cs"><div class="cs-val" id="c-ac">17</div><div class="cs-lbl">CA</div></div>
           <div class="cs"><div class="cs-val" id="c-init">+4</div><div class="cs-lbl">Initiative</div></div>
-          <div class="cs"><div class="cs-val">40 ft</div><div class="cs-lbl">Vitesse</div></div>
+          <div class="cs"><div class="cs-val" id="c-speed">40 ft</div><div class="cs-lbl">Vitesse</div></div>
         </div>
         <div class="combat-row">
           <div class="cs"><div class="cs-val" id="c-prof">+2</div><div class="cs-lbl">Maîtrise</div></div>
@@ -503,9 +544,51 @@
     <button class="tab-btn" onclick="switchTab('histoire',this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
     <button class="tab-btn" onclick="switchTab('des',this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
     <button class="tab-btn" onclick="switchTab('citations',this)"><span class="tab-icon">💬</span><span>Citations</span></button>
+    <button class="tab-btn" onclick="switchTab('equip',this)"><span class="tab-icon">🎒</span><span>Équipement</span></button>
   </nav>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+    <!-- ÉQUIPEMENT -->
+    <div class="panel" id="panel-equip">
+
+      <div class="card">
+        <div class="card-title">Monnaie</div>
+        <div class="money-grid">
+          <div class="money-item">
+            <div class="money-label">🪙 PO</div>
+            <input class="money-input" type="number" id="money-po" min="0" value="15" onchange="setMoney('po',this.value)" inputmode="numeric">
+            <div class="money-btns">
+              <button class="money-btn" onclick="adjMoney('po',-1)">−</button>
+              <button class="money-btn" onclick="adjMoney('po',+1)">+</button>
+            </div>
+          </div>
+          <div class="money-item">
+            <div class="money-label">🥈 PA</div>
+            <input class="money-input" type="number" id="money-pa" min="0" value="3" onchange="setMoney('pa',this.value)" inputmode="numeric">
+            <div class="money-btns">
+              <button class="money-btn" onclick="adjMoney('pa',-1)">−</button>
+              <button class="money-btn" onclick="adjMoney('pa',+1)">+</button>
+            </div>
+          </div>
+          <div class="money-item">
+            <div class="money-label">🟤 PC</div>
+            <input class="money-input" type="number" id="money-pc" min="0" value="8" onchange="setMoney('pc',this.value)" inputmode="numeric">
+            <div class="money-btns">
+              <button class="money-btn" onclick="adjMoney('pc',-1)">−</button>
+              <button class="money-btn" onclick="adjMoney('pc',+1)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="money-total" id="money-total"></div>
+      </div>
+
+      <div class="card" id="equip-card">
+        <div id="equip-categories"></div>
+      </div>
+
+    </div>
 
   <!-- ════════════════════════════════════════
        LEVEL UP MODAL
@@ -520,44 +603,80 @@
 
 <script>
 // ═══════════════════════════════════════════════════════
+// DONS (FEATS)
+// ═══════════════════════════════════════════════════════
+const FEATS = [
+  { id:'alert',      name:'Vigilant',             tag:'Initiative',
+    desc:'Vous obtenez un bonus de +5 à l\'initiative. Vous ne pouvez pas être surpris lorsque vous êtes conscient. Les créatures cachées n\'ont pas l\'avantage pour attaquer contre vous.',
+    effects:{ initiative:5 }, auto:true },
+  { id:'mobile',     name:'Mobile',               tag:'Déplacement',
+    desc:'Votre vitesse de déplacement augmente de 10 ft. Lors d\'une action Foncer, les terrains difficiles ne coûtent pas de mouvement. Après une attaque de mêlée contre une créature, vous ne provoquez plus d\'attaque d\'opportunité de sa part ce tour.',
+    effects:{ speed:10 }, auto:true },
+  { id:'tough',      name:'Robuste',              tag:'PV',
+    desc:'+2 PV max par niveau (rétroactif). Votre total de PV max augmente de 2 pour chaque niveau que vous avez, présent et futur.',
+    effects:{ toughHP:true }, auto:true },
+  { id:'resilient',  name:'Résistant',            tag:'Sauvegarde', needsStatChoice:true,
+    desc:'+1 à une caractéristique de votre choix (max 20). Vous gagnez la maîtrise des jets de sauvegarde utilisant cette caractéristique.',
+    effects:{ resilient:true }, auto:true },
+  { id:'skilled',    name:'Entraîné',             tag:'Compétences',
+    desc:'Vous gagnez la maîtrise de 3 compétences ou outils de votre choix parmi ceux que vous ne maîtrisez pas encore.',
+    effects:{}, auto:false },
+  { id:'lucky',      name:'Chanceux',             tag:'Chance',
+    desc:'Vous disposez de 3 points de chance par long repos. Vous pouvez en dépenser 1 avant un jet d\'attaque, de caractéristique ou de sauvegarde pour lancer un d20 supplémentaire et choisir le résultat à utiliser.',
+    effects:{}, auto:false },
+  { id:'war_caster', name:'Combattant magique',   tag:'Magie', prereq:'Avoir lancé un sort',
+    desc:'Avantage sur les jets de CON pour maintenir la concentration. Vous pouvez lancer un sort de réaction lors d\'une attaque d\'opportunité. Vous pouvez lancer des sorts même en tenant des armes ou un bouclier.',
+    effects:{}, auto:false },
+  { id:'sentinel',   name:'Sentinelle',           tag:'Combat',
+    desc:'Attaque d\'opportunité : vitesse de la cible à 0 jusqu\'à la fin du tour. Vous pouvez effectuer une réaction lorsqu\'un ennemi adjacent attaque un allié. La cible d\'une Esquive ne bloque plus vos attaques d\'opportunité.',
+    effects:{}, auto:false },
+  { id:'skulker',    name:'Discret',              tag:'Discrétion', prereq:'DEX 13+',
+    desc:'Vous pouvez vous cacher lorsque vous êtes dans une lumière faible ou une obscurité. Un jet d\'attaque à distance raté ne révèle pas votre position. La lumière faible n\'impose pas de désavantage à votre Perception.',
+    effects:{}, auto:false },
+  { id:'observant',  name:'Observateur',          tag:'Perception',
+    desc:'+1 INT ou SAG. Votre Perception passive et votre Investigation passive gagnent +5. Vous pouvez lire sur les lèvres si vous voyez la bouche de la créature et connaissez sa langue.',
+    effects:{ passive_perception:5 }, auto:false },
+  { id:'polearm',    name:'Maître du bâton',      tag:'Bâton',
+    desc:'Vous pouvez effectuer une attaque bonus avec l\'extrémité du bâton (1d4 contondant). Les ennemis qui entrent dans votre allonge provoquent une attaque d\'opportunité de votre part.',
+    effects:{}, auto:false },
+  { id:'athlete',    name:'Athlète',              tag:'Mouvement',
+    desc:'+1 FOR ou DEX. Se relever ne coûte que 5 ft de déplacement. Grimper ne coûte pas de mouvement supplémentaire. Vous pouvez faire un saut en longueur depuis une position debout.',
+    effects:{}, auto:false },
+  { id:'charger',    name:'Chargeur',             tag:'Combat',
+    desc:'Lorsque vous utilisez Foncer, vous pouvez faire une attaque bonus (+5 dégâts) ou une bousculade. Si vous vous déplacez d\'au moins 10 ft en ligne droite, votre premier coup ce tour inflige +5 dégâts.',
+    effects:{}, auto:false },
+  { id:'dungeon',    name:'Explorateur souterrain', tag:'Exploration',
+    desc:'Avantage sur les jets pour détecter les passages secrets et pièges. Résistance aux dégâts de pièges. Vous pouvez chercher des pièges à vitesse normale sans malus.',
+    effects:{}, auto:false },
+  { id:'healer',     name:'Guérisseur',           tag:'Soin',
+    desc:'Vous pouvez utiliser une trousse de soins pour soigner une créature stable de 1 PV. Lorsque vous utilisez une trousse de soins, elle restaure 1d6+4+niveau de la cible PV.',
+    effects:{}, auto:false },
+];
+
+// ═══════════════════════════════════════════════════════
 // LEVEL UP DATA (niveaux 4 à 8)
 // ═══════════════════════════════════════════════════════
 const LEVELUP = {
-  4: {
-    ki:4, martialDie:6, profBonus:2, hasASI:true, slowFall:20,
-    abilities:[]
-  },
-  5: {
-    ki:5, martialDie:8, profBonus:3, hasASI:false, slowFall:25,
-    abilities:[
-      { name:"Attaque supplémentaire", tag:"Passif", tagClass:"t-pa",
-        desc:"Vous pouvez attaquer deux fois au lieu d'une lorsque vous effectuez l'action d'Attaque à votre tour." },
-      { name:"Frappe étourdissante améliorée", tag:"1 ki", tagClass:"t-ki",
-        desc:"Le DD de la Frappe étourdissante est recalculé avec le nouveau bonus de maîtrise (+3)." }
-    ]
-  },
-  6: {
-    ki:6, martialDie:8, profBonus:3, hasASI:false, slowFall:30,
-    abilities:[
-      { name:"Pas des ombres", tag:"1 ki · Action bonus", tagClass:"t-ki",
-        desc:"Lorsque vous êtes dans l'obscurité, dépensez 1 ki pour vous téléporter jusqu'à 18 m dans une autre zone d'obscurité visible. Vous avez l'avantage sur votre première attaque de mêlée avant la fin de ce tour." },
-      { name:"Frappes de ki", tag:"Passif", tagClass:"t-pa",
-        desc:"Vos attaques à mains nues comptent désormais comme magiques pour contourner les résistances et immunités." }
-    ]
-  },
-  7: {
-    ki:7, martialDie:8, profBonus:3, hasASI:false, slowFall:35,
-    abilities:[
-      { name:"Esquive totale", tag:"Passif", tagClass:"t-pa",
-        desc:"Quand un effet exige un jet de sauvegarde DEX pour ne subir que la moitié des dégâts, vous n'en subissez aucun si vous réussissez, et seulement la moitié si vous échouez." },
-      { name:"Tranquillité de l'âme", tag:"Action", tagClass:"t-pa",
-        desc:"Utilisez votre action pour mettre fin à un effet de charme ou d'effroi qui vous affecte." }
-    ]
-  },
-  8: {
-    ki:8, martialDie:8, profBonus:3, hasASI:true, slowFall:40,
-    abilities:[]
-  }
+  4: { ki:4, martialDie:6, profBonus:2, hasChoice:true, slowFall:20, abilities:[] },
+  5: { ki:5, martialDie:8, profBonus:3, hasChoice:false, slowFall:25, abilities:[
+    { name:"Attaque supplémentaire", tag:"Passif", tagClass:"t-pa",
+      desc:"Vous pouvez attaquer deux fois au lieu d'une lors d'une action d'Attaque." },
+    { name:"Frappe étourdissante améliorée", tag:"1 ki", tagClass:"t-ki",
+      desc:"Le DD de la Frappe étourdissante est recalculé avec le nouveau bonus de maîtrise." }
+  ]},
+  6: { ki:6, martialDie:8, profBonus:3, hasChoice:false, slowFall:30, abilities:[
+    { name:"Pas des ombres", tag:"1 ki · Action bonus", tagClass:"t-ki",
+      desc:"Dans l'obscurité, dépensez 1 ki pour vous téléporter jusqu'à 18 m dans une autre zone d'obscurité visible. Avantage sur votre première attaque de mêlée ce tour." },
+    { name:"Frappes de ki", tag:"Passif", tagClass:"t-pa",
+      desc:"Vos attaques à mains nues comptent comme magiques pour contourner résistances et immunités." }
+  ]},
+  7: { ki:7, martialDie:8, profBonus:3, hasChoice:false, slowFall:35, abilities:[
+    { name:"Esquive totale", tag:"Passif", tagClass:"t-pa",
+      desc:"Réussite sur jet DEX = aucun dégât. Échec = seulement la moitié." },
+    { name:"Tranquillité de l'âme", tag:"Action", tagClass:"t-pa",
+      desc:"Utilisez votre action pour mettre fin à un effet de charme ou d'effroi." }
+  ]},
+  8: { ki:8, martialDie:8, profBonus:3, hasChoice:true, slowFall:40, abilities:[] }
 };
 
 // ═══════════════════════════════════════════════════════
@@ -569,110 +688,147 @@ const INITIAL = {
   level:3,
   stats:{str:8,dex:18,con:14,int:10,wis:16,cha:10},
   martialDie:6, profBonus:2,
-  unlockedAbilities:[]
+  unlockedAbilities:[],
+  feats:[],
+  bonusSaves:{},
+  featEffects:{},
+  money:{po:15,pa:3,pc:8},
+  items:[
+    {id:1,cat:'armes',name:'Bâton de marche',desc:'Arme de moine · 1d6+4 contondant ou perforant',qty:1},
+    {id:2,cat:'equipement',name:"Sac d'ermite",desc:'Couverture, briquet, rations ×10, torches ×10, outre, tente',qty:1},
+    {id:3,cat:'objets',name:'Parchemin de la Découverte',desc:'Rédigé lors de sa réclusion. Son contenu, lui seul le sait.',qty:1}
+  ],
+  nextItemId:4
 };
 
 let S = JSON.parse(JSON.stringify(INITIAL));
 
-function loadState() {
-  try {
-    const d = JSON.parse(localStorage.getItem('shen-v5')||'null');
-    if (d) S = Object.assign({}, INITIAL, d);
-  } catch(e){}
+function loadState(){
+  try{ const d=JSON.parse(localStorage.getItem('shen-v5')||'null'); if(d) S=Object.assign({},INITIAL,d); }catch(e){}
 }
-function saveState() {
-  try { localStorage.setItem('shen-v5', JSON.stringify(S)); } catch(e){}
+function saveState(){
+  try{ localStorage.setItem('shen-v5',JSON.stringify(S)); }catch(e){}
 }
 
 // ═══════════════════════════════════════════════════════
-// COMPUTED HELPERS
+// COMPUTED
 // ═══════════════════════════════════════════════════════
-function mod(score){ return Math.floor((score-10)/2); }
+function mod(sc){ return Math.floor((sc-10)/2); }
 function fmt(m){ return (m>=0?'+':'')+m; }
-function atkBonus(){ return S.profBonus + mod(S.stats.dex); }
-function kiDC(){ return 8 + S.profBonus + mod(S.stats.wis); }
-function acVal(){ return 10 + mod(S.stats.dex) + mod(S.stats.wis); }
+function atkBonus(){ return S.profBonus+mod(S.stats.dex); }
+function kiDC(){ return 8+S.profBonus+mod(S.stats.wis); }
+function acVal(){ return 10+mod(S.stats.dex)+mod(S.stats.wis); }
+function initVal(){ return mod(S.stats.dex)+(S.featEffects&&S.featEffects.initiative?S.featEffects.initiative:0); }
+function speedVal(){ return 40+(S.featEffects&&S.featEffects.speed?S.featEffects.speed:0); }
+function hasBonusSave(attr){ return !!(S.bonusSaves&&S.bonusSaves[attr]); }
 
 // ═══════════════════════════════════════════════════════
 // RENDER
 // ═══════════════════════════════════════════════════════
 function renderAll(){
   // Header
-  const hpPct = Math.round(Math.max(0,(S.hp/S.hpMax)*100));
-  document.getElementById('hp-mini-lbl').textContent = `${S.hp} / ${S.hpMax}`;
-  document.getElementById('hp-mini-bar').style.width = hpPct+'%';
-  document.getElementById('level-badge').textContent = `Niveau ${S.level}`;
+  const hpPct=Math.round(Math.max(0,(S.hp/S.hpMax)*100));
+  document.getElementById('hp-mini-lbl').textContent=`${S.hp} / ${S.hpMax}`;
+  document.getElementById('hp-mini-bar').style.width=hpPct+'%';
+  document.getElementById('level-badge').textContent=`Niveau ${S.level}`;
 
-  // Stats panel
-  const STATS = [{key:'str'},{key:'dex'},{key:'con'},{key:'int'},{key:'wis'},{key:'cha'}];
-  STATS.forEach(({key})=>{
-    const sc = S.stats[key], m = mod(sc);
-    const box = document.querySelector(`[data-stat="${key}"]`);
+  // Stats
+  ['str','dex','con','int','wis','cha'].forEach(key=>{
+    const sc=S.stats[key],m=mod(sc);
+    const box=document.querySelector(`[data-stat="${key}"]`);
     if(!box) return;
-    box.querySelector('.stat-mod').textContent = fmt(m);
-    box.querySelector('.stat-mod').className = `stat-mod ${m>0?'pos':m<0?'neg':''}`;
-    box.querySelector('.stat-score').textContent = sc;
+    box.querySelector('.stat-mod').textContent=fmt(m);
+    box.querySelector('.stat-mod').className=`stat-mod ${m>0?'pos':m<0?'neg':''}`;
+    box.querySelector('.stat-score').textContent=sc;
   });
 
-  // Skills & saves
-  const pb = S.profBonus;
-  const skillMap = { acrobatics:mod(S.stats.dex)+pb, stealth:mod(S.stats.dex)+pb, perception:mod(S.stats.wis)+pb, insight:mod(S.stats.wis)+pb, religion:mod(S.stats.int)+pb, athletics:mod(S.stats.str) };
-  Object.entries(skillMap).forEach(([k,v])=>{ const el=document.querySelector(`[data-skill="${k}"]`); if(el) el.textContent=fmt(v); });
-  const saveMap = { str:mod(S.stats.str)+pb, dex:mod(S.stats.dex)+pb, con:mod(S.stats.con), int:mod(S.stats.int), wis:mod(S.stats.wis), cha:mod(S.stats.cha) };
-  Object.entries(saveMap).forEach(([k,v])=>{ const el=document.querySelector(`[data-save="${k}"]`); if(el) el.textContent=fmt(v); });
+  // Skills
+  const pb=S.profBonus;
+  const skMap={acrobatics:mod(S.stats.dex)+pb,stealth:mod(S.stats.dex)+pb,perception:mod(S.stats.wis)+pb,insight:mod(S.stats.wis)+pb,religion:mod(S.stats.int)+pb,athletics:mod(S.stats.str)};
+  Object.entries(skMap).forEach(([k,v])=>{ const el=document.querySelector(`[data-skill="${k}"]`); if(el) el.textContent=fmt(v); });
+
+  // Saves (with bonus saves from Resilient)
+  const svMap={
+    str: mod(S.stats.str)+(1===1?pb:0),  // always prof for monk
+    dex: mod(S.stats.dex)+pb,
+    con: mod(S.stats.con)+(hasBonusSave('con')?pb:0),
+    int: mod(S.stats.int)+(hasBonusSave('int')?pb:0),
+    wis: mod(S.stats.wis)+(hasBonusSave('wis')?pb:0),
+    cha: mod(S.stats.cha)+(hasBonusSave('cha')?pb:0),
+  };
+  // STR and DEX are always proficient for monk
+  Object.entries(svMap).forEach(([k,v])=>{ const el=document.querySelector(`[data-save="${k}"]`); if(el) el.textContent=fmt(v); });
+  // Update save proficiency dots for resilient
+  document.querySelectorAll('[data-save-dot]').forEach(el=>{
+    const attr=el.dataset.saveDot;
+    const isProf=(attr==='str'||attr==='dex'||hasBonusSave(attr));
+    el.className='prof-dot'+(isProf?' prof':'');
+  });
 
   // Level up button
-  const btn = document.getElementById('levelup-btn');
+  const btn=document.getElementById('levelup-btn');
   if(S.level>=8){ btn.textContent='✦ Niveau maximum (fiche)'; btn.disabled=true; }
-  else { btn.textContent=`⬆ Passer au niveau ${S.level+1}`; btn.disabled=false; }
+  else{ btn.textContent=`⬆ Passer au niveau ${S.level+1}`; btn.disabled=false; }
+
+  // Feats display
+  renderFeatsDisplay();
 
   // Combat
-  document.getElementById('hp-cur').textContent = S.hp;
-  document.getElementById('hp-max-lbl').textContent = `/ ${S.hpMax} PV max`;
-  document.getElementById('temp-hp').textContent = S.tempHp;
-  document.getElementById('c-ac').textContent = acVal();
-  document.getElementById('c-init').textContent = fmt(mod(S.stats.dex));
-  document.getElementById('c-prof').textContent = fmt(pb);
-  document.getElementById('c-martial').textContent = `1d${S.martialDie}`;
-  document.getElementById('c-kidc').textContent = `DD ${kiDC()}`;
-  const ab = atkBonus();
-  const dmg = `1d${S.martialDie}+${mod(S.stats.dex)}`;
+  document.getElementById('hp-cur').textContent=S.hp;
+  document.getElementById('hp-max-lbl').textContent=`/ ${S.hpMax} PV max`;
+  document.getElementById('temp-hp').textContent=S.tempHp;
+  document.getElementById('c-ac').textContent=acVal();
+  document.getElementById('c-init').textContent=fmt(initVal());
+  document.getElementById('c-speed').textContent=speedVal()+' ft';
+  document.getElementById('c-prof').textContent=fmt(pb);
+  document.getElementById('c-martial').textContent=`1d${S.martialDie}`;
+  document.getElementById('c-kidc').textContent=`DD ${kiDC()}`;
+  const ab=atkBonus(), dmg=`1d${S.martialDie}+${mod(S.stats.dex)}`;
   document.querySelectorAll('.atk-bonus').forEach(el=>el.textContent=fmt(ab));
   document.querySelectorAll('.atk-dmg-martial').forEach(el=>el.textContent=dmg);
-  document.getElementById('atk-stun-detail').textContent = `DD ${kiDC()} CON au toucher · 1 ki`;
-  document.getElementById('ac-formula').textContent = `CA = 10 + DEX (${fmt(mod(S.stats.dex))}) + SAG (${fmt(mod(S.stats.wis))}) = ${acVal()}. Sans armure.`;
-  document.getElementById('deflect-desc').textContent = `Réduit les dégâts d'une attaque à distance de 1d10+${mod(S.stats.dex)+pb}. Si réduit à 0 : renvoyer (${fmt(ab)}, 1d${S.martialDie}+${mod(S.stats.dex)}).`;
-  document.getElementById('fall-desc').textContent = `Réduit les dégâts de chute de ${S.level*5} (niveau ${S.level} × 5).`;
-  document.getElementById('eq-fists').textContent = `${fmt(ab)} · 1d${S.martialDie}+${mod(S.stats.dex)} contondant`;
-  document.getElementById('eq-staff').textContent = `Arme de moine · ${fmt(ab)} · 1d${S.martialDie}+${mod(S.stats.dex)} contondant/perforant`;
-  document.getElementById('class-display').textContent = `Moine niveau ${S.level} · Voie de l'Ombre`;
+  document.getElementById('atk-stun-detail').textContent=`DD ${kiDC()} CON au toucher · 1 ki`;
+  document.getElementById('ac-formula').textContent=`CA = 10 + DEX (${fmt(mod(S.stats.dex))}) + SAG (${fmt(mod(S.stats.wis))}) = ${acVal()}. Sans armure.`;
+  document.getElementById('deflect-desc').textContent=`Réduit les dégâts d'une attaque à distance de 1d10+${mod(S.stats.dex)+pb}. Si réduit à 0 : renvoyer (${fmt(ab)}, ${dmg}).`;
+  document.getElementById('fall-desc').textContent=`Réduit les dégâts de chute de ${S.level*5} (niveau ${S.level} × 5).`;
+  document.getElementById('eq-fists').textContent=`${fmt(ab)} · 1d${S.martialDie}+${mod(S.stats.dex)} contondant`;
+  document.getElementById('eq-staff').textContent=`Arme de moine · ${fmt(ab)} · 1d${S.martialDie}+${mod(S.stats.dex)} contondant/perforant`;
+  document.getElementById('class-display').textContent=`Moine niveau ${S.level} · Voie de l'Ombre`;
 
   // Ki dots
-  const dots = document.getElementById('ki-dots');
+  const dots=document.getElementById('ki-dots');
   dots.innerHTML='';
   for(let i=0;i<S.kiMax;i++){
     const d=document.createElement('div');
     d.className='ki-dot'+(i<S.ki?' on':'');
-    d.textContent='氣';
-    d.onclick=()=>toggleKi(i);
+    d.textContent='氣'; d.onclick=()=>toggleKi(i);
     dots.appendChild(d);
   }
-  document.getElementById('ki-lbl').textContent = `${S.ki} / ${S.kiMax} — Récupérés au repos court ou long`;
+  document.getElementById('ki-lbl').textContent=`${S.ki} / ${S.kiMax} — Récupérés au repos court ou long`;
 
   // Unlocked abilities
-  const ul = document.getElementById('unlocked-abilities');
+  const ul=document.getElementById('unlocked-abilities');
   ul.innerHTML='';
-  if(S.unlockedAbilities && S.unlockedAbilities.length>0){
+  if(S.unlockedAbilities&&S.unlockedAbilities.length>0){
     const card=document.createElement('div');
     card.className='card';
     card.innerHTML=`<div class="card-title">Capacités de niveau supérieur</div>`+
-      S.unlockedAbilities.map(ab=>`
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">${ab.name}</span><span class="ab-tag ${ab.tagClass}">${ab.tag}</span></div>
-          <div class="ab-desc">${ab.desc}</div>
-        </div>`).join('');
+      S.unlockedAbilities.map(ab=>`<div class="ability-item"><div class="ab-hd"><span class="ab-name">${ab.name}</span><span class="ab-tag ${ab.tagClass}">${ab.tag}</span></div><div class="ab-desc">${ab.desc}</div></div>`).join('');
     ul.appendChild(card);
   }
+}
+
+function renderFeatsDisplay(){
+  const container=document.getElementById('feats-display');
+  if(!container) return;
+  if(!S.feats||S.feats.length===0){ container.innerHTML=''; return; }
+  container.innerHTML=`<div class="card">
+    <div class="card-title">Dons obtenus</div>
+    ${S.feats.map(f=>{
+      const feat=FEATS.find(x=>x.id===f.id)||{name:f.name||f.id,tag:'Don',desc:''};
+      const sub=f.subChoice?` (${f.subChoice.toUpperCase()})`:f.subStat?` (+1 ${f.subStat.toUpperCase()})`:'' ;
+      return `<div class="ability-item"><div class="ab-hd"><span class="ab-name">${feat.name}${sub}</span><span class="ab-tag t-pa">${feat.tag}</span></div><div class="ab-desc">${feat.desc}</div></div>`;
+    }).join('')}
+  </div>`;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -686,20 +842,14 @@ document.getElementById('hp-plus').onclick=()=>{
   const v=parseInt(document.getElementById('hp-adj').value)||1;
   S.hp=Math.min(S.hpMax,S.hp+v); saveState(); renderAll(); toast(`+${v} PV → ${S.hp}/${S.hpMax}`);
 };
-function setTempHP(){
-  const v=prompt('PV temporaires :');
-  if(v!==null){S.tempHp=Math.max(0,parseInt(v)||0);saveState();renderAll();toast(`PV temp : ${S.tempHp}`);}
-}
-function toggleKi(i){
-  S.ki = i<S.ki ? S.ki-1 : Math.min(S.kiMax,i+1);
-  saveState(); renderAll(); toast(`Ki : ${S.ki}/${S.kiMax}`);
-}
+function setTempHP(){ const v=prompt('PV temporaires :'); if(v!==null){S.tempHp=Math.max(0,parseInt(v)||0);saveState();renderAll();toast(`PV temp : ${S.tempHp}`);} }
+function toggleKi(i){ S.ki=i<S.ki?S.ki-1:Math.min(S.kiMax,i+1); saveState(); renderAll(); toast(`Ki : ${S.ki}/${S.kiMax}`); }
 function toggleCond(el){ el.classList.toggle('on'); el.querySelector('.cond-check').textContent=el.classList.contains('on')?'✓':''; }
 function shortRest(){
   S.ki=S.kiMax;
-  const roll=Math.ceil(Math.random()*8)+mod(S.stats.con);
-  S.hp=Math.min(S.hpMax,S.hp+Math.max(1,roll));
-  S.tempHp=0; saveState(); renderAll(); toast(`Repos court : +${Math.max(1,roll)} PV · Ki restauré`);
+  const roll=Math.max(1,Math.ceil(Math.random()*8)+mod(S.stats.con));
+  S.hp=Math.min(S.hpMax,S.hp+roll); S.tempHp=0;
+  saveState(); renderAll(); toast(`Repos court : +${roll} PV · Ki restauré`);
 }
 function longRest(){
   S.hp=S.hpMax; S.ki=S.kiMax; S.tempHp=0;
@@ -710,90 +860,165 @@ function longRest(){
 // ═══════════════════════════════════════════════════════
 // LEVEL UP WIZARD
 // ═══════════════════════════════════════════════════════
-let WZ = {}; // wizard state
+let WZ={};
 
 function startLevelUp(){
-  const nl = S.level+1;
-  const data = LEVELUP[nl];
+  const nl=S.level+1;
+  const data=LEVELUP[nl];
   if(!data){ toast("Niveau non disponible dans cette fiche"); return; }
-  WZ = { newLevel:nl, data, hpRoll:null, asiChoices:{str:0,dex:0,con:0,int:0,wis:0,cha:0}, step: data.hasASI?'asi':'hp' };
+  WZ={ newLevel:nl, data, hpRoll:null, asiChoices:{str:0,dex:0,con:0,int:0,wis:0,cha:0},
+       choiceType:null, selectedFeat:null, featSubChoice:null,
+       step: data.hasChoice?'choice':'hp' };
   document.getElementById('levelup-modal').classList.add('open');
   document.body.style.overflow='hidden';
   renderStep();
 }
-function closeModal(){
-  document.getElementById('levelup-modal').classList.remove('open');
-  document.body.style.overflow='';
-}
+function closeModal(){ document.getElementById('levelup-modal').classList.remove('open'); document.body.style.overflow=''; }
 
 function renderStep(){
-  const mc = document.getElementById('modal-content');
-  const { step, newLevel, data } = WZ;
-  const SNAMES = {str:'Force',dex:'Dextérité',con:'Constitution',int:'Intelligence',wis:'Sagesse',cha:'Charisme'};
+  const mc=document.getElementById('modal-content');
+  const {step,newLevel,data}=WZ;
+  const SN={str:'Force',dex:'Dextérité',con:'Constitution',int:'Intelligence',wis:'Sagesse',cha:'Charisme'};
 
-  if(step==='asi'){
-    const total = Object.values(WZ.asiChoices).reduce((a,b)=>a+b,0);
-    const remaining = 2 - total;
+  if(step==='choice'){
     mc.innerHTML=`
       <div class="modal-header">
-        <div class="modal-header-icon">✨</div>
-        <div>
-          <div class="modal-header-title">Niveau ${newLevel}</div>
-          <div class="modal-header-sub">Amélioration de caractéristique</div>
-        </div>
+        <div class="modal-header-icon">⬆</div>
+        <div><div class="modal-header-title">Niveau ${newLevel}</div><div class="modal-header-sub">Choisissez votre progression</div></div>
       </div>
       <div class="modal-body">
-        <div class="modal-section">
-          <div class="modal-label">Points à répartir</div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
-            <div style="font-family:'Cinzel',serif;font-size:40px;font-weight:700;color:${remaining>0?'var(--purple)':'var(--teal)'}">${remaining}</div>
-            <div style="font-size:13px;color:var(--muted)">point${remaining>1?'s':''} restant${remaining>1?'s':''}<br><em>Max +2 par caractéristique · Max 20</em></div>
-          </div>
-          <div class="asi-grid">
-            ${Object.entries(SNAMES).map(([key,label])=>{
-              const sc=S.stats[key], bonus=WZ.asiChoices[key], m=mod(sc+bonus);
-              const canAdd = remaining>0 && bonus<2 && sc+bonus<20;
-              const canRem = bonus>0;
-              return `<div class="asi-box ${bonus>0?'selected':''}">
-                <div class="asi-box-label">${label}</div>
-                <div class="asi-box-mod" style="${bonus>0?'color:var(--purple)':''}">${fmt(m)}</div>
-                <div class="asi-box-score">${sc}${bonus>0?' → '+(sc+bonus):''}</div>
-                <div class="asi-box-ctrl">
-                  <button class="asi-ctrl-btn" onclick="asiAdj('${key}',-1)" ${canRem?'':'disabled'}>−</button>
-                  <span class="asi-bonus" style="${bonus>0?'':'color:var(--muted);opacity:.4'}">${bonus>0?'+'+bonus:'·'}</span>
-                  <button class="asi-ctrl-btn" onclick="asiAdj('${key}',+1)" ${canAdd?'':'disabled'}>+</button>
-                </div>
-              </div>`;
-            }).join('')}
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px">
+          <button onclick="pickASI()" style="padding:20px 12px;border:1.5px solid var(--border2);border-radius:var(--r);background:var(--surface);cursor:pointer;text-align:center;transition:all .15s" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border2)'">
+            <div style="font-size:28px;margin-bottom:8px">✨</div>
+            <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--text)">Amélioration de caractéristique</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px">+2 à répartir entre vos caractéristiques</div>
+          </button>
+          <button onclick="pickFeat()" style="padding:20px 12px;border:1.5px solid var(--border2);border-radius:var(--r);background:var(--surface);cursor:pointer;text-align:center;transition:all .15s" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border2)'">
+            <div style="font-size:28px;margin-bottom:8px">🎯</div>
+            <div style="font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--text)">Don</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px">Capacité spéciale parmi ${FEATS.length} disponibles</div>
+          </button>
         </div>
       </div>
       <div class="modal-footer">
         <button class="modal-btn secondary" onclick="closeModal()">Annuler</button>
-        <button class="modal-btn primary" onclick="asiNext()" ${remaining===0?'':'disabled'} id="asi-btn">Suivant →</button>
+      </div>`;
+
+  } else if(step==='asi'){
+    const total=Object.values(WZ.asiChoices).reduce((a,b)=>a+b,0), rem=2-total;
+    mc.innerHTML=`
+      <div class="modal-header">
+        <div class="modal-header-icon">✨</div>
+        <div><div class="modal-header-title">Niveau ${newLevel}</div><div class="modal-header-sub">Amélioration de caractéristique</div></div>
+      </div>
+      <div class="modal-body">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+          <div style="font-family:'Cinzel',serif;font-size:40px;font-weight:700;color:${rem>0?'var(--purple)':'var(--teal)'}">${rem}</div>
+          <div style="font-size:13px;color:var(--muted)">point${rem!==1?'s':''} restant${rem!==1?'s':''}<br><em>Max +2 par caractéristique · max 20</em></div>
+        </div>
+        <div class="asi-grid">
+          ${Object.entries(SN).map(([key,label])=>{
+            const sc=S.stats[key],bonus=WZ.asiChoices[key],m=mod(sc+bonus);
+            const canA=rem>0&&bonus<2&&sc+bonus<20, canR=bonus>0;
+            return `<div class="asi-box ${bonus>0?'selected':''}">
+              <div class="asi-box-label">${label}</div>
+              <div class="asi-box-mod" style="${bonus>0?'color:var(--purple)':''}">${fmt(m)}</div>
+              <div class="asi-box-score">${sc}${bonus>0?' → '+(sc+bonus):''}</div>
+              <div class="asi-box-ctrl">
+                <button class="asi-ctrl-btn" onclick="asiAdj('${key}',-1)" ${canR?'':'disabled'}>−</button>
+                <span class="asi-bonus" style="${bonus>0?'':'opacity:.35'}">${bonus>0?'+'+bonus:'·'}</span>
+                <button class="asi-ctrl-btn" onclick="asiAdj('${key}',+1)" ${canA?'':'disabled'}>+</button>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn secondary" onclick="WZ.step='choice';renderStep()">← Retour</button>
+        <button class="modal-btn primary" onclick="asiNext()" ${rem===0?'':'disabled'} id="asi-btn">Suivant →</button>
+      </div>`;
+
+  } else if(step==='feat'){
+    const selected=WZ.selectedFeat;
+    mc.innerHTML=`
+      <div class="modal-header">
+        <div class="modal-header-icon">🎯</div>
+        <div><div class="modal-header-title">Niveau ${newLevel}</div><div class="modal-header-sub">Choisissez un don</div></div>
+      </div>
+      <div class="modal-body" style="padding-top:1rem">
+        <div style="max-height:55vh;overflow-y:auto;margin:-0.5rem">
+          ${FEATS.map(feat=>{
+            const isSel=selected===feat.id;
+            const alreadyHas=S.feats&&S.feats.some(f=>f.id===feat.id);
+            return `<div onclick="${alreadyHas?'':`selectFeat('${feat.id}')`}"
+              style="padding:12px 14px;margin-bottom:6px;border-radius:var(--rs);border:1.5px solid ${isSel?'var(--purple)':alreadyHas?'var(--border)':'var(--border)'};
+                     background:${isSel?'var(--purple-bg)':alreadyHas?'var(--faint)':'var(--surface)'};
+                     cursor:${alreadyHas?'default':'pointer'};opacity:${alreadyHas?.5:1};transition:all .15s">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+                <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:${isSel?'var(--purple)':'var(--text)'}">${feat.name}</span>
+                <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:${isSel?'var(--purple)':'var(--faint)'};color:${isSel?'#fff':'var(--muted)'};">${feat.tag}</span>
+                ${alreadyHas?`<span style="font-size:10px;color:var(--muted);font-style:italic">Déjà obtenu</span>`:''}
+                ${feat.prereq?`<span style="font-size:10px;color:var(--gold);font-style:italic">${feat.prereq}</span>`:''}
+              </div>
+              <div style="font-size:12px;color:${isSel?'#3A3060':'var(--muted)'};line-height:1.5">${feat.desc}</div>
+              ${feat.auto?`<div style="font-size:11px;color:var(--teal);margin-top:4px">✓ Effet appliqué automatiquement</div>`:''}
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn secondary" onclick="WZ.step='choice';renderStep()">← Retour</button>
+        <button class="modal-btn primary" onclick="featNext()" ${selected?'':'disabled'} id="feat-btn">Suivant →</button>
+      </div>`;
+
+  } else if(step==='feat_stat'){
+    // Sub-step for Resilient: choose which stat
+    const SN2={str:'Force',dex:'Dextérité',con:'Constitution',int:'Intelligence',wis:'Sagesse',cha:'Charisme'};
+    mc.innerHTML=`
+      <div class="modal-header">
+        <div class="modal-header-icon">🛡️</div>
+        <div><div class="modal-header-title">Résistant</div><div class="modal-header-sub">Choisissez la caractéristique</div></div>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px;color:var(--muted);margin-bottom:16px">+1 à la caractéristique choisie et maîtrise du jet de sauvegarde correspondant.</p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          ${Object.entries(SN2).map(([key,label])=>{
+            const hasProf=(key==='str'||key==='dex'||(S.bonusSaves&&S.bonusSaves[key]));
+            const sc=S.stats[key];
+            const isSel=WZ.featSubChoice===key;
+            return `<button onclick="WZ.featSubChoice='${key}';renderStep()" ${hasProf?'disabled':''}
+              style="padding:12px 8px;border-radius:var(--rs);border:1.5px solid ${isSel?'var(--purple)':'var(--border2)'};
+                     background:${isSel?'var(--purple-bg)':hasProf?'var(--faint)':'var(--surface)'};
+                     cursor:${hasProf?'default':'pointer'};opacity:${hasProf?.5:1};text-align:center">
+              <div style="font-size:10px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">${label}</div>
+              <div style="font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:${isSel?'var(--purple)':'var(--text)'};margin:4px 0">${fmt(mod(sc+1))}</div>
+              <div style="font-size:12px;color:var(--muted)">${sc} → ${sc+1}</div>
+              ${hasProf?`<div style="font-size:10px;color:var(--muted);margin-top:4px">Déjà maîtrisé</div>`:''}
+            </button>`;
+          }).join('')}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn secondary" onclick="WZ.step='feat';renderStep()">← Retour</button>
+        <button class="modal-btn primary" onclick="featStatNext()" ${WZ.featSubChoice?'':'disabled'}>Confirmer →</button>
       </div>`;
 
   } else if(step==='hp'){
-    const conM = mod(S.stats.con);
+    const conM=mod(S.stats.con);
     mc.innerHTML=`
       <div class="modal-header">
         <div class="modal-header-icon">❤️</div>
-        <div>
-          <div class="modal-header-title">Niveau ${newLevel}</div>
-          <div class="modal-header-sub">Points de vie supplémentaires</div>
-        </div>
+        <div><div class="modal-header-title">Niveau ${newLevel}</div><div class="modal-header-sub">Points de vie supplémentaires</div></div>
       </div>
       <div class="modal-body">
-        <div class="modal-section">
-          <div class="modal-label">Lance 1d8 + CON (${fmt(conM)})</div>
-          <div class="hp-roll-display" id="hproll-display">
-            <span>${WZ.hpRoll!==null?'+'+WZ.hpRoll:'—'}</span>
-            ${WZ.hpRoll!==null?`<span class="hp-roll-sub">1d${Math.max(1,WZ.hpRoll-conM)} + CON</span>`:''}
-          </div>
-          <div class="hp-roll-btns">
-            <button class="hp-roll-btn dice" onclick="rollHP()">🎲 Lancer le dé</button>
-            <button class="hp-roll-btn avg" onclick="avgHP()">Valeur fixe (+${5+conM})</button>
-          </div>
+        <div class="modal-label">Lance 1d8 + CON (${fmt(conM)})</div>
+        <div class="hp-roll-display" id="hproll-display">
+          <span>${WZ.hpRoll!==null?'+'+WZ.hpRoll:'—'}</span>
+          ${WZ.hpRoll!==null?`<span class="hp-roll-sub">résultat net</span>`:''}
+        </div>
+        <div class="hp-roll-btns">
+          <button class="hp-roll-btn dice" onclick="rollHP()">🎲 Lancer le dé</button>
+          <button class="hp-roll-btn avg" onclick="avgHP()">Valeur fixe (+${5+conM})</button>
         </div>
       </div>
       <div class="modal-footer">
@@ -802,17 +1027,24 @@ function renderStep(){
       </div>`;
 
   } else if(step==='summary'){
-    const asi = Object.entries(WZ.asiChoices).filter(([,v])=>v>0);
+    const asi=Object.entries(WZ.asiChoices).filter(([,v])=>v>0);
+    const feat=WZ.selectedFeat?FEATS.find(f=>f.id===WZ.selectedFeat):null;
     mc.innerHTML=`
       <div class="modal-body" style="padding-top:1.5rem">
         <div class="summary-banner">
           <div class="summary-icon">⬆</div>
           <div class="summary-title">Niveau ${newLevel} !</div>
-          <div class="summary-sub">${data.abilities.map(a=>a.name).join(' · ')||'Amélioration de caractéristique'}</div>
+          <div class="summary-sub">${data.abilities.map(a=>a.name).join(' · ')||feat?feat.name:asi.length>0?'Amélioration de caractéristique':''}</div>
         </div>
         ${asi.length>0?`<div style="background:var(--purple-bg);border:1px solid var(--border2);border-radius:var(--rs);padding:12px 14px;margin-bottom:12px">
           <div style="font-size:11px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px">Améliorations de caractéristique</div>
-          ${asi.map(([k,v])=>`<div style="font-size:14px;color:var(--text);margin-bottom:4px">${{str:'Force',dex:'Dextérité',con:'Constitution',int:'Intelligence',wis:'Sagesse',cha:'Charisme'}[k]} : ${S.stats[k]} → <strong>${S.stats[k]+v}</strong></div>`).join('')}
+          ${asi.map(([k,v])=>`<div style="font-size:14px;color:var(--text);margin-bottom:4px">${SN[k]} : ${S.stats[k]} → <strong>${S.stats[k]+v}</strong></div>`).join('')}
+        </div>`:''}
+        ${feat?`<div style="background:var(--teal-bg);border:1px solid rgba(15,110,86,.2);border-radius:var(--rs);padding:12px 14px;margin-bottom:12px">
+          <div style="font-size:11px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:6px">Don obtenu</div>
+          <div style="font-family:'Cinzel',serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">${feat.name}${WZ.featSubChoice?' ('+WZ.featSubChoice.toUpperCase()+')':''}</div>
+          <div style="font-size:13px;color:#3A3060;line-height:1.5">${feat.desc}</div>
+          ${feat.auto?`<div style="font-size:11px;color:var(--teal);margin-top:6px">✓ Effets appliqués automatiquement à la fiche</div>`:`<div style="font-size:11px;color:var(--gold);margin-top:6px">⚠ À appliquer manuellement en jeu</div>`}
         </div>`:''}
         <div class="summary-stats">
           <div class="summary-stat"><div class="summary-stat-val" style="color:var(--coral)">+${WZ.hpRoll}</div><div class="summary-stat-lbl">PV max</div></div>
@@ -821,10 +1053,7 @@ function renderStep(){
         </div>
         ${data.abilities.length>0?`<div style="margin-bottom:16px">
           <div style="font-size:11px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px">Nouvelles capacités</div>
-          ${data.abilities.map(ab=>`<div class="new-ability">
-            <div class="new-ability-hd"><span class="new-ability-name">${ab.name}</span><span class="ab-tag ${ab.tagClass}">${ab.tag}</span></div>
-            <div class="new-ability-desc">${ab.desc}</div>
-          </div>`).join('')}
+          ${data.abilities.map(ab=>`<div class="new-ability"><div class="new-ability-hd"><span class="new-ability-name">${ab.name}</span><span class="ab-tag ${ab.tagClass}">${ab.tag}</span></div><div class="new-ability-desc">${ab.desc}</div></div>`).join('')}
         </div>`:''}
       </div>
       <div class="modal-footer">
@@ -834,18 +1063,29 @@ function renderStep(){
   }
 }
 
+// Wizard step functions
+function pickASI(){ WZ.choiceType='asi'; WZ.step='asi'; renderStep(); }
+function pickFeat(){ WZ.choiceType='feat'; WZ.step='feat'; renderStep(); }
+function selectFeat(id){ WZ.selectedFeat=id; WZ.featSubChoice=null; renderStep(); }
+
+function featNext(){
+  if(!WZ.selectedFeat) return;
+  const feat=FEATS.find(f=>f.id===WZ.selectedFeat);
+  if(feat&&feat.needsStatChoice){ WZ.step='feat_stat'; renderStep(); }
+  else{ WZ.step='hp'; renderStep(); }
+}
+function featStatNext(){ if(!WZ.featSubChoice) return; WZ.step='hp'; renderStep(); }
+
 function asiAdj(key,delta){
   const total=Object.values(WZ.asiChoices).reduce((a,b)=>a+b,0);
-  if(delta>0 && (total>=2 || WZ.asiChoices[key]>=2 || S.stats[key]+WZ.asiChoices[key]>=20)) return;
-  if(delta<0 && WZ.asiChoices[key]<=0) return;
-  WZ.asiChoices[key]+=delta;
-  renderStep();
+  if(delta>0&&(total>=2||WZ.asiChoices[key]>=2||S.stats[key]+WZ.asiChoices[key]>=20)) return;
+  if(delta<0&&WZ.asiChoices[key]<=0) return;
+  WZ.asiChoices[key]+=delta; renderStep();
 }
 function asiNext(){ const rem=2-Object.values(WZ.asiChoices).reduce((a,b)=>a+b,0); if(rem>0)return; WZ.step='hp'; renderStep(); }
 function rollHP(){
   const conM=mod(S.stats.con), roll=Math.ceil(Math.random()*8);
-  WZ.hpRoll=Math.max(1,roll+conM);
-  renderStep();
+  WZ.hpRoll=Math.max(1,roll+conM); renderStep();
   const el=document.getElementById('hproll-display');
   if(el){el.style.animation='none';void el.offsetWidth;el.style.animation='pop .4s ease';}
 }
@@ -853,48 +1093,131 @@ function avgHP(){ WZ.hpRoll=Math.max(1,5+mod(S.stats.con)); renderStep(); }
 function hpNext(){ if(WZ.hpRoll===null)return; WZ.step='summary'; renderStep(); }
 
 function applyLevelUp(){
-  const {newLevel,data,hpRoll,asiChoices}=WZ;
+  const {newLevel,data,hpRoll,asiChoices,selectedFeat,featSubChoice}=WZ;
+  // ASI
   Object.entries(asiChoices).forEach(([k,v])=>{ S.stats[k]=Math.min(20,S.stats[k]+v); });
-  S.level=newLevel;
-  S.hpMax+=hpRoll; S.hp=Math.min(S.hpMax,S.hp+hpRoll);
-  S.kiMax=data.ki; S.ki=data.ki;
-  S.martialDie=data.martialDie; S.profBonus=data.profBonus;
+  // Core level changes
+  S.level=newLevel; S.hpMax+=hpRoll; S.hp=Math.min(S.hpMax,S.hp+hpRoll);
+  S.kiMax=data.ki; S.ki=data.ki; S.martialDie=data.martialDie; S.profBonus=data.profBonus;
+  // New abilities
   if(!S.unlockedAbilities) S.unlockedAbilities=[];
   S.unlockedAbilities.push(...data.abilities);
+  // Feat
+  if(selectedFeat){
+    const feat=FEATS.find(f=>f.id===selectedFeat);
+    if(feat){
+      if(!S.feats) S.feats=[];
+      S.feats.push({id:feat.id,name:feat.name,subChoice:featSubChoice});
+      if(!S.featEffects) S.featEffects={};
+      if(!S.bonusSaves) S.bonusSaves={};
+      if(feat.id==='alert') S.featEffects.initiative=(S.featEffects.initiative||0)+5;
+      if(feat.id==='mobile') S.featEffects.speed=(S.featEffects.speed||0)+10;
+      if(feat.id==='tough'){ const bonus=S.level*2; S.hpMax+=bonus; S.hp=Math.min(S.hpMax,S.hp+bonus); }
+      if(feat.id==='resilient'&&featSubChoice){
+        S.stats[featSubChoice]=Math.min(20,S.stats[featSubChoice]+1);
+        S.bonusSaves[featSubChoice]=true;
+      }
+      if(feat.id==='observant') S.featEffects.passivePerception=(S.featEffects.passivePerception||0)+5;
+    }
+  }
   saveState(); closeModal(); renderAll();
   toast(`✦ Bienvenue au niveau ${newLevel} !`);
 }
 
 // ═══════════════════════════════════════════════════════
+// ÉQUIPEMENT
+// ═══════════════════════════════════════════════════════
+const CATS=[
+  {key:'armes',label:'Armes',icon:'⚔️'},
+  {key:'armures',label:'Armures',icon:'🛡️'},
+  {key:'equipement',label:'Équipement',icon:'🎒'},
+  {key:'bijoux',label:'Bijoux',icon:'💎'},
+  {key:'objets',label:'Objets divers',icon:'📦'},
+];
+
+function renderEquipment(){
+  ['po','pa','pc'].forEach(c=>{ const el=document.getElementById('money-'+c); if(el) el.value=S.money[c]||0; });
+  const tot=((S.money.po||0)*100+(S.money.pa||0)*10+(S.money.pc||0));
+  const te=document.getElementById('money-total');
+  if(te) te.textContent=`Total ≈ ${tot} PC · ${(tot/100).toFixed(1)} PO`;
+  const container=document.getElementById('equip-categories');
+  if(!container) return;
+  container.innerHTML=CATS.map(({key,label,icon})=>{
+    const items=(S.items||[]).filter(i=>i.cat===key);
+    return `<div class="equip-cat">
+      <div class="equip-cat-header"><span class="equip-cat-icon">${icon}</span><span class="equip-cat-title">${label}</span></div>
+      <div id="items-${key}">${items.length===0?'<div class="no-items">Aucun objet</div>':items.map(renderItemHTML).join('')}</div>
+      <button class="add-item-btn" onclick="addItem('${key}')">+ Ajouter un objet</button>
+    </div>`;
+  }).join('<div style="border-top:1px solid var(--border);margin:12px 0"></div>');
+}
+
+function renderItemHTML(item){
+  return `<div class="item-row" id="item-${item.id}">
+    <div class="item-content">
+      <div class="item-name">${esc(item.name)}</div>
+      ${item.desc?`<div class="item-desc">${esc(item.desc)}</div>`:''}
+    </div>
+    ${item.qty>1?`<div class="item-qty-badge">×${item.qty}</div>`:''}
+    <div class="item-actions">
+      <button class="ibtn" onclick="editItem(${item.id})" title="Modifier">✏️</button>
+      <button class="ibtn del" onclick="deleteItem(${item.id})" title="Supprimer">✕</button>
+    </div>
+  </div>`;
+}
+
+function editItem(id){
+  const item=(S.items||[]).find(i=>i.id===id); if(!item) return;
+  const row=document.getElementById('item-'+id); if(!row) return;
+  row.innerHTML=`<div class="item-edit-wrap">
+    <input class="iedit" placeholder="Nom de l'objet *" id="en-${id}" value="${esc(item.name)}">
+    <input class="iedit" placeholder="Description (optionnelle)" id="ed-${id}" value="${esc(item.desc||'')}">
+    <div class="iedit-row">
+      <span class="iedit-label">Qté :</span>
+      <input class="iedit qty" type="number" min="1" id="eq-${id}" value="${item.qty}" inputmode="numeric">
+      <button class="isave" onclick="saveItem(${id})">✓ OK</button>
+      <button class="icancel" onclick="renderEquipment()">✕</button>
+    </div>
+  </div>`;
+  document.getElementById('en-'+id).focus();
+}
+function saveItem(id){
+  const item=(S.items||[]).find(i=>i.id===id); if(!item) return;
+  const name=document.getElementById('en-'+id).value.trim();
+  if(!name){ toast('Le nom est obligatoire'); return; }
+  item.name=name; item.desc=document.getElementById('ed-'+id).value.trim();
+  item.qty=Math.max(1,parseInt(document.getElementById('eq-'+id).value)||1);
+  saveState(); renderEquipment(); toast('Objet mis à jour');
+}
+function addItem(cat){
+  if(!S.items) S.items=[];
+  const ni={id:S.nextItemId++,cat,name:'Nouvel objet',desc:'',qty:1};
+  S.items.push(ni); saveState(); renderEquipment();
+  setTimeout(()=>editItem(ni.id),30);
+}
+function deleteItem(id){
+  if(!confirm('Supprimer cet objet ?')) return;
+  S.items=(S.items||[]).filter(i=>i.id!==id); saveState(); renderEquipment(); toast('Objet supprimé');
+}
+function adjMoney(c,delta){
+  if(!S.money) S.money={po:0,pa:0,pc:0};
+  S.money[c]=Math.max(0,(S.money[c]||0)+delta);
+  saveState(); renderEquipment(); toast(`${c.toUpperCase()} : ${S.money[c]}`);
+}
+function setMoney(c,val){ if(!S.money) S.money={po:0,pa:0,pc:0}; S.money[c]=Math.max(0,parseInt(val)||0); saveState(); renderEquipment(); }
+function esc(str){ return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ═══════════════════════════════════════════════════════
 // DICE / PROVERBS / CITATIONS
 // ═══════════════════════════════════════════════════════
-function rollDice(s){
-  const r=Math.ceil(Math.random()*s);
-  const el=document.getElementById('dice-result');
-  el.innerHTML=`<span>${r}</span><span class="dice-lbl">d${s}</span>`;
-  toast(`d${s} → ${r}`);
-}
+function rollDice(s){ const r=Math.ceil(Math.random()*s); const el=document.getElementById('dice-result'); el.innerHTML=`<span>${r}</span><span class="dice-lbl">d${s}</span>`; toast(`d${s} → ${r}`); }
 
 const PROVERBS=["Quand l'aigle doute, c'est que la pluie n'a pas encore compris qu'elle mouille.","Le sage ne choisit pas entre la gauche et la droite. Il attend que le chemin choisisse.","Un bon silence vaut trois bonnes réponses, mais une mauvaise question vaut six bons silences.","L'ombre ne frappe pas celui qui marche dedans. C'est l'évidence même. Sauf le vendredi.","Si tu te demandes si tu dois agir, c'est que tu aurais dû te poser la question avant d'hésiter.","La rivière ne se souvient pas des pierres qu'elle a traversées. C'est pour ça qu'elle se cogne encore.","Décider trop vite, c'est courir sans savoir où atterrir. Décider trop lentement, c'est rater le sol.","La victoire appartient à celui qui attend. La défaite aussi. C'est ce qu'on appelle l'équilibre.","Ce qui ne te tue pas te rend plus fort. Ce qui te tue, par contre, te rend beaucoup moins présent.","Le vrai maître ne demande jamais son chemin. Il demande si le chemin se souvient de lui.","Une épée dans l'ombre coupe aussi bien qu'une épée au soleil. Mais ça fait moins de photo.","Si tu dois choisir entre deux maux, c'est que tu n'as pas encore bien cherché le troisième.","L'ombre n'a pas d'opinion. C'est ce qui fait sa force. Et aussi sa faiblesse. Mais surtout sa force.","On ne traverse pas le Shadowfell à reculons. Enfin, si. Mais on arrive à l'envers.","La méditation sans discipline, c'est juste quelqu'un d'assis qui réfléchit à rien de concret.","Il ne faut jamais répondre à une question par une autre question. Sauf si la réponse est une question.","Agir dans l'urgence, c'est prendre une décision avec les dés de quelqu'un d'autre.","Le vide n'est pas l'absence de tout. C'est la présence de rien. Ce n'est pas pareil. Enfin, presque.","Frapper vite, c'est bien. Frapper juste, c'est mieux. Ne pas frapper et laisser l'autre s'effondrer, c'est de la philosophie.","La patience est une vertu. L'impatience aussi, dans les situations où attendre vous tue.","Tout chemin mène quelque part. C'est l'inconvénient des chemins.","Le guerrier qui rit de ses erreurs vit plus longtemps. Sauf de cette erreur-là précisément.","Si tu regardes trop longtemps l'abîme, c'est que tu n'as probablement rien de mieux à faire.","Trois vérités valent mieux qu'un mensonge. Mais deux vérités et un mensonge, personne ne sait lequel c'est.","Ce qui est fait est fait. Ce qui n'est pas fait non plus.","Un pas dans l'ombre vaut deux pas dans la lumière. Sauf pour lire.","Le destin est une rivière. Certains nagent. Certains coulent. D'autres se demandent si c'est bien une rivière.","Il n'y a pas de mauvaise décision. Il n'y a que des bonnes décisions qu'on regrette au mauvais moment.","L'équilibre parfait, c'est comme l'horizon : on s'en approche, on ne l'atteint jamais, et pourtant tout le monde sait où il est.","Quand on ne peut pas choisir, c'est souvent parce que les deux options sont la même chose vue d'angles différents.","La mort n'est que le début d'une longue période sans activité.","On ne réveille pas l'ombre. L'ombre, elle, ne dort pas.","Le tonnerre prévient. L'éclair, non. C'est pour ça que tout le monde a peur de l'éclair.","Une bonne infiltration, c'est comme un bon repas : on ne devrait pas savoir qu'il y a eu de la préparation.","Ce qui compte, ce n'est pas la destination. C'est d'arriver en vie. Ou pas loin.","Je ne dis pas qu'il ne faut pas décider. Je dis qu'il faut savoir pourquoi on décide avant de décider quoi décider.","L'ombre n'a jamais trahi personne. C'est la lumière qui révèle.","Rien n'est impossible. Certaines choses sont simplement très improbables à des horaires que je n'ai pas consultés.","La force ne réside pas dans le coup qu'on porte, mais dans celui qu'on choisit de ne pas porter. Mais parfois il faut quand même taper.","Un ennemi vaincu sans combat, c'est un ennemi qu'on n'a pas vu venir. Ce n'est pas forcément un succès.","La sagesse ne se prend pas. Elle se mérite. Et encore.","Chaque question porte en elle sa réponse. Encore faut-il poser la bonne question.","Le silence parle. Encore faut-il savoir l'entendre. Encore faut-il vouloir écouter. Encore faut-il être là.","Ce n'est pas parce qu'on ne voit pas l'ombre qu'elle n'est pas là. Elle attend, elle aussi.","La précipitation est le luxe de ceux qui n'ont pas encore eu à regretter.","Il est plus facile de marcher dans les pas d'un autre que dans les siens. C'est pour ça qu'on s'épuise moins à suivre.","Quand tout le monde regarde à gauche, le sage regarde à droite. Quand tout le monde regarde à droite, le sage ferme les yeux.","Un mensonge dit assez souvent finit par ressembler à une vérité. La vérité, elle, ne change pas d'avis.","L'ennemi parfait est celui qu'on ne reconnaît pas comme tel. L'ami parfait aussi, d'ailleurs.","On ne devient pas maître de l'ombre en refusant la lumière. On en devient maître en comprenant pourquoi la lumière jette une ombre."];
 
-function drawProverb(){
-  const box=document.getElementById('proverb-box');
-  box.classList.remove('show'); void box.offsetWidth;
-  box.textContent=PROVERBS[Math.floor(Math.random()*PROVERBS.length)];
-  box.classList.add('show');
-}
+function drawProverb(){ const box=document.getElementById('proverb-box'); box.classList.remove('show'); void box.offsetWidth; box.textContent=PROVERBS[Math.floor(Math.random()*PROVERBS.length)]; box.classList.add('show'); }
 
-function renderCitations(list){
-  document.getElementById('cit-count').textContent=list.length+' sentence'+(list.length>1?'s':'');
-  document.getElementById('cit-list').innerHTML=list.map(p=>`
-    <div class="citation-item">
-      <span class="citation-num">${String(PROVERBS.indexOf(p)+1).padStart(2,'0')}</span>
-      <span class="citation-text">${p}</span>
-    </div>`).join('');
-}
-function filterCitations(q){
-  renderCitations(q.trim()?PROVERBS.filter(p=>p.toLowerCase().includes(q.toLowerCase())):PROVERBS);
-}
+function renderCitations(list){ document.getElementById('cit-count').textContent=list.length+' sentence'+(list.length>1?'s':''); document.getElementById('cit-list').innerHTML=list.map(p=>`<div class="citation-item"><span class="citation-num">${String(PROVERBS.indexOf(p)+1).padStart(2,'0')}</span><span class="citation-text">${p}</span></div>`).join(''); }
+function filterCitations(q){ renderCitations(q.trim()?PROVERBS.filter(p=>p.toLowerCase().includes(q.toLowerCase())):PROVERBS); }
 
 // ═══════════════════════════════════════════════════════
 // TABS / TOAST
@@ -906,26 +1229,14 @@ function switchTab(name,btn){
   btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 let toastTimer;
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
-}
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
 
 // ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
-loadState();
-renderAll();
-renderCitations(PROVERBS);
-
-// Close modal on backdrop click
-document.getElementById('levelup-modal').addEventListener('click', e=>{
-  if(e.target===document.getElementById('levelup-modal')) closeModal();
-});
+loadState(); renderAll(); renderEquipment(); renderCitations(PROVERBS);
+document.getElementById('levelup-modal').addEventListener('click',e=>{ if(e.target===document.getElementById('levelup-modal')) closeModal(); });
 </script>
 </body>
 </html>
