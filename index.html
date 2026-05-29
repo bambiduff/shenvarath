@@ -3,426 +3,241 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Shen Varath — Fiche D&amp;D 5e</title>
+  <title>Shen Varath — Fiche D&D 5e</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>影</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; }
-    body {
-      background: #F0EDF8;
-      color: #1A1535;
-      font-family: 'Crimson Pro', Georgia, serif;
-      min-height: 100dvh;
-      -webkit-font-smoothing: antialiased;
-    }
-
+    body { background: #F0EDF8; color: #1A1535; font-family: 'Crimson Pro', Georgia, serif; min-height: 100dvh; -webkit-font-smoothing: antialiased; }
     :root {
-      --bg: #F0EDF8;
-      --surface: #F8F6FF;
-      --card: #FFFFFF;
-      --border: #DDD8F0;
-      --border2: #C8C0E8;
-      --text: #1A1535;
-      --muted: #6B5FA8;
-      --faint: #EAE7F8;
+      --bg: #F0EDF8; --surface: #F8F6FF; --card: #FFFFFF;
+      --border: #DDD8F0; --border2: #C8C0E8; --text: #1A1535; --muted: #6B5FA8; --faint: #EAE7F8;
+      --purple: #534AB7; --purple-light: #7B72D8; --purple-bg: #EEEDFE; --purple-glow: rgba(83,74,183,.12);
+      --teal: #0F6E56; --teal-bg: #E1F5EE; --coral: #B82A42; --coral-bg: #FBEAED;
+      --gold: #8A6A1A; --gold-bg: #FDF4E0; --tab-h: 68px; --r: 12px; --rs: 8px;
+    }
+    #app { max-width: 480px; margin: 0 auto; padding-bottom: calc(var(--tab-h) + 8px); }
 
-      --purple: #534AB7;
-      --purple-light: #7B72D8;
-      --purple-bg: #EEEDFE;
-      --purple-glow: rgba(83,74,183,.12);
+    /* HEADER */
+    .header { background: linear-gradient(155deg,#2A2255 0%,#3D358A 50%,#4A40A8 100%); padding: 1.5rem 1.25rem 1.1rem; position: relative; overflow: hidden; }
+    .header::before { content:''; position:absolute; top:-60px; right:-40px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%); pointer-events:none; }
+    .header-inner { display:flex; align-items:center; gap:1rem; position:relative; z-index:1; }
+    .avatar { width:74px; height:74px; border-radius:50%; border:2px solid rgba(255,255,255,.4); background:rgba(255,255,255,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; box-shadow:0 0 0 6px rgba(255,255,255,.06); }
+    .avatar-glyph { font-family:'Cinzel',serif; font-size:28px; color:rgba(255,255,255,.9); }
+    .avatar-ring { position:absolute; inset:-8px; border-radius:50%; border:1px solid rgba(255,255,255,.2); animation:ring-pulse 4s ease-in-out infinite; }
+    @keyframes ring-pulse { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.1);opacity:.15} }
+    .char-name { font-family:'Cinzel',serif; font-size:26px; font-weight:700; color:#fff; letter-spacing:.04em; line-height:1.15; }
+    .char-name .accent { color:#C8C0FF; }
+    .char-sub { font-size:14px; color:rgba(255,255,255,.65); margin-top:2px; font-style:italic; }
+    .badges { display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; }
+    .badge { display:inline-flex; align-items:center; font-size:11px; font-family:'Cinzel',serif; letter-spacing:.05em; padding:3px 10px; border-radius:20px; border:1px solid; }
+    .b-pur { background:rgba(255,255,255,.15); border-color:rgba(255,255,255,.35); color:#fff; }
+    .b-tea { background:rgba(62,205,196,.2); border-color:rgba(62,205,196,.5); color:#9FFCE8; }
+    .b-gld { background:rgba(255,200,80,.15); border-color:rgba(255,200,80,.4); color:#FFE08A; }
+    .b-lvl { background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.5); color:#fff; }
+    .hp-mini { position:relative; z-index:1; margin-top:14px; }
+    .hp-mini-labels { display:flex; justify-content:space-between; font-size:12px; color:rgba(255,255,255,.55); margin-bottom:4px; }
+    .hp-mini-labels strong { color:#FFA0B0; font-size:13px; }
+    .hp-track { height:6px; border-radius:3px; background:rgba(255,255,255,.15); overflow:hidden; }
+    .hp-fill { height:100%; border-radius:3px; background:linear-gradient(90deg,#E05068,#F5A0B0); transition:width .5s cubic-bezier(.4,0,.2,1); }
 
-      --teal: #0F6E56;
-      --teal-bg: #E1F5EE;
-      --teal-glow: rgba(15,110,86,.1);
+    /* TABS */
+    .tab-nav { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; height:var(--tab-h); background:rgba(250,248,255,.96); backdrop-filter:blur(20px); border-top:1px solid var(--border); display:flex; overflow-x:auto; z-index:100; padding-bottom:env(safe-area-inset-bottom,0); scrollbar-width:none; }
+    .tab-nav::-webkit-scrollbar { display:none; }
+    .tab-btn { flex:0 0 auto; min-width:70px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; background:none; border:none; cursor:pointer; color:var(--muted); font-family:'Cinzel',serif; font-size:10px; letter-spacing:.04em; padding:8px 10px; transition:color .2s; position:relative; -webkit-tap-highlight-color:transparent; white-space:nowrap; }
+    .tab-btn.active { color:var(--purple); }
+    .tab-btn.active::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:28px; height:2px; background:var(--purple); border-radius:0 0 3px 3px; }
+    .tab-icon { font-size:20px; line-height:1; }
+    .tab-content { padding:1rem; }
+    .panel { display:none; }
+    .panel.active { display:block; }
 
-      --coral: #B82A42;
-      --coral-bg: #FBEAED;
-      --coral-glow: rgba(184,42,66,.1);
+    /* CARDS */
+    .card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:1rem 1.25rem; margin-bottom:12px; box-shadow:0 1px 4px rgba(83,74,183,.06); }
+    .card-title { font-family:'Cinzel',serif; font-size:10px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .card-title::after { content:''; flex:1; height:1px; background:var(--border); }
 
-      --gold: #8A6A1A;
-      --gold-bg: #FDF4E0;
+    /* STATS */
+    .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .stat-box { background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); padding:12px 6px; text-align:center; }
+    .stat-label { font-size:9px; font-family:'Cinzel',serif; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+    .stat-mod { font-family:'Cinzel',serif; font-size:26px; font-weight:700; color:var(--text); line-height:1.1; }
+    .stat-mod.pos { color:var(--teal); }
+    .stat-mod.neg { color:var(--coral); }
+    .stat-score { font-size:12px; color:var(--muted); border:1px solid var(--border); border-radius:20px; padding:2px 10px; display:inline-block; margin-top:3px; }
+    .skill-row { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid var(--border); font-size:14px; }
+    .skill-row:last-child { border-bottom:none; }
+    .prof-dot { width:10px; height:10px; border-radius:50%; border:1.5px solid var(--border2); flex-shrink:0; }
+    .prof-dot.prof { background:var(--purple); border-color:var(--purple); }
+    .skill-name { flex:1; color:var(--text); }
+    .skill-attr { font-size:11px; color:var(--muted); font-family:'Cinzel',serif; }
+    .skill-val { font-family:'Cinzel',serif; font-size:14px; color:var(--text); font-weight:600; min-width:28px; text-align:right; }
+    .saves-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .save-item { display:flex; align-items:center; gap:6px; font-size:13px; }
+    .save-val { font-family:'Cinzel',serif; font-size:14px; color:var(--text); font-weight:700; }
 
-      --tab-h: 68px;
-      --r: 12px;
-      --rs: 8px;
-    }
+    /* LEVEL UP button */
+    .levelup-btn { width:100%; padding:13px; border:2px solid var(--purple); border-radius:var(--rs); background:var(--purple-bg); color:var(--purple); font-family:'Cinzel',serif; font-size:14px; letter-spacing:.06em; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .levelup-btn:hover { background:var(--purple); color:#fff; }
+    .levelup-btn:disabled { opacity:.4; cursor:default; }
 
-    #app {
-      max-width: 480px;
-      margin: 0 auto;
-      padding-bottom: calc(var(--tab-h) + 8px);
-    }
+    /* HP */
+    .hp-controls { display:flex; align-items:center; gap:16px; justify-content:center; margin:12px 0; }
+    .hp-big { font-family:'Cinzel',serif; font-size:58px; color:var(--coral); line-height:1; font-weight:700; }
+    .hp-maxlbl { font-size:14px; color:var(--muted); text-align:center; }
+    .hp-adj-input { text-align:center; font-family:'Cinzel',serif; font-size:16px; width:64px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); color:var(--text); padding:7px; margin-top:8px; }
+    .ctrl-btn { width:48px; height:48px; border-radius:50%; border:1px solid var(--border2); background:var(--surface); color:var(--text); font-size:24px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s; -webkit-tap-highlight-color:transparent; }
+    .ctrl-btn:active { background:var(--border); }
 
-    /* ── HEADER ──────────────────────── */
-    .header {
-      background: linear-gradient(155deg, #2A2255 0%, #3D358A 50%, #4A40A8 100%);
-      padding: 1.5rem 1.25rem 1.1rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .header::before {
-      content: ''; position: absolute;
-      top: -60px; right: -40px;
-      width: 200px; height: 200px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,.07), transparent 70%);
-      pointer-events: none;
-    }
-    .header::after {
-      content: ''; position: absolute;
-      bottom: -30px; left: -20px;
-      width: 130px; height: 130px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(62,205,196,.12), transparent 70%);
-      pointer-events: none;
-    }
-    .header-inner {
-      display: flex; align-items: center;
-      gap: 1rem; position: relative; z-index: 1;
-    }
-    .avatar {
-      width: 74px; height: 74px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,.4);
-      background: rgba(255,255,255,.1);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; position: relative;
-      box-shadow: 0 0 0 6px rgba(255,255,255,.06);
-    }
-    .avatar-glyph {
-      font-family: 'Cinzel', serif; font-size: 28px; color: rgba(255,255,255,.9);
-    }
-    .avatar-ring {
-      position: absolute; inset: -8px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.2); opacity: .6;
-      animation: ring-pulse 4s ease-in-out infinite;
-    }
-    @keyframes ring-pulse {
-      0%,100% { transform: scale(1); opacity: .6; }
-      50% { transform: scale(1.1); opacity: .15; }
-    }
-    .char-name {
-      font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700;
-      color: #fff; letter-spacing: .04em; line-height: 1.15;
-    }
-    .char-name .accent { color: #C8C0FF; }
-    .char-sub { font-size: 14px; color: rgba(255,255,255,.65); margin-top: 2px; font-style: italic; }
-    .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
-    .badge {
-      display: inline-flex; align-items: center;
-      font-size: 11px; font-family: 'Cinzel', serif; letter-spacing: .05em;
-      padding: 3px 10px; border-radius: 20px; border: 1px solid;
-    }
-    .b-pur { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.35); color: #fff; }
-    .b-tea { background: rgba(62,205,196,.2); border-color: rgba(62,205,196,.5); color: #9FFCE8; }
-    .b-gld { background: rgba(255,200,80,.15); border-color: rgba(255,200,80,.4); color: #FFE08A; }
+    /* COMBAT */
+    .combat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:8px; }
+    .cs { background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); padding:12px 6px; text-align:center; }
+    .cs-val { font-family:'Cinzel',serif; font-size:22px; font-weight:700; color:var(--text); }
+    .cs-lbl { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:2px; }
+    .attack-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+    .attack-item:last-child { border-bottom:none; }
+    .atk-icon { font-size:22px; width:32px; text-align:center; flex-shrink:0; }
+    .atk-info { flex:1; }
+    .atk-name { font-family:'Cinzel',serif; font-size:14px; color:var(--text); font-weight:600; }
+    .atk-detail { font-size:12px; color:var(--muted); margin-top:2px; }
+    .atk-stats { text-align:right; }
+    .atk-bonus-val { font-family:'Cinzel',serif; font-size:20px; color:var(--coral); font-weight:700; }
+    .atk-dmg { font-size:12px; color:var(--muted); }
 
-    /* HP mini */
-    .hp-mini { position: relative; z-index: 1; margin-top: 14px; }
-    .hp-mini-labels {
-      display: flex; justify-content: space-between;
-      font-size: 12px; color: rgba(255,255,255,.55); margin-bottom: 4px;
-    }
-    .hp-mini-labels strong { color: #FFA0B0; font-size: 13px; }
-    .hp-track { height: 6px; border-radius: 3px; background: rgba(255,255,255,.15); overflow: hidden; }
-    .hp-fill {
-      height: 100%; border-radius: 3px;
-      background: linear-gradient(90deg, #E05068, #F5A0B0);
-      transition: width .5s cubic-bezier(.4,0,.2,1);
-    }
+    /* KI */
+    .ki-dots { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:14px 0; }
+    .ki-dot { width:48px; height:48px; border-radius:50%; border:2px solid var(--border2); background:var(--surface); cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; font-size:14px; color:var(--muted); transition:all .2s ease; -webkit-tap-highlight-color:transparent; }
+    .ki-dot.on { background:var(--purple-bg); border-color:var(--purple); color:var(--purple); box-shadow:0 0 14px var(--purple-glow); }
+    .ki-lbl { text-align:center; font-size:13px; color:var(--muted); font-style:italic; }
+    .ability-item { padding:12px 0; border-bottom:1px solid var(--border); }
+    .ability-item:last-child { border-bottom:none; }
+    .ab-hd { display:flex; align-items:center; gap:8px; margin-bottom:5px; }
+    .ab-name { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--text); }
+    .ab-tag { font-size:10px; padding:2px 8px; border-radius:20px; border:1px solid; }
+    .t-ki  { background:var(--purple-bg); border-color:var(--purple); color:var(--purple); }
+    .t-sh  { background:var(--teal-bg); border-color:var(--teal); color:var(--teal); }
+    .t-pa  { background:var(--gold-bg); border-color:var(--gold); color:var(--gold); }
+    .t-re  { background:var(--coral-bg); border-color:var(--coral); color:var(--coral); }
+    .t-fr  { background:var(--teal-bg); border-color:rgba(15,110,86,.3); color:var(--teal); }
+    .ab-desc { font-size:13px; color:#4A4070; line-height:1.6; }
 
-    /* ── TABS ────────────────────────── */
-    .tab-nav {
-      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 100%; max-width: 480px;
-      height: var(--tab-h);
-      background: rgba(250,248,255,.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
-      display: flex; overflow-x: auto; z-index: 100;
-      padding-bottom: env(safe-area-inset-bottom, 0);
-      scrollbar-width: none;
-    }
-    .tab-nav::-webkit-scrollbar { display: none; }
-    .tab-btn {
-      flex: 0 0 auto; min-width: 72px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 3px;
-      background: none; border: none; cursor: pointer;
-      color: var(--muted);
-      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: .04em;
-      padding: 8px 12px;
-      transition: color .2s;
-      position: relative;
-      -webkit-tap-highlight-color: transparent;
-      white-space: nowrap;
-    }
-    .tab-btn.active { color: var(--purple); }
-    .tab-btn.active::before {
-      content: ''; position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 28px; height: 2px;
-      background: var(--purple); border-radius: 0 0 3px 3px;
-    }
-    .tab-icon { font-size: 20px; line-height: 1; }
+    /* CONDITIONS */
+    .cond-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+    .cond-chip { display:flex; align-items:center; gap:8px; padding:9px 12px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); font-size:13px; cursor:pointer; color:var(--muted); transition:all .2s; -webkit-tap-highlight-color:transparent; }
+    .cond-chip.on { background:var(--coral-bg); border-color:var(--coral); color:var(--coral); }
+    .cond-check { width:14px; height:14px; border-radius:3px; border:1.5px solid currentColor; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; }
+    .death-row { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+    .death-lbl { font-size:12px; width:60px; font-family:'Cinzel',serif; letter-spacing:.04em; }
+    .death-lbl.s { color:var(--teal); } .death-lbl.f { color:var(--coral); }
+    .dd-dots { display:flex; gap:8px; }
+    .dd { width:24px; height:24px; border-radius:50%; border:1.5px solid var(--border2); cursor:pointer; transition:all .15s; }
+    .dd.s.on { background:var(--teal); border-color:var(--teal); } .dd.f.on { background:var(--coral); border-color:var(--coral); }
+    .rest-row { display:flex; gap:8px; }
+    .rest-btn { flex:1; padding:11px; border:1px solid var(--border); border-radius:var(--rs); background:var(--surface); font-family:'Cinzel',serif; font-size:12px; letter-spacing:.04em; cursor:pointer; color:var(--muted); transition:all .15s; }
+    .rest-btn.long { border-color:var(--purple); color:var(--purple); background:var(--purple-bg); }
 
-    /* ── CONTENT ─────────────────────── */
-    .tab-content { padding: 1rem; }
-    .panel { display: none; }
-    .panel.active { display: block; }
+    /* HISTOIRE */
+    .trait-block { margin-bottom:12px; }
+    .trait-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+    .trait-value { font-size:14px; color:var(--text); line-height:1.6; }
+    .backstory { font-size:14px; color:#3A3060; line-height:1.85; }
+    .backstory p { margin-bottom:10px; }
+    .eq-row { display:flex; gap:12px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--border); }
+    .eq-row:last-child { border-bottom:none; }
+    .eq-icon { font-size:20px; width:28px; text-align:center; flex-shrink:0; color:var(--muted); margin-top:1px; }
+    .eq-name { color:var(--text); font-weight:600; font-size:14px; }
+    .eq-desc { font-size:12px; color:var(--muted); margin-top:2px; }
 
-    /* ── CARDS ───────────────────────── */
-    .card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 1rem 1.25rem; margin-bottom: 12px;
-      box-shadow: 0 1px 4px rgba(83,74,183,.06);
-    }
-    .card-title {
-      font-family: 'Cinzel', serif; font-size: 10px; font-weight: 600;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--muted); display: flex; align-items: center; gap: 10px;
-      margin-bottom: 14px;
-    }
-    .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    /* DÉS */
+    .dice-btns { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:8px 0 16px; }
+    .d-btn { width:56px; height:56px; border-radius:var(--rs); border:1px solid var(--border2); background:var(--surface); color:var(--text); font-family:'Cinzel',serif; font-size:13px; cursor:pointer; transition:all .15s; }
+    .d-btn:hover { border-color:var(--purple); color:var(--purple); background:var(--purple-bg); }
+    .d-btn:active { background:var(--purple); color:#fff; }
+    .dice-result { text-align:center; font-family:'Cinzel',serif; font-size:72px; font-weight:700; color:var(--text); min-height:80px; display:flex; align-items:center; justify-content:center; flex-direction:column; line-height:1; }
+    .dice-lbl { font-size:14px; color:var(--muted); font-weight:400; margin-top:4px; }
+    .proverb-btn { width:100%; padding:13px; border:1px solid var(--purple); border-radius:var(--rs); background:var(--purple-bg); color:var(--purple); font-family:'Cinzel',serif; font-size:14px; letter-spacing:.04em; cursor:pointer; margin-bottom:14px; }
+    .quote-box { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--purple); border-radius:0 var(--rs) var(--rs) 0; padding:16px 18px; font-size:15px; font-style:italic; color:var(--text); line-height:1.8; display:none; animation:fadein .35s ease; }
+    .quote-box.show { display:block; }
 
-    /* ── STATS GRID ──────────────────── */
-    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .stat-box {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--rs); padding: 12px 6px; text-align: center;
-    }
-    .stat-label { font-size: 9px; font-family: 'Cinzel', serif; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-    .stat-mod { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; color: var(--text); line-height: 1.1; }
-    .stat-mod.pos { color: var(--teal); }
-    .stat-mod.neg { color: var(--coral); }
-    .stat-score {
-      font-size: 12px; color: var(--muted);
-      border: 1px solid var(--border); border-radius: 20px;
-      padding: 2px 10px; display: inline-block; margin-top: 3px;
-    }
+    /* CITATIONS */
+    .citations-intro { font-size:14px; color:var(--muted); font-style:italic; line-height:1.6; margin-bottom:16px; padding:12px 16px; background:var(--purple-bg); border-radius:var(--rs); border-left:3px solid var(--purple); }
+    .citation-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+    .citation-item:last-child { border-bottom:none; }
+    .citation-num { font-family:'Cinzel',serif; font-size:11px; color:var(--muted); min-width:24px; padding-top:2px; opacity:.6; }
+    .citation-text { font-size:14px; color:var(--text); line-height:1.65; font-style:italic; }
+    .citation-search { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:var(--rs); background:var(--surface); color:var(--text); font-family:'Crimson Pro',serif; font-size:15px; margin-bottom:14px; outline:none; }
+    .citation-search:focus { border-color:var(--purple); }
+    .citation-count { font-size:12px; color:var(--muted); text-align:right; margin-bottom:8px; font-style:italic; }
 
-    /* ── SKILLS / SAVES ──────────────── */
-    .skill-row {
-      display: flex; align-items: center; gap: 10px;
-      padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 14px;
-    }
-    .skill-row:last-child { border-bottom: none; }
-    .prof-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--border2); flex-shrink: 0; }
-    .prof-dot.prof { background: var(--purple); border-color: var(--purple); }
-    .skill-name { flex: 1; color: var(--text); }
-    .skill-attr { font-size: 11px; color: var(--muted); font-family: 'Cinzel', serif; }
-    .skill-val { font-family: 'Cinzel', serif; font-size: 14px; color: var(--text); font-weight: 600; min-width: 28px; text-align: right; }
-    .saves-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .save-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
-    .save-val { font-family: 'Cinzel', serif; font-size: 14px; color: var(--text); font-weight: 700; }
+    @keyframes fadein { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+    @keyframes pop { 0%{transform:scale(.7);opacity:.4} 60%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+    @keyframes lvlup { 0%{transform:scale(.8);opacity:0} 60%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
 
-    /* ── HP TRACKER ──────────────────── */
-    .hp-controls { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 12px 0; }
-    .hp-big { font-family: 'Cinzel', serif; font-size: 58px; color: var(--coral); line-height: 1; font-weight: 700; }
-    .hp-maxlbl { font-size: 14px; color: var(--muted); text-align: center; }
-    .hp-adj-input {
-      text-align: center; font-family: 'Cinzel', serif; font-size: 16px;
-      width: 64px; background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--rs); color: var(--text); padding: 7px; margin-top: 8px;
-    }
-    .ctrl-btn {
-      width: 48px; height: 48px; border-radius: 50%;
-      border: 1px solid var(--border2); background: var(--surface);
-      color: var(--text); font-size: 24px;
-      display: inline-flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background .15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .ctrl-btn:active { background: var(--border); }
+    /* TOAST */
+    .toast { position:fixed; bottom:calc(var(--tab-h) + 14px); left:50%; transform:translateX(-50%) translateY(8px); background:var(--purple); border-radius:var(--rs); padding:10px 20px; font-size:14px; color:#fff; opacity:0; z-index:200; pointer-events:none; white-space:nowrap; transition:all .25s ease; box-shadow:0 4px 16px var(--purple-glow); }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
-    /* ── COMBAT STATS ────────────────── */
-    .combat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px; }
-    .cs { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rs); padding: 12px 6px; text-align: center; }
-    .cs-val { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: var(--text); }
-    .cs-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+    /* ══════════════════════════════════
+       LEVEL UP MODAL
+    ══════════════════════════════════ */
+    .modal-overlay { position:fixed; inset:0; background:rgba(15,12,30,.8); z-index:400; overflow-y:auto; padding:1rem; display:none; }
+    .modal-overlay.open { display:block; }
+    .modal-box { max-width:420px; margin:2rem auto; background:var(--card); border-radius:var(--r); border:1px solid var(--border2); overflow:hidden; animation:lvlup .3s ease; box-shadow:0 20px 60px rgba(83,74,183,.25); }
+    .modal-header { background:linear-gradient(135deg,#2A2255,#4A40A8); padding:1.25rem 1.5rem; display:flex; align-items:center; gap:12px; }
+    .modal-header-icon { font-size:32px; }
+    .modal-header-title { font-family:'Cinzel',serif; font-size:20px; font-weight:700; color:#fff; }
+    .modal-header-sub { font-size:13px; color:rgba(255,255,255,.6); margin-top:2px; font-style:italic; }
+    .modal-body { padding:1.5rem; }
+    .modal-section { margin-bottom:1.5rem; }
+    .modal-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+    .modal-footer { padding:0 1.5rem 1.5rem; display:flex; gap:8px; }
+    .modal-btn { flex:1; padding:13px; border:none; border-radius:var(--rs); font-family:'Cinzel',serif; font-size:13px; letter-spacing:.04em; cursor:pointer; transition:all .15s; }
+    .modal-btn.primary { background:var(--purple); color:#fff; }
+    .modal-btn.primary:hover { background:var(--purple-light); }
+    .modal-btn.primary:disabled { opacity:.35; cursor:default; }
+    .modal-btn.secondary { background:var(--surface); color:var(--muted); border:1px solid var(--border); }
 
-    /* ── ATTACKS ─────────────────────── */
-    .attack-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-    .attack-item:last-child { border-bottom: none; }
-    .atk-icon { font-size: 22px; width: 32px; text-align: center; flex-shrink: 0; }
-    .atk-info { flex: 1; }
-    .atk-name { font-family: 'Cinzel', serif; font-size: 14px; color: var(--text); font-weight: 600; }
-    .atk-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .atk-stats { text-align: right; }
-    .atk-bonus { font-family: 'Cinzel', serif; font-size: 20px; color: var(--coral); font-weight: 700; }
-    .atk-dmg { font-size: 12px; color: var(--muted); }
+    /* ASI grid */
+    .asi-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+    .asi-box { background:var(--surface); border:1.5px solid var(--border); border-radius:var(--rs); padding:10px 8px; text-align:center; transition:border-color .15s; }
+    .asi-box.selected { border-color:var(--purple); background:var(--purple-bg); }
+    .asi-box-label { font-size:9px; font-family:'Cinzel',serif; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+    .asi-box-mod { font-family:'Cinzel',serif; font-size:20px; font-weight:700; color:var(--text); }
+    .asi-box-score { font-size:12px; color:var(--muted); margin-bottom:8px; }
+    .asi-box-ctrl { display:flex; justify-content:center; align-items:center; gap:6px; }
+    .asi-ctrl-btn { width:26px; height:26px; border-radius:50%; border:1px solid var(--border2); background:var(--card); color:var(--text); cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; }
+    .asi-ctrl-btn:disabled { opacity:.3; cursor:default; }
+    .asi-bonus { font-family:'Cinzel',serif; font-size:14px; color:var(--purple); width:20px; }
 
-    /* ── KI ──────────────────────────── */
-    .ki-dots { display: flex; gap: 12px; justify-content: center; margin: 14px 0; }
-    .ki-dot {
-      width: 48px; height: 48px; border-radius: 50%;
-      border: 2px solid var(--border2); background: var(--surface);
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      font-family: 'Cinzel', serif; font-size: 14px; color: var(--muted);
-      transition: all .2s ease; -webkit-tap-highlight-color: transparent;
-    }
-    .ki-dot.on {
-      background: var(--purple-bg); border-color: var(--purple);
-      color: var(--purple); box-shadow: 0 0 14px var(--purple-glow);
-    }
-    .ki-lbl { text-align: center; font-size: 13px; color: var(--muted); font-style: italic; }
+    /* HP roll */
+    .hp-roll-display { text-align:center; font-family:'Cinzel',serif; font-size:64px; font-weight:700; color:var(--coral); min-height:80px; display:flex; align-items:center; justify-content:center; flex-direction:column; margin:12px 0; }
+    .hp-roll-sub { font-size:14px; color:var(--muted); font-weight:400; margin-top:4px; font-style:italic; }
+    .hp-roll-btns { display:flex; gap:8px; margin-bottom:8px; }
+    .hp-roll-btn { flex:1; padding:12px; border-radius:var(--rs); font-family:'Cinzel',serif; font-size:13px; cursor:pointer; transition:all .15s; }
+    .hp-roll-btn.dice { border:1px solid var(--coral); background:var(--coral-bg); color:var(--coral); }
+    .hp-roll-btn.avg { border:1px solid var(--border); background:var(--surface); color:var(--muted); }
 
-    /* ── ABILITY ITEMS ───────────────── */
-    .ability-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
-    .ability-item:last-child { border-bottom: none; }
-    .ab-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-    .ab-name { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; color: var(--text); }
-    .ab-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; border: 1px solid; }
-    .t-ki  { background: var(--purple-bg); border-color: var(--purple); color: var(--purple); }
-    .t-sh  { background: var(--teal-bg); border-color: var(--teal); color: var(--teal); }
-    .t-pa  { background: var(--gold-bg); border-color: var(--gold); color: var(--gold); }
-    .t-re  { background: var(--coral-bg); border-color: var(--coral); color: var(--coral); }
-    .t-fr  { background: var(--teal-bg); border-color: rgba(15,110,86,.3); color: var(--teal); }
-    .ab-desc { font-size: 13px; color: #4A4070; line-height: 1.6; }
-
-    /* ── CONDITIONS ──────────────────── */
-    .cond-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .cond-chip {
-      display: flex; align-items: center; gap: 8px; padding: 9px 12px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--rs); font-size: 13px; cursor: pointer; color: var(--muted);
-      transition: all .2s; -webkit-tap-highlight-color: transparent;
-    }
-    .cond-chip.on { background: var(--coral-bg); border-color: var(--coral); color: var(--coral); }
-    .cond-check {
-      width: 14px; height: 14px; border-radius: 3px;
-      border: 1.5px solid currentColor;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 10px; flex-shrink: 0;
-    }
-
-    /* ── DEATH SAVES ─────────────────── */
-    .death-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-    .death-lbl { font-size: 12px; width: 60px; font-family: 'Cinzel', serif; letter-spacing: .04em; }
-    .death-lbl.s { color: var(--teal); }
-    .death-lbl.f { color: var(--coral); }
-    .dd-dots { display: flex; gap: 8px; }
-    .dd { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--border2); cursor: pointer; transition: all .15s; -webkit-tap-highlight-color: transparent; }
-    .dd.s.on { background: var(--teal); border-color: var(--teal); }
-    .dd.f.on { background: var(--coral); border-color: var(--coral); }
-
-    /* ── REST BUTTONS ────────────────── */
-    .rest-row { display: flex; gap: 8px; }
-    .rest-btn {
-      flex: 1; padding: 11px;
-      border: 1px solid var(--border); border-radius: var(--rs);
-      background: var(--surface);
-      font-family: 'Cinzel', serif; font-size: 12px;
-      letter-spacing: .04em; cursor: pointer; color: var(--muted);
-      transition: all .15s; -webkit-tap-highlight-color: transparent;
-    }
-    .rest-btn:active { background: var(--border); }
-    .rest-btn.long { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); }
-
-    /* ── HISTOIRE ────────────────────── */
-    .trait-block { margin-bottom: 12px; }
-    .trait-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-    .trait-value { font-size: 14px; color: var(--text); line-height: 1.6; }
-    .backstory { font-size: 14px; color: #3A3060; line-height: 1.85; }
-    .backstory p { margin-bottom: 10px; }
-    .eq-row { display: flex; gap: 12px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
-    .eq-row:last-child { border-bottom: none; }
-    .eq-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; color: var(--muted); margin-top: 1px; }
-    .eq-name { color: var(--text); font-weight: 600; }
-    .eq-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-    /* ── DICES ───────────────────────── */
-    .dice-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 8px 0 16px; }
-    .d-btn {
-      width: 56px; height: 56px; border-radius: var(--rs);
-      border: 1px solid var(--border2); background: var(--surface);
-      color: var(--text); font-family: 'Cinzel', serif; font-size: 13px;
-      cursor: pointer; transition: all .15s; -webkit-tap-highlight-color: transparent;
-    }
-    .d-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); }
-    .d-btn:active { background: var(--purple); color: #fff; border-color: var(--purple); }
-    .dice-result {
-      text-align: center; font-family: 'Cinzel', serif; font-size: 72px; font-weight: 700;
-      color: var(--text); min-height: 80px;
-      display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1;
-    }
-    .dice-lbl { font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 4px; }
-
-    /* ── PROVERB (Dés tab) ───────────── */
-    .proverb-btn {
-      width: 100%; padding: 13px;
-      border: 1px solid var(--purple); border-radius: var(--rs);
-      background: var(--purple-bg);
-      color: var(--purple); font-family: 'Cinzel', serif;
-      font-size: 14px; letter-spacing: .04em; cursor: pointer;
-      margin-bottom: 14px; transition: all .15s; -webkit-tap-highlight-color: transparent;
-    }
-    .proverb-btn:active { background: #DDDAF8; }
-    .quote-box {
-      background: var(--surface); border: 1px solid var(--border);
-      border-left: 3px solid var(--purple);
-      border-radius: 0 var(--rs) var(--rs) 0;
-      padding: 16px 18px; font-size: 15px; font-style: italic;
-      color: var(--text); line-height: 1.8;
-      display: none; animation: fadein .35s ease;
-    }
-    .quote-box.show { display: block; }
-
-    /* ── CITATIONS TAB ───────────────── */
-    .citations-intro {
-      font-size: 14px; color: var(--muted); font-style: italic;
-      line-height: 1.6; margin-bottom: 16px;
-      padding: 12px 16px;
-      background: var(--purple-bg);
-      border-radius: var(--rs);
-      border-left: 3px solid var(--purple);
-    }
-    .citation-item {
-      display: flex; gap: 14px;
-      padding: 12px 0; border-bottom: 1px solid var(--border);
-      align-items: flex-start;
-    }
-    .citation-item:last-child { border-bottom: none; }
-    .citation-num {
-      font-family: 'Cinzel', serif; font-size: 11px;
-      color: var(--muted); min-width: 24px; padding-top: 2px;
-      opacity: .7;
-    }
-    .citation-text {
-      font-size: 14px; color: var(--text); line-height: 1.65;
-      font-style: italic;
-    }
-    .citation-search {
-      width: 100%; padding: 10px 14px;
-      border: 1px solid var(--border); border-radius: var(--rs);
-      background: var(--surface); color: var(--text);
-      font-family: 'Crimson Pro', serif; font-size: 15px;
-      margin-bottom: 14px; outline: none;
-    }
-    .citation-search:focus { border-color: var(--purple); }
-    .citation-count {
-      font-size: 12px; color: var(--muted);
-      text-align: right; margin-bottom: 8px;
-      font-style: italic;
-    }
-
-    @keyframes fadein { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: none; } }
-
-    /* ── TOAST ───────────────────────── */
-    .toast {
-      position: fixed; bottom: calc(var(--tab-h) + 14px); left: 50%;
-      transform: translateX(-50%) translateY(8px);
-      background: var(--purple); border-radius: var(--rs);
-      padding: 10px 20px; font-size: 14px; color: #fff;
-      opacity: 0; z-index: 200; pointer-events: none; white-space: nowrap;
-      transition: all .25s ease; box-shadow: 0 4px 16px var(--purple-glow);
-    }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    /* Summary */
+    .summary-banner { text-align:center; padding:1.25rem 0; }
+    .summary-icon { font-size:48px; margin-bottom:8px; animation:pop .5s ease; }
+    .summary-title { font-family:'Cinzel',serif; font-size:28px; font-weight:700; color:var(--purple); }
+    .summary-sub { font-size:14px; color:var(--muted); margin-top:4px; }
+    .summary-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; background:var(--surface); border:1px solid var(--border); border-radius:var(--rs); padding:14px; margin-bottom:14px; }
+    .summary-stat { text-align:center; }
+    .summary-stat-val { font-family:'Cinzel',serif; font-size:18px; font-weight:700; }
+    .summary-stat-lbl { font-size:11px; color:var(--muted); margin-top:2px; }
+    .new-ability { padding:10px 0; border-bottom:1px solid var(--border); }
+    .new-ability:last-child { border-bottom:none; }
+    .new-ability-hd { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+    .new-ability-name { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--text); }
+    .new-ability-desc { font-size:13px; color:#4A4070; line-height:1.5; }
   </style>
 </head>
 <body>
 <div id="app">
 
-  <!-- ── HEADER ──────────────────────────── -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <div class="avatar">
@@ -431,11 +246,11 @@
       </div>
       <div>
         <h1 class="char-name">Shen <span class="accent">Varath</span></h1>
-        <p class="char-sub">Moine niv. 3 · Voie de l'Ombre</p>
+        <p class="char-sub">Moine · Voie de l'Ombre · Shadar-Kaï</p>
         <div class="badges">
           <span class="badge b-pur">Shadar-Kaï</span>
           <span class="badge b-tea">Voie de l'Ombre</span>
-          <span class="badge b-gld">Loyal Neutre</span>
+          <span class="badge b-lvl" id="level-badge">Niveau 3</span>
         </div>
       </div>
     </div>
@@ -450,7 +265,6 @@
     </div>
   </header>
 
-  <!-- ── TAB CONTENT ─────────────────────── -->
   <div class="tab-content">
 
     <!-- STATS -->
@@ -458,33 +272,37 @@
       <div class="card">
         <div class="card-title">Caractéristiques</div>
         <div class="stats-grid">
-          <div class="stat-box"><div class="stat-label">Force</div><div class="stat-mod neg">−1</div><div class="stat-score">8</div></div>
-          <div class="stat-box"><div class="stat-label">Dextérité</div><div class="stat-mod pos">+4</div><div class="stat-score">18</div></div>
-          <div class="stat-box"><div class="stat-label">Constitution</div><div class="stat-mod pos">+2</div><div class="stat-score">14</div></div>
-          <div class="stat-box"><div class="stat-label">Intelligence</div><div class="stat-mod">+0</div><div class="stat-score">10</div></div>
-          <div class="stat-box"><div class="stat-label">Sagesse</div><div class="stat-mod pos">+3</div><div class="stat-score">16</div></div>
-          <div class="stat-box"><div class="stat-label">Charisme</div><div class="stat-mod">+0</div><div class="stat-score">10</div></div>
+          <div class="stat-box" data-stat="str"><div class="stat-label">Force</div><div class="stat-mod neg">−1</div><div class="stat-score">8</div></div>
+          <div class="stat-box" data-stat="dex"><div class="stat-label">Dextérité</div><div class="stat-mod pos">+4</div><div class="stat-score">18</div></div>
+          <div class="stat-box" data-stat="con"><div class="stat-label">Constitution</div><div class="stat-mod pos">+2</div><div class="stat-score">14</div></div>
+          <div class="stat-box" data-stat="int"><div class="stat-label">Intelligence</div><div class="stat-mod">+0</div><div class="stat-score">10</div></div>
+          <div class="stat-box" data-stat="wis"><div class="stat-label">Sagesse</div><div class="stat-mod pos">+3</div><div class="stat-score">16</div></div>
+          <div class="stat-box" data-stat="cha"><div class="stat-label">Charisme</div><div class="stat-mod">+0</div><div class="stat-score">10</div></div>
         </div>
       </div>
       <div class="card">
         <div class="card-title">Jets de sauvegarde</div>
         <div class="saves-grid">
-          <div class="save-item"><div class="prof-dot prof"></div><span class="skill-attr">FOR</span><span class="save-val">+1</span></div>
-          <div class="save-item"><div class="prof-dot prof"></div><span class="skill-attr">DEX</span><span class="save-val">+6</span></div>
-          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">CON</span><span class="save-val">+2</span></div>
-          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">INT</span><span class="save-val">+0</span></div>
-          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">SAG</span><span class="save-val">+3</span></div>
-          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">CHA</span><span class="save-val">+0</span></div>
+          <div class="save-item"><div class="prof-dot prof"></div><span class="skill-attr">FOR</span><span class="save-val" data-save="str">+1</span></div>
+          <div class="save-item"><div class="prof-dot prof"></div><span class="skill-attr">DEX</span><span class="save-val" data-save="dex">+6</span></div>
+          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">CON</span><span class="save-val" data-save="con">+2</span></div>
+          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">INT</span><span class="save-val" data-save="int">+0</span></div>
+          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">SAG</span><span class="save-val" data-save="wis">+3</span></div>
+          <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">CHA</span><span class="save-val" data-save="cha">+0</span></div>
         </div>
       </div>
       <div class="card">
         <div class="card-title">Compétences</div>
-        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Acrobaties</span><span class="skill-attr">DEX</span><span class="skill-val">+6</span></div>
-        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Discrétion</span><span class="skill-attr">DEX</span><span class="skill-val">+6</span></div>
-        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Perception</span><span class="skill-attr">SAG</span><span class="skill-val">+5</span></div>
-        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Perspicacité</span><span class="skill-attr">SAG</span><span class="skill-val">+5</span></div>
-        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Religion</span><span class="skill-attr">INT</span><span class="skill-val">+2</span></div>
-        <div class="skill-row"><div class="prof-dot"></div><span class="skill-name">Athlétisme</span><span class="skill-attr">FOR</span><span class="skill-val">−1</span></div>
+        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Acrobaties</span><span class="skill-attr">DEX</span><span class="skill-val" data-skill="acrobatics">+6</span></div>
+        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Discrétion</span><span class="skill-attr">DEX</span><span class="skill-val" data-skill="stealth">+6</span></div>
+        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Perception</span><span class="skill-attr">SAG</span><span class="skill-val" data-skill="perception">+5</span></div>
+        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Perspicacité</span><span class="skill-attr">SAG</span><span class="skill-val" data-skill="insight">+5</span></div>
+        <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Religion</span><span class="skill-attr">INT</span><span class="skill-val" data-skill="religion">+2</span></div>
+        <div class="skill-row"><div class="prof-dot"></div><span class="skill-name">Athlétisme</span><span class="skill-attr">FOR</span><span class="skill-val" data-skill="athletics">−1</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Progression</div>
+        <button class="levelup-btn" id="levelup-btn" onclick="startLevelUp()">⬆ Passer au niveau 4</button>
       </div>
     </div>
 
@@ -493,13 +311,13 @@
       <div class="card">
         <div class="card-title">Points de vie</div>
         <div class="hp-controls">
-          <button class="ctrl-btn" id="hp-minus" aria-label="Enlever PV">−</button>
+          <button class="ctrl-btn" id="hp-minus">−</button>
           <div style="text-align:center">
             <div class="hp-big" id="hp-cur">22</div>
-            <div class="hp-maxlbl">/ 22 PV max</div>
+            <div class="hp-maxlbl" id="hp-max-lbl">/ 22 PV max</div>
             <input class="hp-adj-input" type="number" id="hp-adj" value="1" min="1" max="99">
           </div>
-          <button class="ctrl-btn" id="hp-plus" aria-label="Ajouter PV">+</button>
+          <button class="ctrl-btn" id="hp-plus">+</button>
         </div>
         <div style="text-align:center;font-size:12px;color:var(--muted)">
           PV temporaires : <strong id="temp-hp" style="color:var(--text)">0</strong>
@@ -509,22 +327,38 @@
       <div class="card">
         <div class="card-title">Stats de combat</div>
         <div class="combat-row">
-          <div class="cs"><div class="cs-val">17</div><div class="cs-lbl">CA</div></div>
-          <div class="cs"><div class="cs-val">+4</div><div class="cs-lbl">Initiative</div></div>
+          <div class="cs"><div class="cs-val" id="c-ac">17</div><div class="cs-lbl">CA</div></div>
+          <div class="cs"><div class="cs-val" id="c-init">+4</div><div class="cs-lbl">Initiative</div></div>
           <div class="cs"><div class="cs-val">40 ft</div><div class="cs-lbl">Vitesse</div></div>
         </div>
         <div class="combat-row">
-          <div class="cs"><div class="cs-val">+2</div><div class="cs-lbl">Maîtrise</div></div>
-          <div class="cs"><div class="cs-val">1d6</div><div class="cs-lbl">Dé martial</div></div>
-          <div class="cs"><div class="cs-val">DD 14</div><div class="cs-lbl">Seuil Ki</div></div>
+          <div class="cs"><div class="cs-val" id="c-prof">+2</div><div class="cs-lbl">Maîtrise</div></div>
+          <div class="cs"><div class="cs-val" id="c-martial">1d6</div><div class="cs-lbl">Dé martial</div></div>
+          <div class="cs"><div class="cs-val" id="c-kidc">DD 14</div><div class="cs-lbl">Seuil Ki</div></div>
         </div>
       </div>
       <div class="card">
         <div class="card-title">Attaques</div>
-        <div class="attack-item"><div class="atk-icon">👊</div><div class="atk-info"><div class="atk-name">Frappe à mains nues</div><div class="atk-detail">Corps à corps · DEX · Contondant</div></div><div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4</div></div></div>
-        <div class="attack-item"><div class="atk-icon">⚡</div><div class="atk-info"><div class="atk-name">Déluge de frappes</div><div class="atk-detail">2 attaques bonus · 1 ki</div></div><div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4 ×2</div></div></div>
-        <div class="attack-item"><div class="atk-icon">🌑</div><div class="atk-info"><div class="atk-name">Frappe étourdissante</div><div class="atk-detail">DD 14 CON au toucher · 1 ki</div></div><div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">Étourdi</div></div></div>
-        <div class="attack-item"><div class="atk-icon">🏹</div><div class="atk-info"><div class="atk-name">Projectile renvoyé</div><div class="atk-detail">Réaction · après déviation</div></div><div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4</div></div></div>
+        <div class="attack-item">
+          <div class="atk-icon">👊</div>
+          <div class="atk-info"><div class="atk-name">Frappe à mains nues</div><div class="atk-detail" id="atk-detail-1">Corps à corps · DEX · Contondant</div></div>
+          <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg atk-dmg-martial">1d6+4</div></div>
+        </div>
+        <div class="attack-item">
+          <div class="atk-icon">⚡</div>
+          <div class="atk-info"><div class="atk-name">Déluge de frappes</div><div class="atk-detail">2 attaques bonus · 1 ki</div></div>
+          <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg atk-dmg-martial">1d6+4 ×2</div></div>
+        </div>
+        <div class="attack-item">
+          <div class="atk-icon">🌑</div>
+          <div class="atk-info"><div class="atk-name">Frappe étourdissante</div><div class="atk-detail" id="atk-stun-detail">DD 14 CON au toucher · 1 ki</div></div>
+          <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg">Étourdi</div></div>
+        </div>
+        <div class="attack-item">
+          <div class="atk-icon">🏹</div>
+          <div class="atk-info"><div class="atk-name">Projectile renvoyé</div><div class="atk-detail">Réaction · après déviation</div></div>
+          <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg atk-dmg-martial">1d6+4</div></div>
+        </div>
       </div>
       <div class="card">
         <div class="card-title">Conditions</div>
@@ -559,11 +393,7 @@
     <div class="panel" id="panel-ki">
       <div class="card">
         <div class="card-title">Points de Ki</div>
-        <div class="ki-dots" id="ki-dots">
-          <div class="ki-dot on" onclick="toggleKi(0)">氣</div>
-          <div class="ki-dot on" onclick="toggleKi(1)">氣</div>
-          <div class="ki-dot on" onclick="toggleKi(2)">氣</div>
-        </div>
+        <div class="ki-dots" id="ki-dots"></div>
         <div class="ki-lbl" id="ki-lbl">3 / 3 — Récupérés au repos court ou long</div>
       </div>
       <div class="card">
@@ -571,25 +401,24 @@
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déluge de frappes</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — 2 frappes à mains nues supplémentaires immédiatement après une attaque au corps à corps.</div></div>
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Défense patiente</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — Esquiver jusqu'au début de votre prochain tour. Les attaques contre vous ont le désavantage.</div></div>
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Pas du vent</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — Se désengager ou foncer. Distance de saut doublée jusqu'à la fin du tour.</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Frappe étourdissante</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Avant une attaque de mêlée qui touche — DD 14 CON ou étourdi jusqu'à votre prochain tour.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Frappe étourdissante</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Avant une attaque de mêlée qui touche — DD variable CON ou étourdi jusqu'à votre prochain tour.</div></div>
       </div>
       <div class="card">
         <div class="card-title">Arts de l'Ombre</div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Illusion mineure</span><span class="ab-tag t-fr">Gratuit</span></div><div class="ab-desc">Tour mineur — Image ou son illusoire dans un cube de 1,5 m à 9 m ou moins.</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Ténèbres</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Sphère de ténèbres magiques de 4,5 m de rayon, 10 min. Concentration. Bloque toute vision.</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Vision dans le noir</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Confère la vision dans le noir à 18 m à une créature consentante pendant 8 heures.</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Silence</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Zone de silence de 6 m de rayon, 10 min. Concentration. Aucun sort à composante verbale.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Illusion mineure</span><span class="ab-tag t-fr">Gratuit</span></div><div class="ab-desc">Image ou son illusoire dans un cube de 1,5 m à 9 m ou moins.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Ténèbres / Silence / Vision / Image</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Sorts de moine : Ténèbres (4,5 m), Silence (6 m), Vision dans le noir (18 m), Image silencieuse (4,5 m). Concentration selon le sort.</div></div>
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Passage sans trace</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">+10 en Discrétion pour vous et alliés à 9 m. Impossible d'être pisté sans magie. Concentration.</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Image silencieuse</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Illusion visuelle dans un cube de 4,5 m, déplaçable dans la zone. Concentration, 10 min.</div></div>
       </div>
       <div class="card">
         <div class="card-title">Capacités passives</div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Défense sans armure</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc">CA = 10 + DEX (+4) + SAG (+3) = <strong>17</strong>. Sans armure ni bouclier uniquement.</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déviation des projectiles</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc">Réduit les dégâts d'une attaque à distance de 1d10+7. Si réduit à 0 : renvoyer (+6, 1d6+4).</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Chute ralentie</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc">Réduit les dégâts de chute de 15 points (niveau × 5).</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déplacement +10 ft</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc">Vitesse de déplacement augmentée de 10 ft sans armure. Total : 40 ft.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Défense sans armure</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc" id="ac-formula">CA = 10 + DEX (+4) + SAG (+3) = 17. Sans armure ni bouclier.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déviation des projectiles</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc" id="deflect-desc">Réduit les dégâts d'une attaque à distance de 1d10+7. Si réduit à 0 : renvoyer (+6, 1d6+4).</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Chute ralentie</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc" id="fall-desc">Réduit les dégâts de chute de 15 (niveau × 5).</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déplacement +10 ft</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc">Vitesse totale : 40 ft sans armure.</div></div>
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Résistance nécrotique</span><span class="ab-tag t-sh">Shadar-Kaï</span></div><div class="ab-desc">Résistance aux dégâts nécrotiques. Vision dans le noir 60 ft.</div></div>
       </div>
+      <!-- Capacités débloquées dynamiquement -->
+      <div id="unlocked-abilities"></div>
     </div>
 
     <!-- HISTOIRE -->
@@ -597,7 +426,7 @@
       <div class="card">
         <div class="card-title">Identité</div>
         <div class="trait-block"><div class="trait-label">Race</div><div class="trait-value">Shadar-Kaï · Elfe des ombres</div></div>
-        <div class="trait-block"><div class="trait-label">Classe</div><div class="trait-value">Moine niveau 3 · Voie de l'Ombre</div></div>
+        <div class="trait-block"><div class="trait-label">Classe</div><div class="trait-value" id="class-display">Moine niveau 3 · Voie de l'Ombre</div></div>
         <div class="trait-block"><div class="trait-label">Historique</div><div class="trait-value">Ermite</div></div>
         <div class="trait-block"><div class="trait-label">Alignement</div><div class="trait-value">Loyal Neutre</div></div>
         <div class="trait-block"><div class="trait-label">Langues</div><div class="trait-value">Commun · Elvish · Sylvain</div></div>
@@ -611,8 +440,8 @@
       </div>
       <div class="card">
         <div class="card-title">Équipement</div>
-        <div class="eq-row"><div class="eq-icon">✊</div><div><div class="eq-name">Frappes à mains nues</div><div class="eq-desc">+6 · 1d6+4 contondant</div></div></div>
-        <div class="eq-row"><div class="eq-icon">🗡️</div><div><div class="eq-name">Bâton de marche</div><div class="eq-desc">Arme de moine · +6 · 1d6+4 contondant ou perforant</div></div></div>
+        <div class="eq-row"><div class="eq-icon">✊</div><div><div class="eq-name">Frappes à mains nues</div><div class="eq-desc" id="eq-fists">+6 · 1d6+4 contondant</div></div></div>
+        <div class="eq-row"><div class="eq-icon">🗡️</div><div><div class="eq-name">Bâton de marche</div><div class="eq-desc" id="eq-staff">Arme de moine · +6 · 1d6+4 contondant ou perforant</div></div></div>
         <div class="eq-row"><div class="eq-icon">🎒</div><div><div class="eq-name">Sac d'ermite</div><div class="eq-desc">Couverture, briquet, rations ×10, torches ×10, outre d'eau, tente</div></div></div>
         <div class="eq-row"><div class="eq-icon">📜</div><div><div class="eq-name">Parchemin de la Découverte</div><div class="eq-desc">Rédigé lors d'années de réclusion. Son contenu, lui seul le sait.</div></div></div>
         <div class="eq-row"><div class="eq-icon">💰</div><div><div class="eq-name">Bourse</div><div class="eq-desc">15 po · 3 pa · 8 pc</div></div></div>
@@ -621,8 +450,8 @@
         <div class="card-title">Histoire</div>
         <div class="backstory">
           <p>Shen Varath a grandi dans le monastère du <em>Voile Gris</em>, un ordre secret opérant à la frontière entre le Plan Matériel et le Shadowfell. Adopté — ou récupéré, personne ne dit vraiment — alors qu'il était nourrisson.</p>
-          <p>Pendant des décennies, sa vie fut la discipline. Le silence. L'ombre. Les autres novices le regardaient comme on regarde quelque chose qu'on ne comprend pas tout à fait — avec un mélange de respect et d'inquiétude.</p>
-          <p>La nuit du Passage a tout changé. Un événement d'une cruauté absolue, sans ambiguïté morale. Il a quitté le monastère — ou en a été chassé, la distinction est floue même pour lui.</p>
+          <p>Pendant des décennies, sa vie fut la discipline. Le silence. L'ombre. Les autres novices le regardaient comme on regarde quelque chose qu'on ne comprend pas tout à fait.</p>
+          <p>La nuit du Passage a tout changé. Un événement d'une cruauté absolue, sans ambiguïté morale. Il a quitté le monastère.</p>
           <p>Il erre depuis. Non pas sans but, mais sans destination. Et quand on lui demande ce qu'il cherche, il répond généralement par une sentence absurde et définitive.</p>
         </div>
       </div>
@@ -647,9 +476,7 @@
       </div>
       <div class="card">
         <div class="card-title">Sentence aléatoire</div>
-        <p style="font-size:13px;color:var(--muted);font-style:italic;margin-bottom:14px;line-height:1.6">
-          Face à tout dilemme, Shen répond par une sentence absurde et définitive.
-        </p>
+        <p style="font-size:13px;color:var(--muted);font-style:italic;margin-bottom:14px;line-height:1.6">Face à tout dilemme, Shen répond par une sentence absurde et définitive.</p>
         <button class="proverb-btn" onclick="drawProverb()">🎲 Une sentence au hasard</button>
         <div class="quote-box" id="proverb-box"></div>
       </div>
@@ -659,9 +486,7 @@
     <div class="panel" id="panel-citations">
       <div class="card">
         <div class="card-title">Les 50 sentences de Shen</div>
-        <p class="citations-intro">
-          Shen ne donne pas d'avis. Il profère des sentences. Absurdes, définitives, et prononcées avec un calme total qui rend la chose encore plus déconcertante.
-        </p>
+        <p class="citations-intro">Shen ne donne pas d'avis. Il profère des sentences. Absurdes, définitives, prononcées avec un calme total.</p>
         <input class="citation-search" type="search" id="cit-search" placeholder="Chercher une sentence…" oninput="filterCitations(this.value)">
         <div class="citation-count" id="cit-count">50 sentences</div>
         <div id="cit-list"></div>
@@ -670,202 +495,437 @@
 
   </div><!-- /tab-content -->
 
-  <!-- ── TAB NAV ──────────────────────────── -->
+  <!-- TAB NAV -->
   <nav class="tab-nav" role="tablist">
-    <button class="tab-btn active" role="tab" onclick="switchTab('stats',this)"><span class="tab-icon">⚔️</span><span>Stats</span></button>
-    <button class="tab-btn" role="tab" onclick="switchTab('combat',this)"><span class="tab-icon">🩸</span><span>Combat</span></button>
-    <button class="tab-btn" role="tab" onclick="switchTab('ki',this)"><span class="tab-icon">🌑</span><span>Ki</span></button>
-    <button class="tab-btn" role="tab" onclick="switchTab('histoire',this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
-    <button class="tab-btn" role="tab" onclick="switchTab('des',this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
-    <button class="tab-btn" role="tab" onclick="switchTab('citations',this)"><span class="tab-icon">💬</span><span>Citations</span></button>
+    <button class="tab-btn active" onclick="switchTab('stats',this)"><span class="tab-icon">⚔️</span><span>Stats</span></button>
+    <button class="tab-btn" onclick="switchTab('combat',this)"><span class="tab-icon">🩸</span><span>Combat</span></button>
+    <button class="tab-btn" onclick="switchTab('ki',this)"><span class="tab-icon">🌑</span><span>Ki</span></button>
+    <button class="tab-btn" onclick="switchTab('histoire',this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
+    <button class="tab-btn" onclick="switchTab('des',this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
+    <button class="tab-btn" onclick="switchTab('citations',this)"><span class="tab-icon">💬</span><span>Citations</span></button>
   </nav>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-</div>
+
+  <!-- ════════════════════════════════════════
+       LEVEL UP MODAL
+  ════════════════════════════════════════ -->
+  <div class="modal-overlay" id="levelup-modal">
+    <div class="modal-box">
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+</div><!-- /app -->
 
 <script>
-const ST = { hp: 22, hpMax: 22, tempHp: 0, ki: 3, kiMax: 3 };
+// ═══════════════════════════════════════════════════════
+// LEVEL UP DATA (niveaux 4 à 8)
+// ═══════════════════════════════════════════════════════
+const LEVELUP = {
+  4: {
+    ki:4, martialDie:6, profBonus:2, hasASI:true, slowFall:20,
+    abilities:[]
+  },
+  5: {
+    ki:5, martialDie:8, profBonus:3, hasASI:false, slowFall:25,
+    abilities:[
+      { name:"Attaque supplémentaire", tag:"Passif", tagClass:"t-pa",
+        desc:"Vous pouvez attaquer deux fois au lieu d'une lorsque vous effectuez l'action d'Attaque à votre tour." },
+      { name:"Frappe étourdissante améliorée", tag:"1 ki", tagClass:"t-ki",
+        desc:"Le DD de la Frappe étourdissante est recalculé avec le nouveau bonus de maîtrise (+3)." }
+    ]
+  },
+  6: {
+    ki:6, martialDie:8, profBonus:3, hasASI:false, slowFall:30,
+    abilities:[
+      { name:"Pas des ombres", tag:"1 ki · Action bonus", tagClass:"t-ki",
+        desc:"Lorsque vous êtes dans l'obscurité, dépensez 1 ki pour vous téléporter jusqu'à 18 m dans une autre zone d'obscurité visible. Vous avez l'avantage sur votre première attaque de mêlée avant la fin de ce tour." },
+      { name:"Frappes de ki", tag:"Passif", tagClass:"t-pa",
+        desc:"Vos attaques à mains nues comptent désormais comme magiques pour contourner les résistances et immunités." }
+    ]
+  },
+  7: {
+    ki:7, martialDie:8, profBonus:3, hasASI:false, slowFall:35,
+    abilities:[
+      { name:"Esquive totale", tag:"Passif", tagClass:"t-pa",
+        desc:"Quand un effet exige un jet de sauvegarde DEX pour ne subir que la moitié des dégâts, vous n'en subissez aucun si vous réussissez, et seulement la moitié si vous échouez." },
+      { name:"Tranquillité de l'âme", tag:"Action", tagClass:"t-pa",
+        desc:"Utilisez votre action pour mettre fin à un effet de charme ou d'effroi qui vous affecte." }
+    ]
+  },
+  8: {
+    ki:8, martialDie:8, profBonus:3, hasASI:true, slowFall:40,
+    abilities:[]
+  }
+};
 
-const PROVERBS = [
-  "Quand l'aigle doute, c'est que la pluie n'a pas encore compris qu'elle mouille.",
-  "Le sage ne choisit pas entre la gauche et la droite. Il attend que le chemin choisisse.",
-  "Un bon silence vaut trois bonnes réponses, mais une mauvaise question vaut six bons silences.",
-  "L'ombre ne frappe pas celui qui marche dedans. C'est l'évidence même. Sauf le vendredi.",
-  "Si tu te demandes si tu dois agir, c'est que tu aurais dû te poser la question avant d'hésiter.",
-  "La rivière ne se souvient pas des pierres qu'elle a traversées. C'est pour ça qu'elle se cogne encore.",
-  "Décider trop vite, c'est courir sans savoir où atterrir. Décider trop lentement, c'est rater le sol.",
-  "La victoire appartient à celui qui attend. La défaite aussi. C'est ce qu'on appelle l'équilibre.",
-  "Ce qui ne te tue pas te rend plus fort. Ce qui te tue, par contre, te rend beaucoup moins présent.",
-  "Le vrai maître ne demande jamais son chemin. Il demande si le chemin se souvient de lui.",
-  "Une épée dans l'ombre coupe aussi bien qu'une épée au soleil. Mais ça fait moins de photo.",
-  "Si tu dois choisir entre deux maux, c'est que tu n'as pas encore bien cherché le troisième.",
-  "L'ombre n'a pas d'opinion. C'est ce qui fait sa force. Et aussi sa faiblesse. Mais surtout sa force.",
-  "On ne traverse pas le Shadowfell à reculons. Enfin, si. Mais on arrive à l'envers.",
-  "La méditation sans discipline, c'est juste quelqu'un d'assis qui réfléchit à rien de concret.",
-  "Il ne faut jamais répondre à une question par une autre question. Sauf si la réponse est une question.",
-  "Agir dans l'urgence, c'est prendre une décision avec les dés de quelqu'un d'autre.",
-  "Le vide n'est pas l'absence de tout. C'est la présence de rien. Ce n'est pas pareil. Enfin, presque.",
-  "Frapper vite, c'est bien. Frapper juste, c'est mieux. Ne pas frapper et laisser l'autre s'effondrer, c'est de la philosophie.",
-  "La patience est une vertu. L'impatience aussi, dans les situations où attendre vous tue.",
-  "Tout chemin mène quelque part. C'est l'inconvénient des chemins.",
-  "Le guerrier qui rit de ses erreurs vit plus longtemps. Sauf de cette erreur-là précisément.",
-  "Si tu regardes trop longtemps l'abîme, c'est que tu n'as probablement rien de mieux à faire.",
-  "Trois vérités valent mieux qu'un mensonge. Mais deux vérités et un mensonge, personne ne sait lequel c'est.",
-  "Ce qui est fait est fait. Ce qui n'est pas fait non plus.",
-  "Un pas dans l'ombre vaut deux pas dans la lumière. Sauf pour lire.",
-  "Le destin est une rivière. Certains nagent. Certains coulent. D'autres se demandent si c'est bien une rivière.",
-  "Il n'y a pas de mauvaise décision. Il n'y a que des bonnes décisions qu'on regrette au mauvais moment.",
-  "L'équilibre parfait, c'est comme l'horizon : on s'en approche, on ne l'atteint jamais, et pourtant tout le monde sait où il est.",
-  "Quand on ne peut pas choisir, c'est souvent parce que les deux options sont la même chose vue d'angles différents.",
-  "La mort n'est que le début d'une longue période sans activité.",
-  "On ne réveille pas l'ombre. L'ombre, elle, ne dort pas.",
-  "Le tonnerre prévient. L'éclair, non. C'est pour ça que tout le monde a peur de l'éclair.",
-  "Une bonne infiltration, c'est comme un bon repas : on ne devrait pas savoir qu'il y a eu de la préparation.",
-  "Ce qui compte, ce n'est pas la destination. C'est d'arriver en vie. Ou pas loin.",
-  "Je ne dis pas qu'il ne faut pas décider. Je dis qu'il faut savoir pourquoi on décide avant de décider quoi décider.",
-  "L'ombre n'a jamais trahi personne. C'est la lumière qui révèle.",
-  "Rien n'est impossible. Certaines choses sont simplement très improbables à des horaires que je n'ai pas consultés.",
-  "La force ne réside pas dans le coup qu'on porte, mais dans celui qu'on choisit de ne pas porter. Mais parfois il faut quand même taper.",
-  "Un ennemi vaincu sans combat, c'est un ennemi qu'on n'a pas vu venir. Ce n'est pas forcément un succès.",
-  "La sagesse ne se prend pas. Elle se mérite. Et encore.",
-  "Chaque question porte en elle sa réponse. Encore faut-il poser la bonne question.",
-  "Le silence parle. Encore faut-il savoir l'entendre. Encore faut-il vouloir écouter. Encore faut-il être là.",
-  "Ce n'est pas parce qu'on ne voit pas l'ombre qu'elle n'est pas là. Elle attend, elle aussi.",
-  "La précipitation est le luxe de ceux qui n'ont pas encore eu à regretter.",
-  "Il est plus facile de marcher dans les pas d'un autre que dans les siens. C'est pour ça qu'on s'épuise moins à suivre.",
-  "Quand tout le monde regarde à gauche, le sage regarde à droite. Quand tout le monde regarde à droite, le sage ferme les yeux.",
-  "Un mensonge dit assez souvent finit par ressembler à une vérité. La vérité, elle, ne change pas d'avis.",
-  "L'ennemi parfait est celui qu'on ne reconnaît pas comme tel. L'ami parfait aussi, d'ailleurs.",
-  "On ne devient pas maître de l'ombre en refusant la lumière. On en devient maître en comprenant pourquoi la lumière jette une ombre.",
-];
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+const INITIAL = {
+  hp:22, hpMax:22, tempHp:0,
+  ki:3, kiMax:3,
+  level:3,
+  stats:{str:8,dex:18,con:14,int:10,wis:16,cha:10},
+  martialDie:6, profBonus:2,
+  unlockedAbilities:[]
+};
 
-// ── CITATIONS ─────────────────────────────────────
-function renderCitations(list) {
-  const el = document.getElementById('cit-list');
-  const count = document.getElementById('cit-count');
-  count.textContent = list.length + ' sentence' + (list.length > 1 ? 's' : '');
-  el.innerHTML = list.map((p, i) =>
-    `<div class="citation-item">
-      <span class="citation-num">${String(PROVERBS.indexOf(p) + 1).padStart(2,'0')}</span>
-      <span class="citation-text">${p}</span>
-    </div>`
-  ).join('');
-}
+let S = JSON.parse(JSON.stringify(INITIAL));
 
-function filterCitations(q) {
-  const filtered = q.trim()
-    ? PROVERBS.filter(p => p.toLowerCase().includes(q.toLowerCase()))
-    : PROVERBS;
-  renderCitations(filtered);
-}
-
-// ── LOCALSTORAGE ──────────────────────────────────
-function saveState() {
-  try { localStorage.setItem('shen-v3', JSON.stringify({ hp: ST.hp, ki: ST.ki, tempHp: ST.tempHp })); } catch(e) {}
-}
 function loadState() {
   try {
-    const d = JSON.parse(localStorage.getItem('shen-v3') || 'null');
-    if (d) {
-      if (d.hp !== undefined) ST.hp = Math.max(0, Math.min(ST.hpMax, d.hp));
-      if (d.ki !== undefined) ST.ki = Math.max(0, Math.min(ST.kiMax, d.ki));
-      if (d.tempHp !== undefined) ST.tempHp = Math.max(0, d.tempHp);
-    }
-  } catch(e) {}
+    const d = JSON.parse(localStorage.getItem('shen-v5')||'null');
+    if (d) S = Object.assign({}, INITIAL, d);
+  } catch(e){}
+}
+function saveState() {
+  try { localStorage.setItem('shen-v5', JSON.stringify(S)); } catch(e){}
 }
 
-// ── HP ────────────────────────────────────────────
-function updateHP() {
-  const pct = Math.round(Math.max(0, (ST.hp / ST.hpMax) * 100));
-  document.getElementById('hp-cur').textContent = ST.hp;
-  document.getElementById('hp-mini-lbl').textContent = `${ST.hp} / ${ST.hpMax}`;
-  document.getElementById('hp-mini-bar').style.width = pct + '%';
-  saveState();
-}
-document.getElementById('hp-minus').addEventListener('click', () => {
-  const v = parseInt(document.getElementById('hp-adj').value) || 1;
-  ST.hp = Math.max(0, ST.hp - v);
-  updateHP(); toast(`−${v} PV → ${ST.hp}/${ST.hpMax}`);
-});
-document.getElementById('hp-plus').addEventListener('click', () => {
-  const v = parseInt(document.getElementById('hp-adj').value) || 1;
-  ST.hp = Math.min(ST.hpMax, ST.hp + v);
-  updateHP(); toast(`+${v} PV → ${ST.hp}/${ST.hpMax}`);
-});
-function setTempHP() {
-  const v = prompt('PV temporaires :');
-  if (v !== null) { ST.tempHp = Math.max(0, parseInt(v) || 0); document.getElementById('temp-hp').textContent = ST.tempHp; saveState(); toast(`PV temp : ${ST.tempHp}`); }
+// ═══════════════════════════════════════════════════════
+// COMPUTED HELPERS
+// ═══════════════════════════════════════════════════════
+function mod(score){ return Math.floor((score-10)/2); }
+function fmt(m){ return (m>=0?'+':'')+m; }
+function atkBonus(){ return S.profBonus + mod(S.stats.dex); }
+function kiDC(){ return 8 + S.profBonus + mod(S.stats.wis); }
+function acVal(){ return 10 + mod(S.stats.dex) + mod(S.stats.wis); }
+
+// ═══════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════
+function renderAll(){
+  // Header
+  const hpPct = Math.round(Math.max(0,(S.hp/S.hpMax)*100));
+  document.getElementById('hp-mini-lbl').textContent = `${S.hp} / ${S.hpMax}`;
+  document.getElementById('hp-mini-bar').style.width = hpPct+'%';
+  document.getElementById('level-badge').textContent = `Niveau ${S.level}`;
+
+  // Stats panel
+  const STATS = [{key:'str'},{key:'dex'},{key:'con'},{key:'int'},{key:'wis'},{key:'cha'}];
+  STATS.forEach(({key})=>{
+    const sc = S.stats[key], m = mod(sc);
+    const box = document.querySelector(`[data-stat="${key}"]`);
+    if(!box) return;
+    box.querySelector('.stat-mod').textContent = fmt(m);
+    box.querySelector('.stat-mod').className = `stat-mod ${m>0?'pos':m<0?'neg':''}`;
+    box.querySelector('.stat-score').textContent = sc;
+  });
+
+  // Skills & saves
+  const pb = S.profBonus;
+  const skillMap = { acrobatics:mod(S.stats.dex)+pb, stealth:mod(S.stats.dex)+pb, perception:mod(S.stats.wis)+pb, insight:mod(S.stats.wis)+pb, religion:mod(S.stats.int)+pb, athletics:mod(S.stats.str) };
+  Object.entries(skillMap).forEach(([k,v])=>{ const el=document.querySelector(`[data-skill="${k}"]`); if(el) el.textContent=fmt(v); });
+  const saveMap = { str:mod(S.stats.str)+pb, dex:mod(S.stats.dex)+pb, con:mod(S.stats.con), int:mod(S.stats.int), wis:mod(S.stats.wis), cha:mod(S.stats.cha) };
+  Object.entries(saveMap).forEach(([k,v])=>{ const el=document.querySelector(`[data-save="${k}"]`); if(el) el.textContent=fmt(v); });
+
+  // Level up button
+  const btn = document.getElementById('levelup-btn');
+  if(S.level>=8){ btn.textContent='✦ Niveau maximum (fiche)'; btn.disabled=true; }
+  else { btn.textContent=`⬆ Passer au niveau ${S.level+1}`; btn.disabled=false; }
+
+  // Combat
+  document.getElementById('hp-cur').textContent = S.hp;
+  document.getElementById('hp-max-lbl').textContent = `/ ${S.hpMax} PV max`;
+  document.getElementById('temp-hp').textContent = S.tempHp;
+  document.getElementById('c-ac').textContent = acVal();
+  document.getElementById('c-init').textContent = fmt(mod(S.stats.dex));
+  document.getElementById('c-prof').textContent = fmt(pb);
+  document.getElementById('c-martial').textContent = `1d${S.martialDie}`;
+  document.getElementById('c-kidc').textContent = `DD ${kiDC()}`;
+  const ab = atkBonus();
+  const dmg = `1d${S.martialDie}+${mod(S.stats.dex)}`;
+  document.querySelectorAll('.atk-bonus').forEach(el=>el.textContent=fmt(ab));
+  document.querySelectorAll('.atk-dmg-martial').forEach(el=>el.textContent=dmg);
+  document.getElementById('atk-stun-detail').textContent = `DD ${kiDC()} CON au toucher · 1 ki`;
+  document.getElementById('ac-formula').textContent = `CA = 10 + DEX (${fmt(mod(S.stats.dex))}) + SAG (${fmt(mod(S.stats.wis))}) = ${acVal()}. Sans armure.`;
+  document.getElementById('deflect-desc').textContent = `Réduit les dégâts d'une attaque à distance de 1d10+${mod(S.stats.dex)+pb}. Si réduit à 0 : renvoyer (${fmt(ab)}, 1d${S.martialDie}+${mod(S.stats.dex)}).`;
+  document.getElementById('fall-desc').textContent = `Réduit les dégâts de chute de ${S.level*5} (niveau ${S.level} × 5).`;
+  document.getElementById('eq-fists').textContent = `${fmt(ab)} · 1d${S.martialDie}+${mod(S.stats.dex)} contondant`;
+  document.getElementById('eq-staff').textContent = `Arme de moine · ${fmt(ab)} · 1d${S.martialDie}+${mod(S.stats.dex)} contondant/perforant`;
+  document.getElementById('class-display').textContent = `Moine niveau ${S.level} · Voie de l'Ombre`;
+
+  // Ki dots
+  const dots = document.getElementById('ki-dots');
+  dots.innerHTML='';
+  for(let i=0;i<S.kiMax;i++){
+    const d=document.createElement('div');
+    d.className='ki-dot'+(i<S.ki?' on':'');
+    d.textContent='氣';
+    d.onclick=()=>toggleKi(i);
+    dots.appendChild(d);
+  }
+  document.getElementById('ki-lbl').textContent = `${S.ki} / ${S.kiMax} — Récupérés au repos court ou long`;
+
+  // Unlocked abilities
+  const ul = document.getElementById('unlocked-abilities');
+  ul.innerHTML='';
+  if(S.unlockedAbilities && S.unlockedAbilities.length>0){
+    const card=document.createElement('div');
+    card.className='card';
+    card.innerHTML=`<div class="card-title">Capacités de niveau supérieur</div>`+
+      S.unlockedAbilities.map(ab=>`
+        <div class="ability-item">
+          <div class="ab-hd"><span class="ab-name">${ab.name}</span><span class="ab-tag ${ab.tagClass}">${ab.tag}</span></div>
+          <div class="ab-desc">${ab.desc}</div>
+        </div>`).join('');
+    ul.appendChild(card);
+  }
 }
 
-// ── KI ────────────────────────────────────────────
-function updateKi() {
-  document.querySelectorAll('.ki-dot').forEach((d, i) => d.classList.toggle('on', i < ST.ki));
-  document.getElementById('ki-lbl').textContent = `${ST.ki} / ${ST.kiMax} — Récupérés au repos court ou long`;
-  saveState();
+// ═══════════════════════════════════════════════════════
+// HP / KI / CONDITIONS / REST
+// ═══════════════════════════════════════════════════════
+document.getElementById('hp-minus').onclick=()=>{
+  const v=parseInt(document.getElementById('hp-adj').value)||1;
+  S.hp=Math.max(0,S.hp-v); saveState(); renderAll(); toast(`−${v} PV → ${S.hp}/${S.hpMax}`);
+};
+document.getElementById('hp-plus').onclick=()=>{
+  const v=parseInt(document.getElementById('hp-adj').value)||1;
+  S.hp=Math.min(S.hpMax,S.hp+v); saveState(); renderAll(); toast(`+${v} PV → ${S.hp}/${S.hpMax}`);
+};
+function setTempHP(){
+  const v=prompt('PV temporaires :');
+  if(v!==null){S.tempHp=Math.max(0,parseInt(v)||0);saveState();renderAll();toast(`PV temp : ${S.tempHp}`);}
 }
-function toggleKi(idx) {
-  ST.ki = idx < ST.ki ? ST.ki - 1 : Math.min(ST.kiMax, idx + 1);
-  updateKi(); toast(`Ki : ${ST.ki}/${ST.kiMax}`);
+function toggleKi(i){
+  S.ki = i<S.ki ? S.ki-1 : Math.min(S.kiMax,i+1);
+  saveState(); renderAll(); toast(`Ki : ${S.ki}/${S.kiMax}`);
 }
-
-// ── CONDITIONS / RESTS ────────────────────────────
-function toggleCond(el) { el.classList.toggle('on'); el.querySelector('.cond-check').textContent = el.classList.contains('on') ? '✓' : ''; }
-
-function shortRest() {
-  ST.ki = ST.kiMax;
-  const roll = Math.ceil(Math.random() * 8) + 2;
-  ST.hp = Math.min(ST.hpMax, ST.hp + roll);
-  ST.tempHp = 0; document.getElementById('temp-hp').textContent = '0';
-  updateHP(); updateKi(); toast(`Repos court : +${roll} PV · Ki restauré`);
+function toggleCond(el){ el.classList.toggle('on'); el.querySelector('.cond-check').textContent=el.classList.contains('on')?'✓':''; }
+function shortRest(){
+  S.ki=S.kiMax;
+  const roll=Math.ceil(Math.random()*8)+mod(S.stats.con);
+  S.hp=Math.min(S.hpMax,S.hp+Math.max(1,roll));
+  S.tempHp=0; saveState(); renderAll(); toast(`Repos court : +${Math.max(1,roll)} PV · Ki restauré`);
 }
-function longRest() {
-  ST.hp = ST.hpMax; ST.ki = ST.kiMax; ST.tempHp = 0;
-  document.getElementById('temp-hp').textContent = '0';
-  document.querySelectorAll('.dd').forEach(d => d.classList.remove('on'));
-  updateHP(); updateKi(); toast('Long repos — tout restauré !');
-}
-
-// ── DICE ──────────────────────────────────────────
-function rollDice(sides) {
-  const r = Math.ceil(Math.random() * sides);
-  const el = document.getElementById('dice-result');
-  el.innerHTML = `<span>${r}</span><span class="dice-lbl">d${sides}</span>`;
-  toast(`d${sides} → ${r}`);
+function longRest(){
+  S.hp=S.hpMax; S.ki=S.kiMax; S.tempHp=0;
+  document.querySelectorAll('.dd').forEach(d=>d.classList.remove('on'));
+  saveState(); renderAll(); toast('Long repos — tout restauré !');
 }
 
-// ── PROVERB ───────────────────────────────────────
-function drawProverb() {
-  const box = document.getElementById('proverb-box');
+// ═══════════════════════════════════════════════════════
+// LEVEL UP WIZARD
+// ═══════════════════════════════════════════════════════
+let WZ = {}; // wizard state
+
+function startLevelUp(){
+  const nl = S.level+1;
+  const data = LEVELUP[nl];
+  if(!data){ toast("Niveau non disponible dans cette fiche"); return; }
+  WZ = { newLevel:nl, data, hpRoll:null, asiChoices:{str:0,dex:0,con:0,int:0,wis:0,cha:0}, step: data.hasASI?'asi':'hp' };
+  document.getElementById('levelup-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  renderStep();
+}
+function closeModal(){
+  document.getElementById('levelup-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function renderStep(){
+  const mc = document.getElementById('modal-content');
+  const { step, newLevel, data } = WZ;
+  const SNAMES = {str:'Force',dex:'Dextérité',con:'Constitution',int:'Intelligence',wis:'Sagesse',cha:'Charisme'};
+
+  if(step==='asi'){
+    const total = Object.values(WZ.asiChoices).reduce((a,b)=>a+b,0);
+    const remaining = 2 - total;
+    mc.innerHTML=`
+      <div class="modal-header">
+        <div class="modal-header-icon">✨</div>
+        <div>
+          <div class="modal-header-title">Niveau ${newLevel}</div>
+          <div class="modal-header-sub">Amélioration de caractéristique</div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <div class="modal-label">Points à répartir</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+            <div style="font-family:'Cinzel',serif;font-size:40px;font-weight:700;color:${remaining>0?'var(--purple)':'var(--teal)'}">${remaining}</div>
+            <div style="font-size:13px;color:var(--muted)">point${remaining>1?'s':''} restant${remaining>1?'s':''}<br><em>Max +2 par caractéristique · Max 20</em></div>
+          </div>
+          <div class="asi-grid">
+            ${Object.entries(SNAMES).map(([key,label])=>{
+              const sc=S.stats[key], bonus=WZ.asiChoices[key], m=mod(sc+bonus);
+              const canAdd = remaining>0 && bonus<2 && sc+bonus<20;
+              const canRem = bonus>0;
+              return `<div class="asi-box ${bonus>0?'selected':''}">
+                <div class="asi-box-label">${label}</div>
+                <div class="asi-box-mod" style="${bonus>0?'color:var(--purple)':''}">${fmt(m)}</div>
+                <div class="asi-box-score">${sc}${bonus>0?' → '+(sc+bonus):''}</div>
+                <div class="asi-box-ctrl">
+                  <button class="asi-ctrl-btn" onclick="asiAdj('${key}',-1)" ${canRem?'':'disabled'}>−</button>
+                  <span class="asi-bonus" style="${bonus>0?'':'color:var(--muted);opacity:.4'}">${bonus>0?'+'+bonus:'·'}</span>
+                  <button class="asi-ctrl-btn" onclick="asiAdj('${key}',+1)" ${canAdd?'':'disabled'}>+</button>
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn secondary" onclick="closeModal()">Annuler</button>
+        <button class="modal-btn primary" onclick="asiNext()" ${remaining===0?'':'disabled'} id="asi-btn">Suivant →</button>
+      </div>`;
+
+  } else if(step==='hp'){
+    const conM = mod(S.stats.con);
+    mc.innerHTML=`
+      <div class="modal-header">
+        <div class="modal-header-icon">❤️</div>
+        <div>
+          <div class="modal-header-title">Niveau ${newLevel}</div>
+          <div class="modal-header-sub">Points de vie supplémentaires</div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <div class="modal-label">Lance 1d8 + CON (${fmt(conM)})</div>
+          <div class="hp-roll-display" id="hproll-display">
+            <span>${WZ.hpRoll!==null?'+'+WZ.hpRoll:'—'}</span>
+            ${WZ.hpRoll!==null?`<span class="hp-roll-sub">1d${Math.max(1,WZ.hpRoll-conM)} + CON</span>`:''}
+          </div>
+          <div class="hp-roll-btns">
+            <button class="hp-roll-btn dice" onclick="rollHP()">🎲 Lancer le dé</button>
+            <button class="hp-roll-btn avg" onclick="avgHP()">Valeur fixe (+${5+conM})</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn secondary" onclick="closeModal()">Annuler</button>
+        <button class="modal-btn primary" onclick="hpNext()" ${WZ.hpRoll!==null?'':'disabled'} id="hp-btn">Suivant →</button>
+      </div>`;
+
+  } else if(step==='summary'){
+    const asi = Object.entries(WZ.asiChoices).filter(([,v])=>v>0);
+    mc.innerHTML=`
+      <div class="modal-body" style="padding-top:1.5rem">
+        <div class="summary-banner">
+          <div class="summary-icon">⬆</div>
+          <div class="summary-title">Niveau ${newLevel} !</div>
+          <div class="summary-sub">${data.abilities.map(a=>a.name).join(' · ')||'Amélioration de caractéristique'}</div>
+        </div>
+        ${asi.length>0?`<div style="background:var(--purple-bg);border:1px solid var(--border2);border-radius:var(--rs);padding:12px 14px;margin-bottom:12px">
+          <div style="font-size:11px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px">Améliorations de caractéristique</div>
+          ${asi.map(([k,v])=>`<div style="font-size:14px;color:var(--text);margin-bottom:4px">${{str:'Force',dex:'Dextérité',con:'Constitution',int:'Intelligence',wis:'Sagesse',cha:'Charisme'}[k]} : ${S.stats[k]} → <strong>${S.stats[k]+v}</strong></div>`).join('')}
+        </div>`:''}
+        <div class="summary-stats">
+          <div class="summary-stat"><div class="summary-stat-val" style="color:var(--coral)">+${WZ.hpRoll}</div><div class="summary-stat-lbl">PV max</div></div>
+          <div class="summary-stat"><div class="summary-stat-val" style="color:var(--purple)">${data.ki}</div><div class="summary-stat-lbl">Ki max</div></div>
+          <div class="summary-stat"><div class="summary-stat-val" style="color:var(--teal)">1d${data.martialDie}</div><div class="summary-stat-lbl">Dé martial</div></div>
+        </div>
+        ${data.abilities.length>0?`<div style="margin-bottom:16px">
+          <div style="font-size:11px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px">Nouvelles capacités</div>
+          ${data.abilities.map(ab=>`<div class="new-ability">
+            <div class="new-ability-hd"><span class="new-ability-name">${ab.name}</span><span class="ab-tag ${ab.tagClass}">${ab.tag}</span></div>
+            <div class="new-ability-desc">${ab.desc}</div>
+          </div>`).join('')}
+        </div>`:''}
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn secondary" onclick="closeModal()">Annuler</button>
+        <button class="modal-btn primary" onclick="applyLevelUp()">✦ Confirmer</button>
+      </div>`;
+  }
+}
+
+function asiAdj(key,delta){
+  const total=Object.values(WZ.asiChoices).reduce((a,b)=>a+b,0);
+  if(delta>0 && (total>=2 || WZ.asiChoices[key]>=2 || S.stats[key]+WZ.asiChoices[key]>=20)) return;
+  if(delta<0 && WZ.asiChoices[key]<=0) return;
+  WZ.asiChoices[key]+=delta;
+  renderStep();
+}
+function asiNext(){ const rem=2-Object.values(WZ.asiChoices).reduce((a,b)=>a+b,0); if(rem>0)return; WZ.step='hp'; renderStep(); }
+function rollHP(){
+  const conM=mod(S.stats.con), roll=Math.ceil(Math.random()*8);
+  WZ.hpRoll=Math.max(1,roll+conM);
+  renderStep();
+  const el=document.getElementById('hproll-display');
+  if(el){el.style.animation='none';void el.offsetWidth;el.style.animation='pop .4s ease';}
+}
+function avgHP(){ WZ.hpRoll=Math.max(1,5+mod(S.stats.con)); renderStep(); }
+function hpNext(){ if(WZ.hpRoll===null)return; WZ.step='summary'; renderStep(); }
+
+function applyLevelUp(){
+  const {newLevel,data,hpRoll,asiChoices}=WZ;
+  Object.entries(asiChoices).forEach(([k,v])=>{ S.stats[k]=Math.min(20,S.stats[k]+v); });
+  S.level=newLevel;
+  S.hpMax+=hpRoll; S.hp=Math.min(S.hpMax,S.hp+hpRoll);
+  S.kiMax=data.ki; S.ki=data.ki;
+  S.martialDie=data.martialDie; S.profBonus=data.profBonus;
+  if(!S.unlockedAbilities) S.unlockedAbilities=[];
+  S.unlockedAbilities.push(...data.abilities);
+  saveState(); closeModal(); renderAll();
+  toast(`✦ Bienvenue au niveau ${newLevel} !`);
+}
+
+// ═══════════════════════════════════════════════════════
+// DICE / PROVERBS / CITATIONS
+// ═══════════════════════════════════════════════════════
+function rollDice(s){
+  const r=Math.ceil(Math.random()*s);
+  const el=document.getElementById('dice-result');
+  el.innerHTML=`<span>${r}</span><span class="dice-lbl">d${s}</span>`;
+  toast(`d${s} → ${r}`);
+}
+
+const PROVERBS=["Quand l'aigle doute, c'est que la pluie n'a pas encore compris qu'elle mouille.","Le sage ne choisit pas entre la gauche et la droite. Il attend que le chemin choisisse.","Un bon silence vaut trois bonnes réponses, mais une mauvaise question vaut six bons silences.","L'ombre ne frappe pas celui qui marche dedans. C'est l'évidence même. Sauf le vendredi.","Si tu te demandes si tu dois agir, c'est que tu aurais dû te poser la question avant d'hésiter.","La rivière ne se souvient pas des pierres qu'elle a traversées. C'est pour ça qu'elle se cogne encore.","Décider trop vite, c'est courir sans savoir où atterrir. Décider trop lentement, c'est rater le sol.","La victoire appartient à celui qui attend. La défaite aussi. C'est ce qu'on appelle l'équilibre.","Ce qui ne te tue pas te rend plus fort. Ce qui te tue, par contre, te rend beaucoup moins présent.","Le vrai maître ne demande jamais son chemin. Il demande si le chemin se souvient de lui.","Une épée dans l'ombre coupe aussi bien qu'une épée au soleil. Mais ça fait moins de photo.","Si tu dois choisir entre deux maux, c'est que tu n'as pas encore bien cherché le troisième.","L'ombre n'a pas d'opinion. C'est ce qui fait sa force. Et aussi sa faiblesse. Mais surtout sa force.","On ne traverse pas le Shadowfell à reculons. Enfin, si. Mais on arrive à l'envers.","La méditation sans discipline, c'est juste quelqu'un d'assis qui réfléchit à rien de concret.","Il ne faut jamais répondre à une question par une autre question. Sauf si la réponse est une question.","Agir dans l'urgence, c'est prendre une décision avec les dés de quelqu'un d'autre.","Le vide n'est pas l'absence de tout. C'est la présence de rien. Ce n'est pas pareil. Enfin, presque.","Frapper vite, c'est bien. Frapper juste, c'est mieux. Ne pas frapper et laisser l'autre s'effondrer, c'est de la philosophie.","La patience est une vertu. L'impatience aussi, dans les situations où attendre vous tue.","Tout chemin mène quelque part. C'est l'inconvénient des chemins.","Le guerrier qui rit de ses erreurs vit plus longtemps. Sauf de cette erreur-là précisément.","Si tu regardes trop longtemps l'abîme, c'est que tu n'as probablement rien de mieux à faire.","Trois vérités valent mieux qu'un mensonge. Mais deux vérités et un mensonge, personne ne sait lequel c'est.","Ce qui est fait est fait. Ce qui n'est pas fait non plus.","Un pas dans l'ombre vaut deux pas dans la lumière. Sauf pour lire.","Le destin est une rivière. Certains nagent. Certains coulent. D'autres se demandent si c'est bien une rivière.","Il n'y a pas de mauvaise décision. Il n'y a que des bonnes décisions qu'on regrette au mauvais moment.","L'équilibre parfait, c'est comme l'horizon : on s'en approche, on ne l'atteint jamais, et pourtant tout le monde sait où il est.","Quand on ne peut pas choisir, c'est souvent parce que les deux options sont la même chose vue d'angles différents.","La mort n'est que le début d'une longue période sans activité.","On ne réveille pas l'ombre. L'ombre, elle, ne dort pas.","Le tonnerre prévient. L'éclair, non. C'est pour ça que tout le monde a peur de l'éclair.","Une bonne infiltration, c'est comme un bon repas : on ne devrait pas savoir qu'il y a eu de la préparation.","Ce qui compte, ce n'est pas la destination. C'est d'arriver en vie. Ou pas loin.","Je ne dis pas qu'il ne faut pas décider. Je dis qu'il faut savoir pourquoi on décide avant de décider quoi décider.","L'ombre n'a jamais trahi personne. C'est la lumière qui révèle.","Rien n'est impossible. Certaines choses sont simplement très improbables à des horaires que je n'ai pas consultés.","La force ne réside pas dans le coup qu'on porte, mais dans celui qu'on choisit de ne pas porter. Mais parfois il faut quand même taper.","Un ennemi vaincu sans combat, c'est un ennemi qu'on n'a pas vu venir. Ce n'est pas forcément un succès.","La sagesse ne se prend pas. Elle se mérite. Et encore.","Chaque question porte en elle sa réponse. Encore faut-il poser la bonne question.","Le silence parle. Encore faut-il savoir l'entendre. Encore faut-il vouloir écouter. Encore faut-il être là.","Ce n'est pas parce qu'on ne voit pas l'ombre qu'elle n'est pas là. Elle attend, elle aussi.","La précipitation est le luxe de ceux qui n'ont pas encore eu à regretter.","Il est plus facile de marcher dans les pas d'un autre que dans les siens. C'est pour ça qu'on s'épuise moins à suivre.","Quand tout le monde regarde à gauche, le sage regarde à droite. Quand tout le monde regarde à droite, le sage ferme les yeux.","Un mensonge dit assez souvent finit par ressembler à une vérité. La vérité, elle, ne change pas d'avis.","L'ennemi parfait est celui qu'on ne reconnaît pas comme tel. L'ami parfait aussi, d'ailleurs.","On ne devient pas maître de l'ombre en refusant la lumière. On en devient maître en comprenant pourquoi la lumière jette une ombre."];
+
+function drawProverb(){
+  const box=document.getElementById('proverb-box');
   box.classList.remove('show'); void box.offsetWidth;
-  box.textContent = PROVERBS[Math.floor(Math.random() * PROVERBS.length)];
+  box.textContent=PROVERBS[Math.floor(Math.random()*PROVERBS.length)];
   box.classList.add('show');
 }
 
-// ── TABS ──────────────────────────────────────────
-function switchTab(name, btn) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-' + name).classList.add('active');
+function renderCitations(list){
+  document.getElementById('cit-count').textContent=list.length+' sentence'+(list.length>1?'s':'');
+  document.getElementById('cit-list').innerHTML=list.map(p=>`
+    <div class="citation-item">
+      <span class="citation-num">${String(PROVERBS.indexOf(p)+1).padStart(2,'0')}</span>
+      <span class="citation-text">${p}</span>
+    </div>`).join('');
+}
+function filterCitations(q){
+  renderCitations(q.trim()?PROVERBS.filter(p=>p.toLowerCase().includes(q.toLowerCase())):PROVERBS);
+}
+
+// ═══════════════════════════════════════════════════════
+// TABS / TOAST
+// ═══════════════════════════════════════════════════════
+function switchTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── TOAST ─────────────────────────────────────────
 let toastTimer;
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
 }
 
-// ── INIT ──────────────────────────────────────────
-loadState(); updateHP(); updateKi();
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+loadState();
+renderAll();
 renderCitations(PROVERBS);
 
-const s = document.createElement('style');
-s.textContent = '@keyframes pop{0%{transform:scale(.7);opacity:.4}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}';
-document.head.appendChild(s);
+// Close modal on backdrop click
+document.getElementById('levelup-modal').addEventListener('click', e=>{
+  if(e.target===document.getElementById('levelup-modal')) closeModal();
+});
 </script>
 </body>
 </html>
