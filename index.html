@@ -8,45 +8,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
+    html { font-size: 16px; }
     body {
-      background: #07060F;
-      color: #E2DEFF;
+      background: #F0EDF8;
+      color: #1A1535;
       font-family: 'Crimson Pro', Georgia, serif;
       min-height: 100dvh;
       -webkit-font-smoothing: antialiased;
     }
 
     :root {
-      --bg: #07060F;
-      --surface: #0F0C1F;
-      --card: #141030;
-      --card2: #1A1540;
-      --border: #252040;
-      --border2: #332C60;
-      --text: #E2DEFF;
-      --muted: #7268A8;
-      --faint: #2A2448;
+      --bg: #F0EDF8;
+      --surface: #F8F6FF;
+      --card: #FFFFFF;
+      --border: #DDD8F0;
+      --border2: #C8C0E8;
+      --text: #1A1535;
+      --muted: #6B5FA8;
+      --faint: #EAE7F8;
 
-      --purple: #8B7FFF;
-      --purple-glow: rgba(139,127,255,.18);
-      --purple-dark: #534AB7;
+      --purple: #534AB7;
+      --purple-light: #7B72D8;
+      --purple-bg: #EEEDFE;
+      --purple-glow: rgba(83,74,183,.12);
 
-      --teal: #3ECDC4;
-      --teal-glow: rgba(62,205,196,.15);
+      --teal: #0F6E56;
+      --teal-bg: #E1F5EE;
+      --teal-glow: rgba(15,110,86,.1);
 
-      --coral: #E0506A;
-      --coral-glow: rgba(224,80,106,.15);
+      --coral: #B82A42;
+      --coral-bg: #FBEAED;
+      --coral-glow: rgba(184,42,66,.1);
 
-      --gold: #C4963E;
-      --gold-light: #E8C06A;
+      --gold: #8A6A1A;
+      --gold-bg: #FDF4E0;
 
-      --tab-h: 70px;
+      --tab-h: 68px;
       --r: 12px;
       --rs: 8px;
     }
 
-    /* ── APP LAYOUT ─────────────────── */
     #app {
       max-width: 480px;
       margin: 0 auto;
@@ -55,24 +56,23 @@
 
     /* ── HEADER ──────────────────────── */
     .header {
-      background: linear-gradient(155deg, #12102A 0%, #0C0A1E 55%, var(--surface) 100%);
+      background: linear-gradient(155deg, #2A2255 0%, #3D358A 50%, #4A40A8 100%);
       padding: 1.5rem 1.25rem 1.1rem;
-      border-bottom: 1px solid var(--border);
       position: relative;
       overflow: hidden;
     }
     .header::before {
       content: ''; position: absolute;
-      top: -80px; right: -50px;
-      width: 240px; height: 240px; border-radius: 50%;
-      background: radial-gradient(circle, var(--purple-glow), transparent 70%);
+      top: -60px; right: -40px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.07), transparent 70%);
       pointer-events: none;
     }
     .header::after {
       content: ''; position: absolute;
-      bottom: -40px; left: -30px;
-      width: 150px; height: 150px; border-radius: 50%;
-      background: radial-gradient(circle, var(--teal-glow), transparent 70%);
+      bottom: -30px; left: -20px;
+      width: 130px; height: 130px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(62,205,196,.12), transparent 70%);
       pointer-events: none;
     }
     .header-inner {
@@ -80,54 +80,52 @@
       gap: 1rem; position: relative; z-index: 1;
     }
     .avatar {
-      width: 76px; height: 76px; border-radius: 50%;
-      border: 1.5px solid var(--purple);
-      background: var(--faint);
+      width: 74px; height: 74px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.4);
+      background: rgba(255,255,255,.1);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; position: relative;
-      box-shadow: 0 0 24px rgba(139,127,255,.2);
+      box-shadow: 0 0 0 6px rgba(255,255,255,.06);
     }
     .avatar-glyph {
-      font-family: 'Cinzel', serif; font-size: 28px; color: var(--purple);
+      font-family: 'Cinzel', serif; font-size: 28px; color: rgba(255,255,255,.9);
     }
     .avatar-ring {
-      position: absolute; inset: -7px; border-radius: 50%;
-      border: 1px solid var(--purple); opacity: .18;
+      position: absolute; inset: -8px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.2); opacity: .6;
       animation: ring-pulse 4s ease-in-out infinite;
     }
     @keyframes ring-pulse {
-      0%,100% { transform: scale(1); opacity: .18; }
-      50% { transform: scale(1.12); opacity: .04; }
+      0%,100% { transform: scale(1); opacity: .6; }
+      50% { transform: scale(1.1); opacity: .15; }
     }
     .char-name {
       font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700;
       color: #fff; letter-spacing: .04em; line-height: 1.15;
     }
-    .char-name .accent { color: var(--purple); }
-    .char-sub { font-size: 14px; color: var(--muted); margin-top: 2px; font-style: italic; }
+    .char-name .accent { color: #C8C0FF; }
+    .char-sub { font-size: 14px; color: rgba(255,255,255,.65); margin-top: 2px; font-style: italic; }
     .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
     .badge {
       display: inline-flex; align-items: center;
       font-size: 11px; font-family: 'Cinzel', serif; letter-spacing: .05em;
       padding: 3px 10px; border-radius: 20px; border: 1px solid;
     }
-    .b-pur { background: rgba(139,127,255,.1); border-color: var(--purple); color: var(--purple); }
-    .b-tea { background: rgba(62,205,196,.08); border-color: var(--teal); color: var(--teal); }
-    .b-gld { background: rgba(196,150,62,.1); border-color: var(--gold); color: var(--gold-light); }
+    .b-pur { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.35); color: #fff; }
+    .b-tea { background: rgba(62,205,196,.2); border-color: rgba(62,205,196,.5); color: #9FFCE8; }
+    .b-gld { background: rgba(255,200,80,.15); border-color: rgba(255,200,80,.4); color: #FFE08A; }
 
     /* HP mini */
     .hp-mini { position: relative; z-index: 1; margin-top: 14px; }
     .hp-mini-labels {
       display: flex; justify-content: space-between;
-      font-size: 12px; color: var(--muted); margin-bottom: 4px;
+      font-size: 12px; color: rgba(255,255,255,.55); margin-bottom: 4px;
     }
-    .hp-mini-labels strong { color: var(--coral); font-size: 13px; }
-    .hp-track {
-      height: 6px; border-radius: 3px; background: var(--faint); overflow: hidden;
-    }
+    .hp-mini-labels strong { color: #FFA0B0; font-size: 13px; }
+    .hp-track { height: 6px; border-radius: 3px; background: rgba(255,255,255,.15); overflow: hidden; }
     .hp-fill {
       height: 100%; border-radius: 3px;
-      background: linear-gradient(90deg, var(--coral), #f07a8e);
+      background: linear-gradient(90deg, #E05068, #F5A0B0);
       transition: width .5s cubic-bezier(.4,0,.2,1);
     }
 
@@ -136,32 +134,36 @@
       position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
       width: 100%; max-width: 480px;
       height: var(--tab-h);
-      background: rgba(7,6,15,.94);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      background: rgba(250,248,255,.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid var(--border);
-      display: flex; z-index: 100;
+      display: flex; overflow-x: auto; z-index: 100;
       padding-bottom: env(safe-area-inset-bottom, 0);
+      scrollbar-width: none;
     }
+    .tab-nav::-webkit-scrollbar { display: none; }
     .tab-btn {
-      flex: 1; display: flex; flex-direction: column;
+      flex: 0 0 auto; min-width: 72px;
+      display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 3px;
       background: none; border: none; cursor: pointer;
       color: var(--muted);
-      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: .05em;
-      padding: 8px 4px;
+      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: .04em;
+      padding: 8px 12px;
       transition: color .2s;
       position: relative;
       -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
     }
     .tab-btn.active { color: var(--purple); }
     .tab-btn.active::before {
       content: ''; position: absolute;
       top: 0; left: 50%; transform: translateX(-50%);
-      width: 30px; height: 2px;
+      width: 28px; height: 2px;
       background: var(--purple); border-radius: 0 0 3px 3px;
     }
-    .tab-icon { font-size: 22px; line-height: 1; }
+    .tab-icon { font-size: 20px; line-height: 1; }
 
     /* ── CONTENT ─────────────────────── */
     .tab-content { padding: 1rem; }
@@ -172,6 +174,7 @@
     .card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: var(--r); padding: 1rem 1.25rem; margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(83,74,183,.06);
     }
     .card-title {
       font-family: 'Cinzel', serif; font-size: 10px; font-weight: 600;
@@ -182,15 +185,13 @@
     .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
     /* ── STATS GRID ──────────────────── */
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-    }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .stat-box {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--rs); padding: 12px 6px; text-align: center;
     }
     .stat-label { font-size: 9px; font-family: 'Cinzel', serif; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-    .stat-mod { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #fff; line-height: 1.1; }
+    .stat-mod { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; color: var(--text); line-height: 1.1; }
     .stat-mod.pos { color: var(--teal); }
     .stat-mod.neg { color: var(--coral); }
     .stat-score {
@@ -205,30 +206,23 @@
       padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 14px;
     }
     .skill-row:last-child { border-bottom: none; }
-    .prof-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      border: 1.5px solid var(--muted); flex-shrink: 0;
-    }
+    .prof-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--border2); flex-shrink: 0; }
     .prof-dot.prof { background: var(--purple); border-color: var(--purple); }
     .skill-name { flex: 1; color: var(--text); }
-    .skill-attr { font-size: 11px; color: var(--faint); font-family: 'Cinzel', serif; }
-    .skill-val { font-family: 'Cinzel', serif; font-size: 14px; color: #fff; min-width: 28px; text-align: right; }
+    .skill-attr { font-size: 11px; color: var(--muted); font-family: 'Cinzel', serif; }
+    .skill-val { font-family: 'Cinzel', serif; font-size: 14px; color: var(--text); font-weight: 600; min-width: 28px; text-align: right; }
     .saves-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .save-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
-    .save-val { font-family: 'Cinzel', serif; font-size: 14px; color: #fff; font-weight: 700; }
+    .save-val { font-family: 'Cinzel', serif; font-size: 14px; color: var(--text); font-weight: 700; }
 
     /* ── HP TRACKER ──────────────────── */
-    .hp-controls {
-      display: flex; align-items: center;
-      gap: 16px; justify-content: center; margin: 12px 0;
-    }
-    .hp-big { font-family: 'Cinzel', serif; font-size: 58px; color: var(--coral); line-height: 1; }
+    .hp-controls { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 12px 0; }
+    .hp-big { font-family: 'Cinzel', serif; font-size: 58px; color: var(--coral); line-height: 1; font-weight: 700; }
     .hp-maxlbl { font-size: 14px; color: var(--muted); text-align: center; }
     .hp-adj-input {
       text-align: center; font-family: 'Cinzel', serif; font-size: 16px;
       width: 64px; background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--rs); color: var(--text); padding: 7px;
-      margin-top: 8px;
+      border-radius: var(--rs); color: var(--text); padding: 7px; margin-top: 8px;
     }
     .ctrl-btn {
       width: 48px; height: 48px; border-radius: 50%;
@@ -238,26 +232,20 @@
       cursor: pointer; transition: background .15s;
       -webkit-tap-highlight-color: transparent;
     }
-    .ctrl-btn:active { background: var(--border2); }
+    .ctrl-btn:active { background: var(--border); }
 
     /* ── COMBAT STATS ────────────────── */
     .combat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px; }
-    .cs {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--rs); padding: 12px 6px; text-align: center;
-    }
-    .cs-val { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: #fff; }
+    .cs { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rs); padding: 12px 6px; text-align: center; }
+    .cs-val { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: var(--text); }
     .cs-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
 
     /* ── ATTACKS ─────────────────────── */
-    .attack-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 0; border-bottom: 1px solid var(--border);
-    }
+    .attack-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
     .attack-item:last-child { border-bottom: none; }
     .atk-icon { font-size: 22px; width: 32px; text-align: center; flex-shrink: 0; }
     .atk-info { flex: 1; }
-    .atk-name { font-family: 'Cinzel', serif; font-size: 14px; color: #fff; }
+    .atk-name { font-family: 'Cinzel', serif; font-size: 14px; color: var(--text); font-weight: 600; }
     .atk-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .atk-stats { text-align: right; }
     .atk-bonus { font-family: 'Cinzel', serif; font-size: 20px; color: var(--coral); font-weight: 700; }
@@ -270,29 +258,26 @@
       border: 2px solid var(--border2); background: var(--surface);
       cursor: pointer; display: flex; align-items: center; justify-content: center;
       font-family: 'Cinzel', serif; font-size: 14px; color: var(--muted);
-      transition: all .2s ease;
-      -webkit-tap-highlight-color: transparent;
+      transition: all .2s ease; -webkit-tap-highlight-color: transparent;
     }
     .ki-dot.on {
-      background: var(--purple-glow); border-color: var(--purple);
-      color: var(--purple); box-shadow: 0 0 16px rgba(139,127,255,.22);
+      background: var(--purple-bg); border-color: var(--purple);
+      color: var(--purple); box-shadow: 0 0 14px var(--purple-glow);
     }
     .ki-lbl { text-align: center; font-size: 13px; color: var(--muted); font-style: italic; }
 
     /* ── ABILITY ITEMS ───────────────── */
-    .ability-item {
-      padding: 12px 0; border-bottom: 1px solid var(--border);
-    }
+    .ability-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
     .ability-item:last-child { border-bottom: none; }
     .ab-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-    .ab-name { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; color: #fff; }
+    .ab-name { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; color: var(--text); }
     .ab-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; border: 1px solid; }
-    .t-ki  { background: rgba(139,127,255,.1); border-color: var(--purple); color: var(--purple); }
-    .t-sh  { background: rgba(62,205,196,.08); border-color: var(--teal); color: var(--teal); }
-    .t-pa  { background: rgba(196,150,62,.1); border-color: var(--gold); color: var(--gold-light); }
-    .t-re  { background: rgba(224,80,106,.1); border-color: var(--coral); color: var(--coral); }
-    .t-fr  { background: rgba(62,205,196,.06); border-color: rgba(62,205,196,.3); color: var(--teal); }
-    .ab-desc { font-size: 13px; color: #A8A0D8; line-height: 1.6; }
+    .t-ki  { background: var(--purple-bg); border-color: var(--purple); color: var(--purple); }
+    .t-sh  { background: var(--teal-bg); border-color: var(--teal); color: var(--teal); }
+    .t-pa  { background: var(--gold-bg); border-color: var(--gold); color: var(--gold); }
+    .t-re  { background: var(--coral-bg); border-color: var(--coral); color: var(--coral); }
+    .t-fr  { background: var(--teal-bg); border-color: rgba(15,110,86,.3); color: var(--teal); }
+    .ab-desc { font-size: 13px; color: #4A4070; line-height: 1.6; }
 
     /* ── CONDITIONS ──────────────────── */
     .cond-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
@@ -300,10 +285,9 @@
       display: flex; align-items: center; gap: 8px; padding: 9px 12px;
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--rs); font-size: 13px; cursor: pointer; color: var(--muted);
-      transition: all .2s;
-      -webkit-tap-highlight-color: transparent;
+      transition: all .2s; -webkit-tap-highlight-color: transparent;
     }
-    .cond-chip.on { background: var(--coral-glow); border-color: var(--coral); color: var(--coral); }
+    .cond-chip.on { background: var(--coral-bg); border-color: var(--coral); color: var(--coral); }
     .cond-check {
       width: 14px; height: 14px; border-radius: 3px;
       border: 1.5px solid currentColor;
@@ -317,11 +301,7 @@
     .death-lbl.s { color: var(--teal); }
     .death-lbl.f { color: var(--coral); }
     .dd-dots { display: flex; gap: 8px; }
-    .dd {
-      width: 24px; height: 24px; border-radius: 50%;
-      border: 1.5px solid var(--border2); cursor: pointer; transition: all .15s;
-      -webkit-tap-highlight-color: transparent;
-    }
+    .dd { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--border2); cursor: pointer; transition: all .15s; -webkit-tap-highlight-color: transparent; }
     .dd.s.on { background: var(--teal); border-color: var(--teal); }
     .dd.f.on { background: var(--coral); border-color: var(--coral); }
 
@@ -333,89 +313,110 @@
       background: var(--surface);
       font-family: 'Cinzel', serif; font-size: 12px;
       letter-spacing: .04em; cursor: pointer; color: var(--muted);
-      transition: all .15s;
-      -webkit-tap-highlight-color: transparent;
+      transition: all .15s; -webkit-tap-highlight-color: transparent;
     }
     .rest-btn:active { background: var(--border); }
-    .rest-btn.long { border-color: var(--purple); color: var(--purple); background: var(--purple-glow); }
-    .rest-btn.long:active { background: rgba(139,127,255,.3); }
+    .rest-btn.long { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); }
 
     /* ── HISTOIRE ────────────────────── */
     .trait-block { margin-bottom: 12px; }
-    .trait-label {
-      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
-    }
+    .trait-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
     .trait-value { font-size: 14px; color: var(--text); line-height: 1.6; }
-    .backstory { font-size: 14px; color: #A8A0D8; line-height: 1.85; }
+    .backstory { font-size: 14px; color: #3A3060; line-height: 1.85; }
     .backstory p { margin-bottom: 10px; }
-    .eq-row {
-      display: flex; gap: 12px; align-items: flex-start;
-      padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 14px;
-    }
+    .eq-row { display: flex; gap: 12px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
     .eq-row:last-child { border-bottom: none; }
     .eq-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; color: var(--muted); margin-top: 1px; }
-    .eq-name { color: #fff; font-weight: 600; }
+    .eq-name { color: var(--text); font-weight: 600; }
     .eq-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-    /* ── DICES & PROVERBS ────────────── */
+    /* ── DICES ───────────────────────── */
     .dice-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 8px 0 16px; }
     .d-btn {
       width: 56px; height: 56px; border-radius: var(--rs);
       border: 1px solid var(--border2); background: var(--surface);
       color: var(--text); font-family: 'Cinzel', serif; font-size: 13px;
-      cursor: pointer; transition: all .15s;
-      -webkit-tap-highlight-color: transparent;
+      cursor: pointer; transition: all .15s; -webkit-tap-highlight-color: transparent;
     }
-    .d-btn:hover { border-color: var(--purple); color: var(--purple); }
+    .d-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); }
     .d-btn:active { background: var(--purple); color: #fff; border-color: var(--purple); }
     .dice-result {
       text-align: center; font-family: 'Cinzel', serif; font-size: 72px; font-weight: 700;
-      color: #fff; min-height: 80px; display: flex;
-      align-items: center; justify-content: center; flex-direction: column;
-      line-height: 1;
+      color: var(--text); min-height: 80px;
+      display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1;
     }
     .dice-lbl { font-size: 14px; color: var(--muted); font-weight: 400; margin-top: 4px; }
+
+    /* ── PROVERB (Dés tab) ───────────── */
     .proverb-btn {
       width: 100%; padding: 13px;
       border: 1px solid var(--purple); border-radius: var(--rs);
-      background: var(--purple-glow);
+      background: var(--purple-bg);
       color: var(--purple); font-family: 'Cinzel', serif;
       font-size: 14px; letter-spacing: .04em; cursor: pointer;
-      margin-bottom: 14px; transition: all .15s;
-      -webkit-tap-highlight-color: transparent;
+      margin-bottom: 14px; transition: all .15s; -webkit-tap-highlight-color: transparent;
     }
-    .proverb-btn:active { background: rgba(139,127,255,.3); }
+    .proverb-btn:active { background: #DDDAF8; }
     .quote-box {
       background: var(--surface); border: 1px solid var(--border);
       border-left: 3px solid var(--purple);
       border-radius: 0 var(--rs) var(--rs) 0;
       padding: 16px 18px; font-size: 15px; font-style: italic;
       color: var(--text); line-height: 1.8;
-      display: none;
-      animation: fadein .35s ease;
+      display: none; animation: fadein .35s ease;
     }
     .quote-box.show { display: block; }
+
+    /* ── CITATIONS TAB ───────────────── */
+    .citations-intro {
+      font-size: 14px; color: var(--muted); font-style: italic;
+      line-height: 1.6; margin-bottom: 16px;
+      padding: 12px 16px;
+      background: var(--purple-bg);
+      border-radius: var(--rs);
+      border-left: 3px solid var(--purple);
+    }
+    .citation-item {
+      display: flex; gap: 14px;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .citation-item:last-child { border-bottom: none; }
+    .citation-num {
+      font-family: 'Cinzel', serif; font-size: 11px;
+      color: var(--muted); min-width: 24px; padding-top: 2px;
+      opacity: .7;
+    }
+    .citation-text {
+      font-size: 14px; color: var(--text); line-height: 1.65;
+      font-style: italic;
+    }
+    .citation-search {
+      width: 100%; padding: 10px 14px;
+      border: 1px solid var(--border); border-radius: var(--rs);
+      background: var(--surface); color: var(--text);
+      font-family: 'Crimson Pro', serif; font-size: 15px;
+      margin-bottom: 14px; outline: none;
+    }
+    .citation-search:focus { border-color: var(--purple); }
+    .citation-count {
+      font-size: 12px; color: var(--muted);
+      text-align: right; margin-bottom: 8px;
+      font-style: italic;
+    }
+
     @keyframes fadein { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: none; } }
 
     /* ── TOAST ───────────────────────── */
     .toast {
       position: fixed; bottom: calc(var(--tab-h) + 14px); left: 50%;
       transform: translateX(-50%) translateY(8px);
-      background: var(--card2); border: 1px solid var(--border2);
-      border-radius: var(--rs); padding: 10px 20px;
-      font-size: 14px; color: var(--text);
+      background: var(--purple); border-radius: var(--rs);
+      padding: 10px 20px; font-size: 14px; color: #fff;
       opacity: 0; z-index: 200; pointer-events: none; white-space: nowrap;
-      transition: all .25s ease;
+      transition: all .25s ease; box-shadow: 0 4px 16px var(--purple-glow);
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    /* Divider for section heading in KI tab */
-    .section-div {
-      font-family: 'Cinzel', serif; font-size: 11px; color: var(--purple);
-      letter-spacing: .1em; text-transform: uppercase;
-      text-align: center; margin: 16px 0 8px; opacity: .7;
-    }
   </style>
 </head>
 <body>
@@ -452,7 +453,7 @@
   <!-- ── TAB CONTENT ─────────────────────── -->
   <div class="tab-content">
 
-    <!-- PANEL: STATS -->
+    <!-- STATS -->
     <div class="panel active" id="panel-stats">
       <div class="card">
         <div class="card-title">Caractéristiques</div>
@@ -465,7 +466,6 @@
           <div class="stat-box"><div class="stat-label">Charisme</div><div class="stat-mod">+0</div><div class="stat-score">10</div></div>
         </div>
       </div>
-
       <div class="card">
         <div class="card-title">Jets de sauvegarde</div>
         <div class="saves-grid">
@@ -477,7 +477,6 @@
           <div class="save-item"><div class="prof-dot"></div><span class="skill-attr">CHA</span><span class="save-val">+0</span></div>
         </div>
       </div>
-
       <div class="card">
         <div class="card-title">Compétences</div>
         <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Acrobaties</span><span class="skill-attr">DEX</span><span class="skill-val">+6</span></div>
@@ -489,7 +488,7 @@
       </div>
     </div>
 
-    <!-- PANEL: COMBAT -->
+    <!-- COMBAT -->
     <div class="panel" id="panel-combat">
       <div class="card">
         <div class="card-title">Points de vie</div>
@@ -498,7 +497,7 @@
           <div style="text-align:center">
             <div class="hp-big" id="hp-cur">22</div>
             <div class="hp-maxlbl">/ 22 PV max</div>
-            <input class="hp-adj-input" type="number" id="hp-adj" value="1" min="1" max="99" aria-label="Valeur d'ajustement PV">
+            <input class="hp-adj-input" type="number" id="hp-adj" value="1" min="1" max="99">
           </div>
           <button class="ctrl-btn" id="hp-plus" aria-label="Ajouter PV">+</button>
         </div>
@@ -507,7 +506,6 @@
           <button onclick="setTempHP()" style="background:none;border:none;color:var(--teal);cursor:pointer;font-size:12px;margin-left:8px">Modifier</button>
         </div>
       </div>
-
       <div class="card">
         <div class="card-title">Stats de combat</div>
         <div class="combat-row">
@@ -521,34 +519,16 @@
           <div class="cs"><div class="cs-val">DD 14</div><div class="cs-lbl">Seuil Ki</div></div>
         </div>
       </div>
-
       <div class="card">
         <div class="card-title">Attaques</div>
-        <div class="attack-item">
-          <div class="atk-icon">👊</div>
-          <div class="atk-info"><div class="atk-name">Frappe à mains nues</div><div class="atk-detail">Corps à corps · DEX · Contondant</div></div>
-          <div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4</div></div>
-        </div>
-        <div class="attack-item">
-          <div class="atk-icon">⚡</div>
-          <div class="atk-info"><div class="atk-name">Déluge de frappes</div><div class="atk-detail">2 attaques bonus · 1 ki</div></div>
-          <div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4 ×2</div></div>
-        </div>
-        <div class="attack-item">
-          <div class="atk-icon">🌑</div>
-          <div class="atk-info"><div class="atk-name">Frappe étourdissante</div><div class="atk-detail">DD 14 CON au toucher · 1 ki</div></div>
-          <div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">Étourdi</div></div>
-        </div>
-        <div class="attack-item">
-          <div class="atk-icon">🏹</div>
-          <div class="atk-info"><div class="atk-name">Projectile renvoyé</div><div class="atk-detail">Réaction · après déviation</div></div>
-          <div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4</div></div>
-        </div>
+        <div class="attack-item"><div class="atk-icon">👊</div><div class="atk-info"><div class="atk-name">Frappe à mains nues</div><div class="atk-detail">Corps à corps · DEX · Contondant</div></div><div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4</div></div></div>
+        <div class="attack-item"><div class="atk-icon">⚡</div><div class="atk-info"><div class="atk-name">Déluge de frappes</div><div class="atk-detail">2 attaques bonus · 1 ki</div></div><div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4 ×2</div></div></div>
+        <div class="attack-item"><div class="atk-icon">🌑</div><div class="atk-info"><div class="atk-name">Frappe étourdissante</div><div class="atk-detail">DD 14 CON au toucher · 1 ki</div></div><div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">Étourdi</div></div></div>
+        <div class="attack-item"><div class="atk-icon">🏹</div><div class="atk-info"><div class="atk-name">Projectile renvoyé</div><div class="atk-detail">Réaction · après déviation</div></div><div class="atk-stats"><div class="atk-bonus">+6</div><div class="atk-dmg">1d6+4</div></div></div>
       </div>
-
       <div class="card">
         <div class="card-title">Conditions</div>
-        <div class="cond-grid" id="cond-grid">
+        <div class="cond-grid">
           <div class="cond-chip" onclick="toggleCond(this)"><div class="cond-check"></div>Aveuglé</div>
           <div class="cond-chip" onclick="toggleCond(this)"><div class="cond-check"></div>Charmé</div>
           <div class="cond-chip" onclick="toggleCond(this)"><div class="cond-check"></div>Effrayé</div>
@@ -561,27 +541,11 @@
           <div class="cond-chip" onclick="toggleCond(this)"><div class="cond-check"></div>Inconscient</div>
         </div>
       </div>
-
       <div class="card">
         <div class="card-title">Jets de mort</div>
-        <div class="death-row">
-          <span class="death-lbl s">Succès</span>
-          <div class="dd-dots">
-            <div class="dd s" onclick="this.classList.toggle('on')"></div>
-            <div class="dd s" onclick="this.classList.toggle('on')"></div>
-            <div class="dd s" onclick="this.classList.toggle('on')"></div>
-          </div>
-        </div>
-        <div class="death-row">
-          <span class="death-lbl f">Échecs</span>
-          <div class="dd-dots">
-            <div class="dd f" onclick="this.classList.toggle('on')"></div>
-            <div class="dd f" onclick="this.classList.toggle('on')"></div>
-            <div class="dd f" onclick="this.classList.toggle('on')"></div>
-          </div>
-        </div>
+        <div class="death-row"><span class="death-lbl s">Succès</span><div class="dd-dots"><div class="dd s" onclick="this.classList.toggle('on')"></div><div class="dd s" onclick="this.classList.toggle('on')"></div><div class="dd s" onclick="this.classList.toggle('on')"></div></div></div>
+        <div class="death-row"><span class="death-lbl f">Échecs</span><div class="dd-dots"><div class="dd f" onclick="this.classList.toggle('on')"></div><div class="dd f" onclick="this.classList.toggle('on')"></div><div class="dd f" onclick="this.classList.toggle('on')"></div></div></div>
       </div>
-
       <div class="card">
         <div class="card-title">Repos</div>
         <div class="rest-row">
@@ -591,92 +555,44 @@
       </div>
     </div>
 
-    <!-- PANEL: KI -->
+    <!-- KI -->
     <div class="panel" id="panel-ki">
       <div class="card">
         <div class="card-title">Points de Ki</div>
         <div class="ki-dots" id="ki-dots">
-          <div class="ki-dot on" onclick="toggleKi(0)" aria-label="Ki 1">氣</div>
-          <div class="ki-dot on" onclick="toggleKi(1)" aria-label="Ki 2">氣</div>
-          <div class="ki-dot on" onclick="toggleKi(2)" aria-label="Ki 3">氣</div>
+          <div class="ki-dot on" onclick="toggleKi(0)">氣</div>
+          <div class="ki-dot on" onclick="toggleKi(1)">氣</div>
+          <div class="ki-dot on" onclick="toggleKi(2)">氣</div>
         </div>
         <div class="ki-lbl" id="ki-lbl">3 / 3 — Récupérés au repos court ou long</div>
       </div>
-
       <div class="card">
         <div class="card-title">Capacités de Ki</div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Déluge de frappes</span><span class="ab-tag t-ki">1 ki</span></div>
-          <div class="ab-desc">Action bonus — 2 frappes à mains nues supplémentaires immédiatement après une attaque au corps à corps.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Défense patiente</span><span class="ab-tag t-ki">1 ki</span></div>
-          <div class="ab-desc">Action bonus — Esquiver jusqu'au début de votre prochain tour (attaques contre vous avec désavantage).</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Pas du vent</span><span class="ab-tag t-ki">1 ki</span></div>
-          <div class="ab-desc">Action bonus — Se désengager ou foncer sans provoquer d'attaque d'opportunité. Distance de saut doublée.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Frappe étourdissante</span><span class="ab-tag t-ki">1 ki</span></div>
-          <div class="ab-desc">Avant une attaque de mêlée qui touche — DD 14 CON ou étourdi jusqu'à votre prochain tour. Pas d'action requise.</div>
-        </div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déluge de frappes</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — 2 frappes à mains nues supplémentaires immédiatement après une attaque au corps à corps.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Défense patiente</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — Esquiver jusqu'au début de votre prochain tour. Les attaques contre vous ont le désavantage.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Pas du vent</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — Se désengager ou foncer. Distance de saut doublée jusqu'à la fin du tour.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Frappe étourdissante</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Avant une attaque de mêlée qui touche — DD 14 CON ou étourdi jusqu'à votre prochain tour.</div></div>
       </div>
-
       <div class="card">
         <div class="card-title">Arts de l'Ombre</div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Illusion mineure</span><span class="ab-tag t-fr">Gratuit</span></div>
-          <div class="ab-desc">Tour mineur — Image ou son illusoire dans un cube de 1,5 m à 9 m ou moins. Sans ki.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Ténèbres</span><span class="ab-tag t-ki">2 ki</span></div>
-          <div class="ab-desc">Sphère de ténèbres magiques de 4,5 m de rayon, 10 min. Concentration. Bloque toute vision normale et dans le noir.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Vision dans le noir</span><span class="ab-tag t-ki">2 ki</span></div>
-          <div class="ab-desc">Confère la vision dans le noir à 18 m à une créature consentante pendant 8 heures.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Silence</span><span class="ab-tag t-ki">2 ki</span></div>
-          <div class="ab-desc">Zone de silence de 6 m de rayon, 10 min. Concentration. Aucun son ne peut traverser ni être émis dans la zone.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Passage sans trace</span><span class="ab-tag t-ki">2 ki</span></div>
-          <div class="ab-desc">+10 en Discrétion pour vous et alliés à 9 m. Impossible d'être pisté sans magie. Concentration.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Image silencieuse</span><span class="ab-tag t-ki">2 ki</span></div>
-          <div class="ab-desc">Illusion visuelle dans un cube de 4,5 m, déplaçable dans la zone. Concentration, 10 min.</div>
-        </div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Illusion mineure</span><span class="ab-tag t-fr">Gratuit</span></div><div class="ab-desc">Tour mineur — Image ou son illusoire dans un cube de 1,5 m à 9 m ou moins.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Ténèbres</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Sphère de ténèbres magiques de 4,5 m de rayon, 10 min. Concentration. Bloque toute vision.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Vision dans le noir</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Confère la vision dans le noir à 18 m à une créature consentante pendant 8 heures.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Silence</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Zone de silence de 6 m de rayon, 10 min. Concentration. Aucun sort à composante verbale.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Passage sans trace</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">+10 en Discrétion pour vous et alliés à 9 m. Impossible d'être pisté sans magie. Concentration.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Image silencieuse</span><span class="ab-tag t-ki">2 ki</span></div><div class="ab-desc">Illusion visuelle dans un cube de 4,5 m, déplaçable dans la zone. Concentration, 10 min.</div></div>
       </div>
-
       <div class="card">
         <div class="card-title">Capacités passives</div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Défense sans armure</span><span class="ab-tag t-pa">Passif</span></div>
-          <div class="ab-desc">CA = 10 + mod. DEX (+4) + mod. SAG (+3) = <strong style="color:#fff">17</strong>. Invalide si armure ou bouclier équipé.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Déviation des projectiles</span><span class="ab-tag t-re">Réaction</span></div>
-          <div class="ab-desc">Réduit les dégâts d'une attaque à distance de 1d10+7. Si réduit à 0, peut renvoyer le projectile (+6 att · 1d6+4).</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Chute ralentie</span><span class="ab-tag t-re">Réaction</span></div>
-          <div class="ab-desc">Réduit les dégâts de chute de 15 points (niveau × 5). Doit être conscient et non empêché de réagir.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Déplacement +10 ft</span><span class="ab-tag t-pa">Passif</span></div>
-          <div class="ab-desc">Vitesse de déplacement augmentée de 10 ft sans armure ni bouclier. Vitesse totale : 40 ft.</div>
-        </div>
-        <div class="ability-item">
-          <div class="ab-hd"><span class="ab-name">Résistance nécrotique</span><span class="ab-tag t-sh">Shadar-Kaï</span></div>
-          <div class="ab-desc">Résistance aux dégâts nécrotiques. Vision dans le noir 60 ft naturelle.</div>
-        </div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Défense sans armure</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc">CA = 10 + DEX (+4) + SAG (+3) = <strong>17</strong>. Sans armure ni bouclier uniquement.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déviation des projectiles</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc">Réduit les dégâts d'une attaque à distance de 1d10+7. Si réduit à 0 : renvoyer (+6, 1d6+4).</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Chute ralentie</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc">Réduit les dégâts de chute de 15 points (niveau × 5).</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déplacement +10 ft</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc">Vitesse de déplacement augmentée de 10 ft sans armure. Total : 40 ft.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Résistance nécrotique</span><span class="ab-tag t-sh">Shadar-Kaï</span></div><div class="ab-desc">Résistance aux dégâts nécrotiques. Vision dans le noir 60 ft.</div></div>
       </div>
     </div>
 
-    <!-- PANEL: HISTOIRE -->
+    <!-- HISTOIRE -->
     <div class="panel" id="panel-histoire">
       <div class="card">
         <div class="card-title">Identité</div>
@@ -686,7 +602,6 @@
         <div class="trait-block"><div class="trait-label">Alignement</div><div class="trait-value">Loyal Neutre</div></div>
         <div class="trait-block"><div class="trait-label">Langues</div><div class="trait-value">Commun · Elvish · Sylvain</div></div>
       </div>
-
       <div class="card">
         <div class="card-title">Personnalité</div>
         <div class="trait-block"><div class="trait-label">Trait de caractère</div><div class="trait-value">Le silence est sa langue maternelle. Il observe avant d'agir, écoute avant de parler.</div></div>
@@ -694,7 +609,6 @@
         <div class="trait-block"><div class="trait-label">Lien</div><div class="trait-value">Le Voile Gris — l'ordre du monastère qui l'a formé, et dont il cherche à comprendre le vrai visage.</div></div>
         <div class="trait-block"><div class="trait-label">Défaut</div><div class="trait-value">Incapable de prendre une décision simple sans la philosopher jusqu'à l'absurde.</div></div>
       </div>
-
       <div class="card">
         <div class="card-title">Équipement</div>
         <div class="eq-row"><div class="eq-icon">✊</div><div><div class="eq-name">Frappes à mains nues</div><div class="eq-desc">+6 · 1d6+4 contondant</div></div></div>
@@ -703,19 +617,18 @@
         <div class="eq-row"><div class="eq-icon">📜</div><div><div class="eq-name">Parchemin de la Découverte</div><div class="eq-desc">Rédigé lors d'années de réclusion. Son contenu, lui seul le sait.</div></div></div>
         <div class="eq-row"><div class="eq-icon">💰</div><div><div class="eq-name">Bourse</div><div class="eq-desc">15 po · 3 pa · 8 pc</div></div></div>
       </div>
-
       <div class="card">
         <div class="card-title">Histoire</div>
         <div class="backstory">
-          <p>Shen Varath a grandi dans le monastère du <em>Voile Gris</em>, un ordre secret opérant à la frontière entre le Plan Matériel et le Shadowfell. Adopté — ou récupéré, personne ne dit vraiment — alors qu'il était nourrisson, il n'a connu que les couloirs d'obsidienne de ce lieu hors du temps.</p>
+          <p>Shen Varath a grandi dans le monastère du <em>Voile Gris</em>, un ordre secret opérant à la frontière entre le Plan Matériel et le Shadowfell. Adopté — ou récupéré, personne ne dit vraiment — alors qu'il était nourrisson.</p>
           <p>Pendant des décennies, sa vie fut la discipline. Le silence. L'ombre. Les autres novices le regardaient comme on regarde quelque chose qu'on ne comprend pas tout à fait — avec un mélange de respect et d'inquiétude.</p>
-          <p>La nuit du Passage a tout changé. Un événement d'une cruauté absolue, sans ambiguïté morale, dont la précision chirurgicale laisse penser que Shen n'en a pas encore saisi toutes les implications. Il a quitté le monastère — ou en a été chassé, la distinction est floue même pour lui.</p>
+          <p>La nuit du Passage a tout changé. Un événement d'une cruauté absolue, sans ambiguïté morale. Il a quitté le monastère — ou en a été chassé, la distinction est floue même pour lui.</p>
           <p>Il erre depuis. Non pas sans but, mais sans destination. Et quand on lui demande ce qu'il cherche, il répond généralement par une sentence absurde et définitive.</p>
         </div>
       </div>
     </div>
 
-    <!-- PANEL: DICES & SENTENCES -->
+    <!-- DÉS -->
     <div class="panel" id="panel-des">
       <div class="card">
         <div class="card-title">Lanceur de dés</div>
@@ -732,48 +645,47 @@
           <span style="color:var(--muted);font-size:48px">—</span>
         </div>
       </div>
-
       <div class="card">
-        <div class="card-title">Sentences de Shen</div>
+        <div class="card-title">Sentence aléatoire</div>
         <p style="font-size:13px;color:var(--muted);font-style:italic;margin-bottom:14px;line-height:1.6">
-          Face à tout dilemme, Shen répond par une sentence absurde et définitive. Le groupe attend une décision. Il médite. Puis il parle.
+          Face à tout dilemme, Shen répond par une sentence absurde et définitive.
         </p>
         <button class="proverb-btn" onclick="drawProverb()">🎲 Une sentence au hasard</button>
         <div class="quote-box" id="proverb-box"></div>
       </div>
     </div>
 
+    <!-- CITATIONS -->
+    <div class="panel" id="panel-citations">
+      <div class="card">
+        <div class="card-title">Les 50 sentences de Shen</div>
+        <p class="citations-intro">
+          Shen ne donne pas d'avis. Il profère des sentences. Absurdes, définitives, et prononcées avec un calme total qui rend la chose encore plus déconcertante.
+        </p>
+        <input class="citation-search" type="search" id="cit-search" placeholder="Chercher une sentence…" oninput="filterCitations(this.value)">
+        <div class="citation-count" id="cit-count">50 sentences</div>
+        <div id="cit-list"></div>
+      </div>
+    </div>
+
   </div><!-- /tab-content -->
 
   <!-- ── TAB NAV ──────────────────────────── -->
-  <nav class="tab-nav" role="tablist" aria-label="Navigation fiche de personnage">
-    <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('stats',this)">
-      <span class="tab-icon">⚔️</span><span>Stats</span>
-    </button>
-    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('combat',this)">
-      <span class="tab-icon">🩸</span><span>Combat</span>
-    </button>
-    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('ki',this)">
-      <span class="tab-icon">🌑</span><span>Ki</span>
-    </button>
-    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('histoire',this)">
-      <span class="tab-icon">📜</span><span>Histoire</span>
-    </button>
-    <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('des',this)">
-      <span class="tab-icon">🎲</span><span>Dés</span>
-    </button>
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" role="tab" onclick="switchTab('stats',this)"><span class="tab-icon">⚔️</span><span>Stats</span></button>
+    <button class="tab-btn" role="tab" onclick="switchTab('combat',this)"><span class="tab-icon">🩸</span><span>Combat</span></button>
+    <button class="tab-btn" role="tab" onclick="switchTab('ki',this)"><span class="tab-icon">🌑</span><span>Ki</span></button>
+    <button class="tab-btn" role="tab" onclick="switchTab('histoire',this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
+    <button class="tab-btn" role="tab" onclick="switchTab('des',this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
+    <button class="tab-btn" role="tab" onclick="switchTab('citations',this)"><span class="tab-icon">💬</span><span>Citations</span></button>
   </nav>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
 <script>
-// ── STATE ───────────────────────────────────────
-const ST = {
-  hp: 22, hpMax: 22, tempHp: 0, ki: 3, kiMax: 3
-};
+const ST = { hp: 22, hpMax: 22, tempHp: 0, ki: 3, kiMax: 3 };
 
-// ── PROVERBS ─────────────────────────────────────
 const PROVERBS = [
   "Quand l'aigle doute, c'est que la pluie n'a pas encore compris qu'elle mouille.",
   "Le sage ne choisit pas entre la gauche et la droite. Il attend que le chemin choisisse.",
@@ -827,15 +739,30 @@ const PROVERBS = [
   "On ne devient pas maître de l'ombre en refusant la lumière. On en devient maître en comprenant pourquoi la lumière jette une ombre.",
 ];
 
-// ── LOCALSTORAGE ─────────────────────────────────
-function saveState() {
-  try {
-    localStorage.setItem('shen-v3', JSON.stringify({
-      hp: ST.hp, ki: ST.ki, tempHp: ST.tempHp
-    }));
-  } catch(e) {}
+// ── CITATIONS ─────────────────────────────────────
+function renderCitations(list) {
+  const el = document.getElementById('cit-list');
+  const count = document.getElementById('cit-count');
+  count.textContent = list.length + ' sentence' + (list.length > 1 ? 's' : '');
+  el.innerHTML = list.map((p, i) =>
+    `<div class="citation-item">
+      <span class="citation-num">${String(PROVERBS.indexOf(p) + 1).padStart(2,'0')}</span>
+      <span class="citation-text">${p}</span>
+    </div>`
+  ).join('');
 }
 
+function filterCitations(q) {
+  const filtered = q.trim()
+    ? PROVERBS.filter(p => p.toLowerCase().includes(q.toLowerCase()))
+    : PROVERBS;
+  renderCitations(filtered);
+}
+
+// ── LOCALSTORAGE ──────────────────────────────────
+function saveState() {
+  try { localStorage.setItem('shen-v3', JSON.stringify({ hp: ST.hp, ki: ST.ki, tempHp: ST.tempHp })); } catch(e) {}
+}
 function loadState() {
   try {
     const d = JSON.parse(localStorage.getItem('shen-v3') || 'null');
@@ -849,95 +776,67 @@ function loadState() {
 
 // ── HP ────────────────────────────────────────────
 function updateHP() {
-  const hp = ST.hp, max = ST.hpMax;
-  const pct = Math.round(Math.max(0, (hp / max) * 100));
-  document.getElementById('hp-cur').textContent = hp;
-  document.getElementById('hp-mini-lbl').textContent = `${hp} / ${max}`;
+  const pct = Math.round(Math.max(0, (ST.hp / ST.hpMax) * 100));
+  document.getElementById('hp-cur').textContent = ST.hp;
+  document.getElementById('hp-mini-lbl').textContent = `${ST.hp} / ${ST.hpMax}`;
   document.getElementById('hp-mini-bar').style.width = pct + '%';
   saveState();
 }
-
 document.getElementById('hp-minus').addEventListener('click', () => {
   const v = parseInt(document.getElementById('hp-adj').value) || 1;
   ST.hp = Math.max(0, ST.hp - v);
-  updateHP();
-  toast(`−${v} PV → ${ST.hp}/${ST.hpMax}`);
+  updateHP(); toast(`−${v} PV → ${ST.hp}/${ST.hpMax}`);
 });
 document.getElementById('hp-plus').addEventListener('click', () => {
   const v = parseInt(document.getElementById('hp-adj').value) || 1;
   ST.hp = Math.min(ST.hpMax, ST.hp + v);
-  updateHP();
-  toast(`+${v} PV → ${ST.hp}/${ST.hpMax}`);
+  updateHP(); toast(`+${v} PV → ${ST.hp}/${ST.hpMax}`);
 });
-
 function setTempHP() {
   const v = prompt('PV temporaires :');
-  if (v !== null) {
-    ST.tempHp = Math.max(0, parseInt(v) || 0);
-    document.getElementById('temp-hp').textContent = ST.tempHp;
-    saveState();
-    toast(`PV temporaires : ${ST.tempHp}`);
-  }
+  if (v !== null) { ST.tempHp = Math.max(0, parseInt(v) || 0); document.getElementById('temp-hp').textContent = ST.tempHp; saveState(); toast(`PV temp : ${ST.tempHp}`); }
 }
 
 // ── KI ────────────────────────────────────────────
 function updateKi() {
-  document.querySelectorAll('.ki-dot').forEach((d, i) => {
-    d.classList.toggle('on', i < ST.ki);
-  });
-  document.getElementById('ki-lbl').textContent =
-    `${ST.ki} / ${ST.kiMax} — Récupérés au repos court ou long`;
+  document.querySelectorAll('.ki-dot').forEach((d, i) => d.classList.toggle('on', i < ST.ki));
+  document.getElementById('ki-lbl').textContent = `${ST.ki} / ${ST.kiMax} — Récupérés au repos court ou long`;
   saveState();
 }
-
 function toggleKi(idx) {
   ST.ki = idx < ST.ki ? ST.ki - 1 : Math.min(ST.kiMax, idx + 1);
-  updateKi();
-  toast(`Ki : ${ST.ki}/${ST.kiMax}`);
+  updateKi(); toast(`Ki : ${ST.ki}/${ST.kiMax}`);
 }
 
-// ── CONDITIONS ────────────────────────────────────
-function toggleCond(el) {
-  el.classList.toggle('on');
-  el.querySelector('.cond-check').textContent = el.classList.contains('on') ? '✓' : '';
-}
+// ── CONDITIONS / RESTS ────────────────────────────
+function toggleCond(el) { el.classList.toggle('on'); el.querySelector('.cond-check').textContent = el.classList.contains('on') ? '✓' : ''; }
 
-// ── RESTS ─────────────────────────────────────────
 function shortRest() {
   ST.ki = ST.kiMax;
-  const roll = Math.ceil(Math.random() * 8) + 2; // 1d8 + CON mod
+  const roll = Math.ceil(Math.random() * 8) + 2;
   ST.hp = Math.min(ST.hpMax, ST.hp + roll);
-  updateHP();
-  updateKi();
-  document.getElementById('temp-hp').textContent = '0';
-  ST.tempHp = 0;
-  toast(`Repos court : +${roll} PV · Ki restauré`);
+  ST.tempHp = 0; document.getElementById('temp-hp').textContent = '0';
+  updateHP(); updateKi(); toast(`Repos court : +${roll} PV · Ki restauré`);
 }
-
 function longRest() {
-  ST.hp = ST.hpMax;
-  ST.ki = ST.kiMax;
-  ST.tempHp = 0;
+  ST.hp = ST.hpMax; ST.ki = ST.kiMax; ST.tempHp = 0;
   document.getElementById('temp-hp').textContent = '0';
   document.querySelectorAll('.dd').forEach(d => d.classList.remove('on'));
-  updateHP();
-  updateKi();
-  toast('Long repos — tout restauré !');
+  updateHP(); updateKi(); toast('Long repos — tout restauré !');
 }
 
 // ── DICE ──────────────────────────────────────────
 function rollDice(sides) {
-  const result = Math.ceil(Math.random() * sides);
+  const r = Math.ceil(Math.random() * sides);
   const el = document.getElementById('dice-result');
-  el.innerHTML = `<span style="animation:pop .3s ease">${result}</span><span class="dice-lbl">d${sides}</span>`;
-  toast(`d${sides} → ${result}`);
+  el.innerHTML = `<span>${r}</span><span class="dice-lbl">d${sides}</span>`;
+  toast(`d${sides} → ${r}`);
 }
 
 // ── PROVERB ───────────────────────────────────────
 function drawProverb() {
   const box = document.getElementById('proverb-box');
-  box.classList.remove('show');
-  void box.offsetWidth; // reflow for animation
+  box.classList.remove('show'); void box.offsetWidth;
   box.textContent = PROVERBS[Math.floor(Math.random() * PROVERBS.length)];
   box.classList.add('show');
 }
@@ -945,13 +844,9 @@ function drawProverb() {
 // ── TABS ──────────────────────────────────────────
 function switchTab(name, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    b.classList.remove('active');
-    b.setAttribute('aria-selected', 'false');
-  });
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + name).classList.add('active');
   btn.classList.add('active');
-  btn.setAttribute('aria-selected', 'true');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -959,18 +854,15 @@ function switchTab(name, btn) {
 let toastTimer;
 function toast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
 // ── INIT ──────────────────────────────────────────
-loadState();
-updateHP();
-updateKi();
+loadState(); updateHP(); updateKi();
+renderCitations(PROVERBS);
 
-// Dice roll pop animation
 const s = document.createElement('style');
 s.textContent = '@keyframes pop{0%{transform:scale(.7);opacity:.4}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}';
 document.head.appendChild(s);
