@@ -341,6 +341,13 @@
         <div class="skill-row"><div class="prof-dot"></div><span class="skill-name">Athlétisme</span><span class="skill-attr">FOR</span><span class="skill-val" data-skill="athletics">−1</span></div>
       </div>
       <div id="feats-display"></div>
+      <div class="card" id="saves-card">
+        <div class="card-title">Points de sauvegarde</div>
+        <button onclick="createSave()" style="width:100%;padding:11px;border:1.5px solid var(--teal);border-radius:var(--rs);background:var(--teal-bg);color:var(--teal);font-family:'Cinzel',serif;font-size:13px;letter-spacing:.04em;cursor:pointer;margin-bottom:12px">
+          💾 Sauvegarder l'état actuel
+        </button>
+        <div id="saves-list"></div>
+      </div>
       <div class="card">
         <div class="card-title">Progression</div>
         <button class="levelup-btn" id="levelup-btn" onclick="startLevelUp()">⬆ Passer au niveau 4</button>
@@ -523,16 +530,6 @@
       </div>
     </div>
 
-    <!-- CITATIONS -->
-    <div class="panel" id="panel-citations">
-      <div class="card">
-        <div class="card-title">Les 50 sentences de Shen</div>
-        <p class="citations-intro">Shen ne donne pas d'avis. Il profère des sentences. Absurdes, définitives, prononcées avec un calme total.</p>
-        <input class="citation-search" type="search" id="cit-search" placeholder="Chercher une sentence…" oninput="filterCitations(this.value)">
-        <div class="citation-count" id="cit-count">50 sentences</div>
-        <div id="cit-list"></div>
-      </div>
-    </div>
 
   </div><!-- /tab-content -->
 
@@ -543,7 +540,6 @@
     <button class="tab-btn" onclick="switchTab('ki',this)"><span class="tab-icon">🌑</span><span>Ki</span></button>
     <button class="tab-btn" onclick="switchTab('histoire',this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
     <button class="tab-btn" onclick="switchTab('des',this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
-    <button class="tab-btn" onclick="switchTab('citations',this)"><span class="tab-icon">💬</span><span>Citations</span></button>
     <button class="tab-btn" onclick="switchTab('equip',this)"><span class="tab-icon">🎒</span><span>Équipement</span></button>
   </nav>
 
@@ -1022,7 +1018,7 @@ function renderStep(){
         </div>
       </div>
       <div class="modal-footer">
-        <button class="modal-btn secondary" onclick="closeModal()">Annuler</button>
+        <button class="modal-btn secondary" onclick="hpBack()">← Retour</button>
         <button class="modal-btn primary" onclick="hpNext()" ${WZ.hpRoll!==null?'':'disabled'} id="hp-btn">Suivant →</button>
       </div>`;
 
@@ -1057,7 +1053,7 @@ function renderStep(){
         </div>`:''}
       </div>
       <div class="modal-footer">
-        <button class="modal-btn secondary" onclick="closeModal()">Annuler</button>
+        <button class="modal-btn secondary" onclick="WZ.step='hp';renderStep()">← Retour</button>
         <button class="modal-btn primary" onclick="applyLevelUp()">✦ Confirmer</button>
       </div>`;
   }
@@ -1125,6 +1121,55 @@ function applyLevelUp(){
 }
 
 // ═══════════════════════════════════════════════════════
+// SAUVEGARDES
+// ═══════════════════════════════════════════════════════
+function getSaves(){ try{ return JSON.parse(localStorage.getItem('shen-saves')||'{}'); }catch(e){ return {}; } }
+function putSaves(s){ localStorage.setItem('shen-saves',JSON.stringify(s)); }
+
+function createSave(){
+  const name=prompt('Nom de la sauvegarde :'); if(!name||!name.trim()) return;
+  const n=name.trim(), saves=getSaves(), d=new Date();
+  saves[n]={...JSON.parse(JSON.stringify(S)), _at:d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})};
+  putSaves(saves); renderSaves(); toast('Sauvegarde : '+n);
+}
+
+function loadSave(name){
+  if(!confirm('Charger "'+name+'" ? L\'etat actuel sera remplace.')) return;
+  const saves=getSaves(); if(!saves[name]) return;
+  const snap=JSON.parse(JSON.stringify(saves[name])); delete snap._at;
+  S=Object.assign({},JSON.parse(JSON.stringify(INITIAL)),snap);
+  saveState(); renderAll(); renderEquipment(); renderSaves(); toast('Charge : '+name);
+}
+
+function deleteSave(name){
+  if(!confirm('Supprimer "'+name+'" ?')) return;
+  const saves=getSaves(); delete saves[name]; putSaves(saves); renderSaves(); toast('Supprime');
+}
+
+function renderSaves(){
+  const el=document.getElementById('saves-list'); if(!el) return;
+  const entries=Object.entries(getSaves());
+  if(!entries.length){ el.innerHTML='<p style="font-size:13px;color:var(--muted);font-style:italic;text-align:center;padding:4px 0">Aucune sauvegarde</p>'; return; }
+  el.innerHTML=entries.reverse().map(([name,data])=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--border)">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(name)}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Niv.${data.level||'?'} · ${data._at||''}</div>
+      </div>
+      <button onclick="loadSave(${JSON.stringify(name)})" style="flex-shrink:0;padding:6px 10px;border:1px solid var(--teal);border-radius:var(--rs);background:var(--teal-bg);color:var(--teal);font-size:12px;font-family:'Cinzel',serif;cursor:pointer">Charger</button>
+      <button onclick="deleteSave(${JSON.stringify(name)})" style="flex-shrink:0;width:28px;height:28px;border:1px solid var(--coral-bg);border-radius:var(--rs);background:var(--coral-bg);color:var(--coral);font-size:14px;cursor:pointer">✕</button>
+    </div>`).join('');
+}
+
+function hpBack(){
+  if(WZ.choiceType==='asi') WZ.step='asi';
+  else if(WZ.choiceType==='feat'){
+    const feat=FEATS.find(f=>f.id===WZ.selectedFeat);
+    WZ.step=(feat&&feat.needsStatChoice)?'feat_stat':'feat';
+  } else { closeModal(); return; }
+  renderStep();
+}
+
 // ÉQUIPEMENT
 // ═══════════════════════════════════════════════════════
 const CATS=[
@@ -1216,8 +1261,6 @@ const PROVERBS=["Quand l'aigle doute, c'est que la pluie n'a pas encore compris 
 
 function drawProverb(){ const box=document.getElementById('proverb-box'); box.classList.remove('show'); void box.offsetWidth; box.textContent=PROVERBS[Math.floor(Math.random()*PROVERBS.length)]; box.classList.add('show'); }
 
-function renderCitations(list){ document.getElementById('cit-count').textContent=list.length+' sentence'+(list.length>1?'s':''); document.getElementById('cit-list').innerHTML=list.map(p=>`<div class="citation-item"><span class="citation-num">${String(PROVERBS.indexOf(p)+1).padStart(2,'0')}</span><span class="citation-text">${p}</span></div>`).join(''); }
-function filterCitations(q){ renderCitations(q.trim()?PROVERBS.filter(p=>p.toLowerCase().includes(q.toLowerCase())):PROVERBS); }
 
 // ═══════════════════════════════════════════════════════
 // TABS / TOAST
@@ -1235,7 +1278,7 @@ function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg
 // ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
-loadState(); renderAll(); renderEquipment(); renderCitations(PROVERBS);
+loadState(); renderAll(); renderEquipment(); renderSaves(); renderCitations(PROVERBS);
 document.getElementById('levelup-modal').addEventListener('click',e=>{ if(e.target===document.getElementById('levelup-modal')) closeModal(); });
 </script>
 </body>
