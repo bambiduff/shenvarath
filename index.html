@@ -568,6 +568,11 @@
           <p>Il erre depuis. Non pas sans but, mais sans destination. Et quand on lui demande ce qu'il cherche, il répond généralement par une sentence absurde et définitive.</p>
         </div>
       </div>
+      <div class="card">
+        <div class="card-title">Danger Zone</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px">Réinitialise le personnage à son état de départ (niveau 3, PV et Ki de base). Les Chroniques de session ne sont pas effacées.</p>
+        <button onclick="resetCharacter()" style="width:100%;padding:12px;border:1px solid var(--coral);border-radius:var(--rs);background:var(--coral-bg);color:var(--coral);font-family:'Cinzel',serif;font-size:13px;letter-spacing:.04em;cursor:pointer;">⚠️ Réinitialiser le personnage</button>
+      </div>
     </div>
 
     <!-- DÉS -->
@@ -1404,9 +1409,15 @@ const PROVERBS=["Quand l'aigle doute, c'est que la pluie n'a pas encore compris 
 function drawProverb(){ const box=document.getElementById('proverb-box'); box.classList.remove('show'); void box.offsetWidth; box.textContent=PROVERBS[Math.floor(Math.random()*PROVERBS.length)]; box.classList.add('show'); }
 
 
-// ═══════════════════════════════════════════════════════
-// SESSION — WHISPER + CLAUDE
-// ═══════════════════════════════════════════════════════
+function resetCharacter(){
+  if(!confirm('Réinitialiser Shen au niveau 3 ? Cette action est irréversible.')) return;
+  localStorage.removeItem('shen-v5');
+  S = JSON.parse(JSON.stringify(INITIAL));
+  saveState(); renderAll(); renderEquipment(); renderSaves();
+  toast('✦ Personnage réinitialisé au niveau 3');
+}
+
+
 let currentAudioFile = null;
 let currentSessionResult = null;
 
