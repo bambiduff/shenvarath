@@ -214,6 +214,71 @@
     @keyframes pop { 0%{transform:scale(.7);opacity:.4} 60%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
     @keyframes lvlup { 0%{transform:scale(.8);opacity:0} 60%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1} }
 
+    /* ── SESSION ──────────────────────── */
+    .sess-intro { font-size:13px; color:var(--muted); line-height:1.6; padding:12px 14px; background:var(--purple-bg); border-radius:var(--rs); border-left:3px solid var(--purple); margin-bottom:14px; }
+    .sess-field { margin-bottom:10px; }
+    .sess-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+    .sess-input { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:var(--rs); background:var(--surface); color:var(--text); font-family:'Crimson Pro',serif; font-size:15px; outline:none; }
+    .sess-input:focus { border-color:var(--purple); }
+    .file-drop { border:2px dashed var(--border2); border-radius:var(--r); padding:28px 16px; text-align:center; cursor:pointer; transition:all .2s; background:var(--surface); }
+    .file-drop:hover,.file-drop.drag { border-color:var(--purple); background:var(--purple-bg); }
+    .file-drop-icon { font-size:36px; margin-bottom:8px; }
+    .file-drop-label { font-size:14px; color:var(--muted); }
+    .file-drop-label strong { color:var(--purple); }
+    .file-selected { display:flex; align-items:center; gap:10px; padding:12px 14px; background:var(--teal-bg); border:1px solid var(--teal); border-radius:var(--rs); font-size:13px; color:var(--teal); margin-top:8px; }
+    .file-selected-name { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .file-clear { background:none; border:none; color:var(--teal); cursor:pointer; font-size:16px; flex-shrink:0; }
+    .opts-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+    .opt-chip { display:flex; align-items:center; gap:8px; padding:9px 12px; border:1px solid var(--border); border-radius:var(--rs); background:var(--surface); cursor:pointer; font-size:13px; color:var(--muted); transition:all .15s; -webkit-tap-highlight-color:transparent; }
+    .opt-chip.on { background:var(--purple-bg); border-color:var(--purple); color:var(--purple); }
+    .opt-check { width:14px; height:14px; border-radius:3px; border:1.5px solid currentColor; display:flex; align-items:center; justify-content:center; font-size:9px; flex-shrink:0; }
+    .apikey-wrap { position:relative; }
+    .apikey-toggle { position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--muted); cursor:pointer; font-size:16px; padding:4px; }
+    .analyze-btn { width:100%; padding:14px; border:none; border-radius:var(--rs); background:linear-gradient(135deg,var(--purple),var(--purple-light)); color:#fff; font-family:'Cinzel',serif; font-size:14px; letter-spacing:.06em; cursor:pointer; transition:opacity .2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .analyze-btn:disabled { opacity:.35; cursor:default; }
+    .loading-wrap { display:none; text-align:center; padding:24px 0; }
+    .loading-wrap.show { display:block; }
+    .loading-bar { height:3px; background:var(--border); border-radius:2px; overflow:hidden; margin:12px 0; }
+    .loading-bar-inner { height:100%; background:linear-gradient(90deg,var(--purple),var(--purple-light)); border-radius:2px; animation:loadslide 1.5s ease-in-out infinite; width:40%; }
+    @keyframes loadslide { 0%{transform:translateX(-150%)} 100%{transform:translateX(350%)} }
+    .loading-msg { font-size:13px; color:var(--muted); font-style:italic; }
+    .result-section { display:none; animation:fadein .4s ease; }
+    .result-section.visible { display:block; }
+    .result-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); margin-bottom:12px; overflow:hidden; box-shadow:0 1px 4px rgba(83,74,183,.06); }
+    .result-card-header { padding:12px 16px; display:flex; align-items:center; gap:10px; font-family:'Cinzel',serif; font-size:12px; font-weight:600; letter-spacing:.08em; }
+    .result-card-body { padding:12px 16px; font-size:14px; color:var(--text); line-height:1.7; }
+    .result-tag { display:inline-flex; align-items:center; padding:2px 8px; border-radius:20px; font-size:11px; font-weight:500; margin:2px; }
+    .tag-pur { background:var(--purple-bg); color:var(--purple); }
+    .tag-tea { background:var(--teal-bg); color:var(--teal); }
+    .tag-gld { background:var(--gold-bg); color:var(--gold); }
+    .tag-cor { background:var(--coral-bg); color:var(--coral); }
+    .result-mini-list { list-style:none; }
+    .result-mini-list li { padding:8px 0; border-bottom:1px solid var(--border); font-size:13px; }
+    .result-mini-list li:last-child { border-bottom:none; }
+    .result-mini-list li strong { display:block; font-family:'Cinzel',serif; font-size:12px; color:var(--text); margin-bottom:2px; }
+    .result-mini-list li span { color:var(--muted); }
+    .save-session-btn { width:100%; padding:12px; border:1px solid var(--purple); border-radius:var(--rs); background:var(--purple-bg); color:var(--purple); font-family:'Cinzel',serif; font-size:13px; letter-spacing:.05em; cursor:pointer; margin-bottom:14px; display:none; }
+    .save-session-btn.show { display:block; }
+
+    /* ── CHRONIQUES ──────────────────── */
+    .chron-empty { text-align:center; padding:40px 20px; color:var(--muted); }
+    .chron-empty-icon { font-size:40px; margin-bottom:10px; opacity:.4; }
+    .chron-empty-text { font-size:14px; font-style:italic; }
+    .chron-item { background:var(--card); border:1px solid var(--border); border-radius:var(--r); margin-bottom:10px; overflow:hidden; box-shadow:0 1px 4px rgba(83,74,183,.06); animation:fadein .3s ease; }
+    .chron-item-header { padding:12px 14px; display:flex; align-items:flex-start; gap:10px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+    .chron-num { font-family:'Cinzel',serif; font-size:11px; color:var(--muted); width:28px; flex-shrink:0; padding-top:2px; }
+    .chron-title { flex:1; font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--text); line-height:1.3; }
+    .chron-date { font-size:11px; color:var(--muted); margin-top:3px; }
+    .chron-chevron { color:var(--muted); font-size:12px; transition:transform .2s; flex-shrink:0; padding-top:2px; }
+    .chron-item.open .chron-chevron { transform:rotate(180deg); }
+    .chron-body { display:none; padding:0 14px 14px; border-top:1px solid var(--border); }
+    .chron-item.open .chron-body { display:block; animation:fadein .25s ease; }
+    .chron-section { margin-bottom:12px; }
+    .chron-section-title { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; padding-top:10px; display:flex; align-items:center; gap:8px; }
+    .chron-section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+    .chron-delete { margin-top:10px; width:100%; padding:9px; border:1px solid var(--coral-bg); border-radius:var(--rs); background:var(--coral-bg); color:var(--coral); font-size:12px; cursor:pointer; }
+    .chron-prose { font-size:14px; color:var(--text); line-height:1.75; }
+
     /* TOAST */
     .toast { position:fixed; bottom:calc(var(--tab-h) + 14px); left:50%; transform:translateX(-50%) translateY(8px); background:var(--purple); border-radius:var(--rs); padding:10px 20px; font-size:14px; color:#fff; opacity:0; z-index:200; pointer-events:none; white-space:nowrap; transition:all .25s ease; box-shadow:0 4px 16px var(--purple-glow); }
     .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
@@ -541,6 +606,8 @@
     <button class="tab-btn" onclick="switchTab('histoire',this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
     <button class="tab-btn" onclick="switchTab('des',this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
     <button class="tab-btn" onclick="switchTab('equip',this)"><span class="tab-icon">🎒</span><span>Équipement</span></button>
+    <button class="tab-btn" onclick="switchTab('session',this)"><span class="tab-icon">🎙️</span><span>Session</span></button>
+    <button class="tab-btn" onclick="switchTab('chroniques',this)"><span class="tab-icon">📖</span><span>Chroniques</span></button>
   </nav>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -585,6 +652,81 @@
       </div>
 
     </div>
+
+  <!-- ════════════════════════════════════════
+       SESSION
+  ════════════════════════════════════════ -->
+  <div class="panel" id="panel-session">
+
+    <div class="card">
+      <div class="card-title">Analyser une session</div>
+      <div class="sess-intro">Importe un fichier audio de ta session. Il sera transcrit par Whisper (OpenAI) puis analysé par Claude pour générer un résumé automatique.</div>
+
+      <div class="sess-field">
+        <div class="sess-label">Nom de la session (optionnel)</div>
+        <input class="sess-input" type="text" id="sess-name" placeholder="Ex : La crypte de Kelmaroth…">
+      </div>
+
+      <div class="sess-field">
+        <div class="sess-label">Fichier audio</div>
+        <div class="file-drop" id="file-drop" onclick="document.getElementById('audio-input').click()" ondragover="e=>{e.preventDefault();this.classList.add('drag')}" ondragleave="document.getElementById('file-drop').classList.remove('drag')" ondrop="handleDrop(event)">
+          <div class="file-drop-icon">🎵</div>
+          <div class="file-drop-label">Glisse ton fichier ici ou <strong>parcourir</strong></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">mp3, m4a, webm, wav, ogg…</div>
+        </div>
+        <input type="file" id="audio-input" accept="audio/*" style="display:none" onchange="handleFileSelect(this)">
+        <div class="file-selected" id="file-selected" style="display:none">
+          <span>🎵</span>
+          <span class="file-selected-name" id="file-selected-name"></span>
+          <button class="file-clear" onclick="clearFile()">✕</button>
+        </div>
+      </div>
+
+      <div class="sess-field">
+        <div class="sess-label">Éléments à extraire</div>
+        <div class="opts-grid">
+          <div class="opt-chip on" data-k="resume" onclick="toggleOpt(this)"><span class="opt-check">✓</span>Résumé narratif</div>
+          <div class="opt-chip on" data-k="perso" onclick="toggleOpt(this)"><span class="opt-check">✓</span>Personnages</div>
+          <div class="opt-chip on" data-k="lieux" onclick="toggleOpt(this)"><span class="opt-check">✓</span>Lieux</div>
+          <div class="opt-chip on" data-k="events" onclick="toggleOpt(this)"><span class="opt-check">✓</span>Événements clés</div>
+          <div class="opt-chip" data-k="objets" onclick="toggleOpt(this)"><span class="opt-check"></span>Objets & trésors</div>
+          <div class="opt-chip" data-k="intrigues" onclick="toggleOpt(this)"><span class="opt-check"></span>Intrigues</div>
+        </div>
+      </div>
+
+      <div class="sess-field">
+        <div class="sess-label">Clé API OpenAI (Whisper)</div>
+        <div class="apikey-wrap">
+          <input class="sess-input" type="password" id="openai-key" placeholder="sk-…" style="padding-right:44px">
+          <button class="apikey-toggle" onclick="toggleApiKey()" id="apikey-eye">👁️</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Stockée localement, jamais envoyée ailleurs qu'à OpenAI.</div>
+      </div>
+    </div>
+
+    <button class="analyze-btn" id="analyze-btn" onclick="analyzeSession()">✦ Analyser la session</button>
+
+    <div class="loading-wrap" id="loading-wrap">
+      <div style="font-size:28px;margin-bottom:8px">⏳</div>
+      <div class="loading-bar"><div class="loading-bar-inner"></div></div>
+      <div class="loading-msg" id="loading-msg">Envoi à Whisper…</div>
+    </div>
+
+    <button class="save-session-btn" id="save-session-btn" onclick="saveCurrentSession()">💾 Enregistrer dans les Chroniques</button>
+
+    <div class="result-section" id="result-section"></div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════
+       CHRONIQUES
+  ════════════════════════════════════════ -->
+  <div class="panel" id="panel-chroniques">
+    <div class="card" style="padding-bottom:4px">
+      <div class="card-title">Chroniques de Shen Varath</div>
+      <div id="chron-list"></div>
+    </div>
+  </div>
 
   <!-- ════════════════════════════════════════
        LEVEL UP MODAL
@@ -1263,13 +1405,299 @@ function drawProverb(){ const box=document.getElementById('proverb-box'); box.cl
 
 
 // ═══════════════════════════════════════════════════════
-// TABS / TOAST
+// SESSION — WHISPER + CLAUDE
 // ═══════════════════════════════════════════════════════
+let currentAudioFile = null;
+let currentSessionResult = null;
+
+function handleFileSelect(input) {
+  if (input.files && input.files[0]) setAudioFile(input.files[0]);
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('file-drop').classList.remove('drag');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('audio/')) setAudioFile(f);
+  else toast('Fichier audio requis (mp3, m4a, wav…)');
+}
+function setAudioFile(f) {
+  currentAudioFile = f;
+  document.getElementById('file-drop').style.display = 'none';
+  const sel = document.getElementById('file-selected');
+  sel.style.display = 'flex';
+  document.getElementById('file-selected-name').textContent = f.name + ' (' + (f.size/1024/1024).toFixed(1) + ' Mo)';
+}
+function clearFile() {
+  currentAudioFile = null;
+  document.getElementById('audio-input').value = '';
+  document.getElementById('file-drop').style.display = '';
+  document.getElementById('file-selected').style.display = 'none';
+}
+function toggleOpt(el) {
+  el.classList.toggle('on');
+  el.querySelector('.opt-check').textContent = el.classList.contains('on') ? '✓' : '';
+}
+function toggleApiKey() {
+  const inp = document.getElementById('openai-key');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+async function analyzeSession() {
+  const keyInput = document.getElementById('openai-key');
+  const apiKey = keyInput.value.trim();
+  if (apiKey) localStorage.setItem('shen-openai-key', apiKey);
+  const storedKey = apiKey || localStorage.getItem('shen-openai-key') || '';
+  if (!storedKey) { toast('Clé API OpenAI requise'); return; }
+  if (!currentAudioFile) { toast('Importe un fichier audio d\'abord'); return; }
+
+  const opts = Array.from(document.querySelectorAll('.opt-chip.on')).map(c => c.dataset.k);
+  if (!opts.length) { toast('Choisis au moins un élément à extraire'); return; }
+
+  document.getElementById('analyze-btn').disabled = true;
+  document.getElementById('loading-wrap').classList.add('show');
+  document.getElementById('result-section').classList.remove('visible');
+  document.getElementById('result-section').innerHTML = '';
+  document.getElementById('save-session-btn').classList.remove('show');
+  currentSessionResult = null;
+
+  const loadMsgs = ['Envoi à Whisper…','Transcription en cours…','Claude analyse la session…','Identification des personnages…','Rédaction du résumé…'];
+  let mi = 0;
+  const msgEl = document.getElementById('loading-msg');
+  msgEl.textContent = loadMsgs[0];
+  const msgInt = setInterval(() => { mi = (mi+1) % loadMsgs.length; msgEl.textContent = loadMsgs[mi]; }, 3000);
+
+  try {
+    // ÉTAPE 1 : Whisper transcription
+    const formData = new FormData();
+    formData.append('file', currentAudioFile, currentAudioFile.name);
+    formData.append('model', 'whisper-1');
+    formData.append('language', 'fr');
+    formData.append('response_format', 'text');
+
+    const whisperRes = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + storedKey },
+      body: formData
+    });
+    if (!whisperRes.ok) {
+      const err = await whisperRes.json().catch(()=>({}));
+      throw new Error('Whisper : ' + (err.error?.message || whisperRes.status));
+    }
+    const transcription = await whisperRes.text();
+
+    // ÉTAPE 2 : Claude analyse
+    const optLabels = {
+      resume: 'un résumé narratif immersif (resume_narratif)',
+      perso: 'la liste des personnages PJ et PNJ (personnages)',
+      lieux: 'les lieux visités (lieux)',
+      events: 'les événements clés (evenements)',
+      objets: 'les objets et trésors obtenus (objets)',
+      intrigues: 'les intrigues et fils narratifs (intrigues)'
+    };
+    const wantedStr = opts.map(k => optLabels[k]).filter(Boolean).join(', ');
+    const sessName = document.getElementById('sess-name').value.trim();
+
+    const systemPrompt = `Tu es le Chroniqueur de Shen Varath, scribe épique de ses aventures D&D 5e. Tu reçois la transcription d'une session et tu dois en extraire les informations demandées. Tu réponds UNIQUEMENT en JSON valide, sans markdown ni backticks.\n\nJSON attendu (inclus toutes ces clés, laisse vide si non demandé) :\n{\n  "titre_suggere": "titre court et évocateur de la session (5-7 mots max, style épique)",\n  "resume_narratif": "résumé en prose immersive de 3-5 paragraphes si demandé, sinon chaîne vide",\n  "personnages": [{"nom":"","type":"PJ|PNJ","role":"","actions":""}],\n  "lieux": [{"nom":"","description":""}],\n  "evenements": [{"titre":"","description":"","consequence":""}],\n  "objets": [{"nom":"","type":"","note":""}],\n  "intrigues": [{"titre":"","description":"","statut":"ouvert|résolu|en suspens"}]\n}`;
+
+    const userMsg = `${sessName ? `Session : "${sessName}"\n\n` : ''}Transcription de la session :\n\n${transcription}\n\nExtrait demandé : ${wantedStr}`;
+
+    const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+    if (!claudeRes.ok) throw new Error('Claude API : ' + claudeRes.status);
+    const claudeData = await claudeRes.json();
+    const rawText = claudeData.content.map(b => b.text||'').join('').replace(/```json|```/g,'').trim();
+    const result = JSON.parse(rawText);
+
+    clearInterval(msgInt);
+    currentSessionResult = {
+      titre: result.titre_suggere || sessName || 'Session sans titre',
+      date: new Date().toISOString(),
+      fileName: currentAudioFile.name,
+      opts,
+      data: result
+    };
+    renderSessionResult(result, opts);
+    document.getElementById('save-session-btn').classList.add('show');
+
+  } catch(err) {
+    clearInterval(msgInt);
+    toast('Erreur : ' + err.message);
+    document.getElementById('loading-wrap').classList.remove('show');
+    document.getElementById('analyze-btn').disabled = false;
+    console.error(err);
+    return;
+  }
+
+  document.getElementById('loading-wrap').classList.remove('show');
+  document.getElementById('analyze-btn').disabled = false;
+}
+
+function renderSessionResult(result, opts) {
+  const container = document.getElementById('result-section');
+  container.innerHTML = '';
+  const cards = [];
+
+  if (result.titre_suggere) {
+    cards.push({ bg:'#2A2255', fg:'#fff', icon:'✦', title:'Titre suggéré',
+      body:`<div class="result-card-body" style="font-family:'Cinzel',serif;font-size:16px;font-weight:600">${esc(result.titre_suggere)}</div>` });
+  }
+  if (opts.includes('resume') && result.resume_narratif) {
+    cards.push({ bg:'#EAE7F8', fg:'#2A1F6A', icon:'📜', title:'Résumé narratif',
+      body:`<div class="result-card-body">${esc(result.resume_narratif).replace(/\n/g,'<br>')}</div>` });
+  }
+  if (opts.includes('perso') && result.personnages?.length) {
+    const rows = result.personnages.map(p =>
+      `<li><strong>${esc(p.nom)} <span class="result-tag ${p.type==='PJ'?'tag-pur':'tag-tea'}">${esc(p.type)}</span></strong><span>${esc(p.role)}${p.actions?` — ${esc(p.actions)}`:''}</span></li>`
+    ).join('');
+    cards.push({ bg:'#E1F5EE', fg:'#085041', icon:'👥', title:'Personnages',
+      body:`<div class="result-card-body"><ul class="result-mini-list">${rows}</ul></div>` });
+  }
+  if (opts.includes('lieux') && result.lieux?.length) {
+    const rows = result.lieux.map(l =>
+      `<li><strong>${esc(l.nom)}</strong><span>${esc(l.description)}</span></li>`
+    ).join('');
+    cards.push({ bg:'#FDF4E0', fg:'#633806', icon:'🗺️', title:'Lieux',
+      body:`<div class="result-card-body"><ul class="result-mini-list">${rows}</ul></div>` });
+  }
+  if (opts.includes('events') && result.evenements?.length) {
+    const rows = result.evenements.map(ev =>
+      `<li><strong>${esc(ev.titre)}</strong><span>${esc(ev.description)}${ev.consequence?` <em>→ ${esc(ev.consequence)}</em>`:''}</span></li>`
+    ).join('');
+    cards.push({ bg:'#FBEAED', fg:'#712B13', icon:'⚔️', title:'Événements clés',
+      body:`<div class="result-card-body"><ul class="result-mini-list">${rows}</ul></div>` });
+  }
+  if (opts.includes('objets') && result.objets?.length) {
+    const rows = result.objets.map(o =>
+      `<li><strong>${esc(o.nom)} <span class="result-tag tag-gld">${esc(o.type)}</span></strong><span>${esc(o.note)}</span></li>`
+    ).join('');
+    cards.push({ bg:'#FDF4E0', fg:'#633806', icon:'💎', title:'Objets & trésors',
+      body:`<div class="result-card-body"><ul class="result-mini-list">${rows}</ul></div>` });
+  }
+  if (opts.includes('intrigues') && result.intrigues?.length) {
+    const rows = result.intrigues.map(i => {
+      const cls = i.statut==='résolu'?'tag-tea':i.statut==='en suspens'?'tag-gld':'tag-cor';
+      return `<li><strong>${esc(i.titre)} <span class="result-tag ${cls}">${esc(i.statut)}</span></strong><span>${esc(i.description)}</span></li>`;
+    }).join('');
+    cards.push({ bg:'#EEEDFE', fg:'#2A1F6A', icon:'🔮', title:'Intrigues',
+      body:`<div class="result-card-body"><ul class="result-mini-list">${rows}</ul></div>` });
+  }
+
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `<div class="result-card-header" style="background:${c.bg};color:${c.fg}">${c.icon} ${c.title}</div>${c.body}`;
+    container.appendChild(card);
+  });
+  container.classList.add('visible');
+  container.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function saveCurrentSession() {
+  if (!currentSessionResult) return;
+  try {
+    const sessions = JSON.parse(localStorage.getItem('shen-chroniques') || '[]');
+    sessions.unshift(currentSessionResult);
+    localStorage.setItem('shen-chroniques', JSON.stringify(sessions));
+    toast('✦ Session enregistrée dans les Chroniques !');
+    document.getElementById('save-session-btn').classList.remove('show');
+    currentSessionResult = null;
+  } catch(e) { toast('Erreur de sauvegarde'); }
+}
+
+// ═══════════════════════════════════════════════════════
+// CHRONIQUES
+// ═══════════════════════════════════════════════════════
+function renderChroniques() {
+  const container = document.getElementById('chron-list');
+  let sessions = [];
+  try { sessions = JSON.parse(localStorage.getItem('shen-chroniques') || '[]'); } catch(e){}
+
+  if (!sessions.length) {
+    container.innerHTML = `<div class="chron-empty"><div class="chron-empty-icon">📖</div><div class="chron-empty-text">Aucune session enregistrée.<br>Analyse ta première session dans l'onglet Session !</div></div>`;
+    return;
+  }
+
+  container.innerHTML = sessions.map((s, i) => {
+    const d = new Date(s.date);
+    const dateStr = d.toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+    const data = s.data || {};
+
+    let bodyHtml = '';
+    if (data.resume_narratif) {
+      bodyHtml += `<div class="chron-section"><div class="chron-section-title">📜 Résumé</div><div class="chron-prose">${esc(data.resume_narratif).replace(/\n/g,'<br>')}</div></div>`;
+    }
+    if (data.personnages?.length) {
+      const rows = data.personnages.map(p => `<li><strong>${esc(p.nom)} <span class="result-tag ${p.type==='PJ'?'tag-pur':'tag-tea'}">${esc(p.type)}</span></strong><span>${esc(p.role)}</span></li>`).join('');
+      bodyHtml += `<div class="chron-section"><div class="chron-section-title">👥 Personnages</div><ul class="result-mini-list">${rows}</ul></div>`;
+    }
+    if (data.evenements?.length) {
+      const rows = data.evenements.map(ev => `<li><strong>${esc(ev.titre)}</strong><span>${esc(ev.description)}</span></li>`).join('');
+      bodyHtml += `<div class="chron-section"><div class="chron-section-title">⚔️ Événements</div><ul class="result-mini-list">${rows}</ul></div>`;
+    }
+    if (data.lieux?.length) {
+      const rows = data.lieux.map(l => `<li><strong>${esc(l.nom)}</strong><span>${esc(l.description)}</span></li>`).join('');
+      bodyHtml += `<div class="chron-section"><div class="chron-section-title">🗺️ Lieux</div><ul class="result-mini-list">${rows}</ul></div>`;
+    }
+    if (data.intrigues?.length) {
+      const rows = data.intrigues.map(intr => {
+        const cls = intr.statut==='résolu'?'tag-tea':intr.statut==='en suspens'?'tag-gld':'tag-cor';
+        return `<li><strong>${esc(intr.titre)} <span class="result-tag ${cls}">${esc(intr.statut)}</span></strong><span>${esc(intr.description)}</span></li>`;
+      }).join('');
+      bodyHtml += `<div class="chron-section"><div class="chron-section-title">🔮 Intrigues</div><ul class="result-mini-list">${rows}</ul></div>`;
+    }
+    if (data.objets?.length) {
+      const rows = data.objets.map(o => `<li><strong>${esc(o.nom)}</strong><span>${esc(o.note)}</span></li>`).join('');
+      bodyHtml += `<div class="chron-section"><div class="chron-section-title">💎 Objets</div><ul class="result-mini-list">${rows}</ul></div>`;
+    }
+    bodyHtml += `<button class="chron-delete" onclick="deleteSession(${i})">🗑️ Supprimer cette session</button>`;
+
+    return `<div class="chron-item" id="chron-${i}">
+      <div class="chron-item-header" onclick="toggleChron(${i})">
+        <div class="chron-num">#${sessions.length - i}</div>
+        <div><div class="chron-title">${esc(s.titre)}</div><div class="chron-date">${dateStr}${s.fileName ? ` · ${esc(s.fileName)}` : ''}</div></div>
+        <div class="chron-chevron">▼</div>
+      </div>
+      <div class="chron-body">${bodyHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleChron(i) {
+  document.getElementById('chron-' + i).classList.toggle('open');
+}
+
+function deleteSession(i) {
+  if (!confirm('Supprimer cette session des Chroniques ?')) return;
+  try {
+    const sessions = JSON.parse(localStorage.getItem('shen-chroniques') || '[]');
+    sessions.splice(i, 1);
+    localStorage.setItem('shen-chroniques', JSON.stringify(sessions));
+    renderChroniques();
+    toast('Session supprimée');
+  } catch(e) {}
+}
+
+// Charger la clé API sauvegardée
+(function initSession() {
+  const k = localStorage.getItem('shen-openai-key');
+  if (k) document.getElementById('openai-key').value = k;
+})();
+
+
 function switchTab(name,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
   btn.classList.add('active');
+  if (name === 'chroniques') renderChroniques();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 let toastTimer;
@@ -1278,7 +1706,7 @@ function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg
 // ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
-loadState(); renderAll(); renderEquipment(); renderSaves(); renderCitations(PROVERBS);
+loadState(); renderAll(); renderEquipment(); renderSaves();
 document.getElementById('levelup-modal').addEventListener('click',e=>{ if(e.target===document.getElementById('levelup-modal')) closeModal(); });
 </script>
 </body>
