@@ -674,7 +674,7 @@
           <div class="file-drop-label">Glisse ton fichier ici ou <strong>parcourir</strong></div>
           <div style="font-size:11px;color:var(--muted);margin-top:4px">mp3, m4a, webm, wav, ogg…</div>
         </div>
-        <input type="file" id="audio-input" accept="audio/*" style="display:none" onchange="handleFileSelect(this)">
+        <input type="file" id="audio-input" accept="audio/*,.m4a,.mp3,.wav,.ogg,.webm,.aac,.caf" style="display:none" onchange="handleFileSelect(this)">
         <div class="file-selected" id="file-selected" style="display:none">
           <span>🎵</span>
           <span class="file-selected-name" id="file-selected-name"></span>
@@ -1417,8 +1417,9 @@ function handleDrop(e) {
   e.preventDefault();
   document.getElementById('file-drop').classList.remove('drag');
   const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('audio/')) setAudioFile(f);
-  else toast('Fichier audio requis (mp3, m4a, wav…)');
+  const allowed = ['audio','video']; // m4a peut apparaître en video/mp4 sur iOS
+  if (f && (allowed.some(t => f.type.startsWith(t)) || f.name.match(/\.(m4a|mp3|wav|ogg|webm|aac|caf|flac)$/i))) setAudioFile(f);
+  else toast('Fichier audio requis (m4a, mp3, wav…)');
 }
 function setAudioFile(f) {
   currentAudioFile = f;
