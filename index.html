@@ -695,12 +695,12 @@
       </div>
 
       <div class="sess-field">
-        <div class="sess-label">Clé API OpenAI (Whisper)</div>
+        <div class="sess-label">Clé API Groq (gratuit)</div>
         <div class="apikey-wrap">
-          <input class="sess-input" type="password" id="openai-key" placeholder="sk-…" style="padding-right:44px">
+          <input class="sess-input" type="password" id="openai-key" placeholder="gsk_…" style="padding-right:44px">
           <button class="apikey-toggle" onclick="toggleApiKey()" id="apikey-eye">👁️</button>
         </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px">Stockée localement, jamais envoyée ailleurs qu'à OpenAI.</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Gratuit sur console.groq.com · Stockée localement, jamais envoyée ailleurs qu'à Groq.</div>
       </div>
     </div>
 
@@ -1471,11 +1471,11 @@ async function analyzeSession() {
     // ÉTAPE 1 : Whisper transcription
     const formData = new FormData();
     formData.append('file', currentAudioFile, currentAudioFile.name);
-    formData.append('model', 'whisper-1');
+    formData.append('model', 'whisper-large-v3');
     formData.append('language', 'fr');
     formData.append('response_format', 'text');
 
-    const whisperRes = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+    const whisperRes = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + storedKey },
       body: formData
