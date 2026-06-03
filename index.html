@@ -1475,7 +1475,7 @@ async function analyzeSession() {
     formData.append('language', 'fr');
     formData.append('response_format', 'text');
 
-    const whisperRes = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
+    const whisperRes = await fetch('https://corsproxy.io/?' + encodeURIComponent('https://api.groq.com/openai/v1/audio/transcriptions'), {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + storedKey },
       body: formData
