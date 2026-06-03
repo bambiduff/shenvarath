@@ -665,7 +665,7 @@
 
     <div class="card">
       <div class="card-title">Analyser une session</div>
-      <div class="sess-intro">Importe un fichier audio de ta session. Il sera transcrit par Whisper (OpenAI) puis analysé par Claude pour générer un résumé automatique.</div>
+      <div class="sess-intro">Colle ici la transcription de ta session (depuis Otter.ai, la dictée iOS, ou toute autre source). Claude génère ensuite le résumé automatiquement — sans clé API audio.</div>
 
       <div class="sess-field">
         <div class="sess-label">Nom de la session (optionnel)</div>
@@ -673,18 +673,9 @@
       </div>
 
       <div class="sess-field">
-        <div class="sess-label">Fichier audio</div>
-        <div class="file-drop" id="file-drop" onclick="document.getElementById('audio-input').click()" ondragover="e=>{e.preventDefault();this.classList.add('drag')}" ondragleave="document.getElementById('file-drop').classList.remove('drag')" ondrop="handleDrop(event)">
-          <div class="file-drop-icon">🎵</div>
-          <div class="file-drop-label">Glisse ton fichier ici ou <strong>parcourir</strong></div>
-          <div style="font-size:11px;color:var(--muted);margin-top:4px">mp3, m4a, webm, wav, ogg…</div>
-        </div>
-        <input type="file" id="audio-input" accept="audio/*,.m4a,.mp3,.wav,.ogg,.webm,.aac,.caf" style="display:none" onchange="handleFileSelect(this)">
-        <div class="file-selected" id="file-selected" style="display:none">
-          <span>🎵</span>
-          <span class="file-selected-name" id="file-selected-name"></span>
-          <button class="file-clear" onclick="clearFile()">✕</button>
-        </div>
+        <div class="sess-label">Transcription de la session</div>
+        <textarea class="sess-input" id="sess-transcription" placeholder="Colle ici le texte de ta session…" rows="8" style="resize:vertical;line-height:1.6"></textarea>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Conseil : Otter.ai offre 300 min/mois gratuits · La dictée iOS fonctionne aussi</div>
       </div>
 
       <div class="sess-field">
@@ -698,15 +689,6 @@
           <div class="opt-chip" data-k="intrigues" onclick="toggleOpt(this)"><span class="opt-check"></span>Intrigues</div>
         </div>
       </div>
-
-      <div class="sess-field">
-        <div class="sess-label">Clé API Groq (gratuit)</div>
-        <div class="apikey-wrap">
-          <input class="sess-input" type="password" id="openai-key" placeholder="gsk_…" style="padding-right:44px">
-          <button class="apikey-toggle" onclick="toggleApiKey()" id="apikey-eye">👁️</button>
-        </div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px">Gratuit sur console.groq.com · Stockée localement, jamais envoyée ailleurs qu'à Groq.</div>
-      </div>
     </div>
 
     <button class="analyze-btn" id="analyze-btn" onclick="analyzeSession()">✦ Analyser la session</button>
@@ -714,7 +696,7 @@
     <div class="loading-wrap" id="loading-wrap">
       <div style="font-size:28px;margin-bottom:8px">⏳</div>
       <div class="loading-bar"><div class="loading-bar-inner"></div></div>
-      <div class="loading-msg" id="loading-msg">Envoi à Whisper…</div>
+      <div class="loading-msg" id="loading-msg">Claude analyse la session…</div>
     </div>
 
     <button class="save-session-btn" id="save-session-btn" onclick="saveCurrentSession()">💾 Enregistrer dans les Chroniques</button>
@@ -1418,49 +1400,19 @@ function resetCharacter(){
 }
 
 
-let currentAudioFile = null;
+// ═══════════════════════════════════════════════════════
+// SESSION — CLAUDE ANALYSE
+// ═══════════════════════════════════════════════════════
 let currentSessionResult = null;
 
-function handleFileSelect(input) {
-  if (input.files && input.files[0]) setAudioFile(input.files[0]);
-}
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('file-drop').classList.remove('drag');
-  const f = e.dataTransfer.files[0];
-  const allowed = ['audio','video']; // m4a peut apparaître en video/mp4 sur iOS
-  if (f && (allowed.some(t => f.type.startsWith(t)) || f.name.match(/\.(m4a|mp3|wav|ogg|webm|aac|caf|flac)$/i))) setAudioFile(f);
-  else toast('Fichier audio requis (m4a, mp3, wav…)');
-}
-function setAudioFile(f) {
-  currentAudioFile = f;
-  document.getElementById('file-drop').style.display = 'none';
-  const sel = document.getElementById('file-selected');
-  sel.style.display = 'flex';
-  document.getElementById('file-selected-name').textContent = f.name + ' (' + (f.size/1024/1024).toFixed(1) + ' Mo)';
-}
-function clearFile() {
-  currentAudioFile = null;
-  document.getElementById('audio-input').value = '';
-  document.getElementById('file-drop').style.display = '';
-  document.getElementById('file-selected').style.display = 'none';
-}
 function toggleOpt(el) {
   el.classList.toggle('on');
   el.querySelector('.opt-check').textContent = el.classList.contains('on') ? '✓' : '';
 }
-function toggleApiKey() {
-  const inp = document.getElementById('openai-key');
-  inp.type = inp.type === 'password' ? 'text' : 'password';
-}
 
 async function analyzeSession() {
-  const keyInput = document.getElementById('openai-key');
-  const apiKey = keyInput.value.trim();
-  if (apiKey) localStorage.setItem('shen-openai-key', apiKey);
-  const storedKey = apiKey || localStorage.getItem('shen-openai-key') || '';
-  if (!storedKey) { toast('Clé API OpenAI requise'); return; }
-  if (!currentAudioFile) { toast('Importe un fichier audio d\'abord'); return; }
+  const transcription = document.getElementById('sess-transcription').value.trim();
+  if (!transcription) { toast('Colle une transcription d\'abord'); return; }
 
   const opts = Array.from(document.querySelectorAll('.opt-chip.on')).map(c => c.dataset.k);
   if (!opts.length) { toast('Choisis au moins un élément à extraire'); return; }
@@ -1472,46 +1424,13 @@ async function analyzeSession() {
   document.getElementById('save-session-btn').classList.remove('show');
   currentSessionResult = null;
 
-  const loadMsgs = ['Envoi à Whisper…','Transcription en cours…','Claude analyse la session…','Identification des personnages…','Rédaction du résumé…'];
+  const loadMsgs = ['Claude analyse la session…','Identification des personnages…','Rédaction du résumé…','Fil des intrigues en cours…'];
   let mi = 0;
   const msgEl = document.getElementById('loading-msg');
   msgEl.textContent = loadMsgs[0];
-  const msgInt = setInterval(() => { mi = (mi+1) % loadMsgs.length; msgEl.textContent = loadMsgs[mi]; }, 3000);
+  const msgInt = setInterval(() => { mi = (mi+1) % loadMsgs.length; msgEl.textContent = loadMsgs[mi]; }, 2500);
 
   try {
-    // ÉTAPE 1 : Whisper transcription
-    const formData = new FormData();
-    formData.append('file', currentAudioFile, currentAudioFile.name);
-    formData.append('model', 'whisper-large-v3');
-    formData.append('language', 'fr');
-    formData.append('response_format', 'text');
-
-    let whisperRes;
-    try {
-      whisperRes = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + storedKey },
-        body: formData
-      });
-    } catch(fetchErr) {
-      // CORS fallback
-      try {
-        whisperRes = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://api.groq.com/openai/v1/audio/transcriptions'), {
-          method: 'POST',
-          headers: { 'Authorization': 'Bearer ' + storedKey },
-          body: formData
-        });
-      } catch(fallbackErr) {
-        throw new Error('Connexion impossible à Groq. Détail : ' + fetchErr.message + ' / ' + fallbackErr.message);
-      }
-    }
-    if (!whisperRes.ok) {
-      const err = await whisperRes.json().catch(()=>({}));
-      throw new Error('Whisper : ' + (err.error?.message || whisperRes.status));
-    }
-    const transcription = await whisperRes.text();
-
-    // ÉTAPE 2 : Claude analyse
     const optLabels = {
       resume: 'un résumé narratif immersif (resume_narratif)',
       perso: 'la liste des personnages PJ et PNJ (personnages)',
@@ -1523,9 +1442,9 @@ async function analyzeSession() {
     const wantedStr = opts.map(k => optLabels[k]).filter(Boolean).join(', ');
     const sessName = document.getElementById('sess-name').value.trim();
 
-    const systemPrompt = `Tu es le Chroniqueur de Shen Varath, scribe épique de ses aventures D&D 5e. Tu reçois la transcription d'une session et tu dois en extraire les informations demandées. Tu réponds UNIQUEMENT en JSON valide, sans markdown ni backticks.\n\nJSON attendu (inclus toutes ces clés, laisse vide si non demandé) :\n{\n  "titre_suggere": "titre court et évocateur de la session (5-7 mots max, style épique)",\n  "resume_narratif": "résumé en prose immersive de 3-5 paragraphes si demandé, sinon chaîne vide",\n  "personnages": [{"nom":"","type":"PJ|PNJ","role":"","actions":""}],\n  "lieux": [{"nom":"","description":""}],\n  "evenements": [{"titre":"","description":"","consequence":""}],\n  "objets": [{"nom":"","type":"","note":""}],\n  "intrigues": [{"titre":"","description":"","statut":"ouvert|résolu|en suspens"}]\n}`;
+    const systemPrompt = `Tu es le Chroniqueur de Shen Varath, scribe épique de ses aventures D&D 5e. Tu reçois la transcription d'une session et tu dois en extraire les informations demandées. Tu réponds UNIQUEMENT en JSON valide, sans markdown ni backticks.\n\nJSON attendu :\n{\n  "titre_suggere": "titre court et évocateur (5-7 mots max, style épique)",\n  "resume_narratif": "résumé en prose immersive de 3-5 paragraphes si demandé, sinon chaîne vide",\n  "personnages": [{"nom":"","type":"PJ|PNJ","role":"","actions":""}],\n  "lieux": [{"nom":"","description":""}],\n  "evenements": [{"titre":"","description":"","consequence":""}],\n  "objets": [{"nom":"","type":"","note":""}],\n  "intrigues": [{"titre":"","description":"","statut":"ouvert|résolu|en suspens"}]\n}`;
 
-    const userMsg = `${sessName ? `Session : "${sessName}"\n\n` : ''}Transcription de la session :\n\n${transcription}\n\nExtrait demandé : ${wantedStr}`;
+    const userMsg = `${sessName ? `Session : "${sessName}"\n\n` : ''}Transcription :\n\n${transcription}\n\nExtrait demandé : ${wantedStr}`;
 
     const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -1546,7 +1465,6 @@ async function analyzeSession() {
     currentSessionResult = {
       titre: result.titre_suggere || sessName || 'Session sans titre',
       date: new Date().toISOString(),
-      fileName: currentAudioFile.name,
       opts,
       data: result
     };
@@ -1556,10 +1474,7 @@ async function analyzeSession() {
   } catch(err) {
     clearInterval(msgInt);
     toast('Erreur : ' + err.message);
-    document.getElementById('loading-wrap').classList.remove('show');
-    document.getElementById('analyze-btn').disabled = false;
     console.error(err);
-    return;
   }
 
   document.getElementById('loading-wrap').classList.remove('show');
@@ -1710,12 +1625,6 @@ function deleteSession(i) {
     toast('Session supprimée');
   } catch(e) {}
 }
-
-// Charger la clé API sauvegardée
-(function initSession() {
-  const k = localStorage.getItem('shen-openai-key');
-  if (k) document.getElementById('openai-key').value = k;
-})();
 
 
 function switchTab(name,btn){
