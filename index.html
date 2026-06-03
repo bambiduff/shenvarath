@@ -1475,11 +1475,25 @@ async function analyzeSession() {
     formData.append('language', 'fr');
     formData.append('response_format', 'text');
 
-    const whisperRes = await fetch('https://corsproxy.io/?' + encodeURIComponent('https://api.groq.com/openai/v1/audio/transcriptions'), {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + storedKey },
-      body: formData
-    });
+    let whisperRes;
+    try {
+      whisperRes = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + storedKey },
+        body: formData
+      });
+    } catch(fetchErr) {
+      // CORS fallback
+      try {
+        whisperRes = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://api.groq.com/openai/v1/audio/transcriptions'), {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + storedKey },
+          body: formData
+        });
+      } catch(fallbackErr) {
+        throw new Error('Connexion impossible à Groq. Détail : ' + fetchErr.message + ' / ' + fallbackErr.message);
+      }
+    }
     if (!whisperRes.ok) {
       const err = await whisperRes.json().catch(()=>({}));
       throw new Error('Whisper : ' + (err.error?.message || whisperRes.status));
