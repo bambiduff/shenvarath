@@ -611,7 +611,6 @@
     <button class="tab-btn" onclick="switchTab('histoire',this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
     <button class="tab-btn" onclick="switchTab('des',this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
     <button class="tab-btn" onclick="switchTab('equip',this)"><span class="tab-icon">🎒</span><span>Équipement</span></button>
-    <button class="tab-btn" onclick="switchTab('session',this)"><span class="tab-icon">🎙️</span><span>Session</span></button>
     <button class="tab-btn" onclick="switchTab('chroniques',this)"><span class="tab-icon">📖</span><span>Chroniques</span></button>
   </nav>
 
@@ -657,53 +656,6 @@
       </div>
 
     </div>
-
-  <!-- ════════════════════════════════════════
-       SESSION
-  ════════════════════════════════════════ -->
-  <div class="panel" id="panel-session">
-
-    <div class="card">
-      <div class="card-title">Analyser une session</div>
-      <div class="sess-intro">Colle ici la transcription de ta session (depuis Otter.ai, la dictée iOS, ou toute autre source). Claude génère ensuite le résumé automatiquement — sans clé API audio.</div>
-
-      <div class="sess-field">
-        <div class="sess-label">Nom de la session (optionnel)</div>
-        <input class="sess-input" type="text" id="sess-name" placeholder="Ex : La crypte de Kelmaroth…">
-      </div>
-
-      <div class="sess-field">
-        <div class="sess-label">Transcription de la session</div>
-        <textarea class="sess-input" id="sess-transcription" placeholder="Colle ici le texte de ta session…" rows="8" style="resize:vertical;line-height:1.6"></textarea>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px">Conseil : Otter.ai offre 300 min/mois gratuits · La dictée iOS fonctionne aussi</div>
-      </div>
-
-      <div class="sess-field">
-        <div class="sess-label">Éléments à extraire</div>
-        <div class="opts-grid">
-          <div class="opt-chip on" data-k="resume" onclick="toggleOpt(this)"><span class="opt-check">✓</span>Résumé narratif</div>
-          <div class="opt-chip on" data-k="perso" onclick="toggleOpt(this)"><span class="opt-check">✓</span>Personnages</div>
-          <div class="opt-chip on" data-k="lieux" onclick="toggleOpt(this)"><span class="opt-check">✓</span>Lieux</div>
-          <div class="opt-chip on" data-k="events" onclick="toggleOpt(this)"><span class="opt-check">✓</span>Événements clés</div>
-          <div class="opt-chip" data-k="objets" onclick="toggleOpt(this)"><span class="opt-check"></span>Objets & trésors</div>
-          <div class="opt-chip" data-k="intrigues" onclick="toggleOpt(this)"><span class="opt-check"></span>Intrigues</div>
-        </div>
-      </div>
-    </div>
-
-    <button class="analyze-btn" id="analyze-btn" onclick="analyzeSession()">✦ Analyser la session</button>
-
-    <div class="loading-wrap" id="loading-wrap">
-      <div style="font-size:28px;margin-bottom:8px">⏳</div>
-      <div class="loading-bar"><div class="loading-bar-inner"></div></div>
-      <div class="loading-msg" id="loading-msg">Claude analyse la session…</div>
-    </div>
-
-    <button class="save-session-btn" id="save-session-btn" onclick="saveCurrentSession()">💾 Enregistrer dans les Chroniques</button>
-
-    <div class="result-section" id="result-section"></div>
-
-  </div>
 
   <!-- ════════════════════════════════════════
        CHRONIQUES
