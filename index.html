@@ -1400,9 +1400,40 @@ function esc(str){ return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;')
 // ═══════════════════════════════════════════════════════
 function rollDice(s){ const r=Math.ceil(Math.random()*s); const el=document.getElementById('dice-result'); el.innerHTML=`<span>${r}</span><span class="dice-lbl">d${s}</span>`; toast(`d${s} → ${r}`); }
 
-const PROVERBS=["Quand l'aigle doute, c'est que la pluie n'a pas encore compris qu'elle mouille.","Le sage ne choisit pas entre la gauche et la droite. Il attend que le chemin choisisse.","Un bon silence vaut trois bonnes réponses, mais une mauvaise question vaut six bons silences.","L'ombre ne frappe pas celui qui marche dedans. C'est l'évidence même. Sauf le vendredi.","Si tu te demandes si tu dois agir, c'est que tu aurais dû te poser la question avant d'hésiter.","La rivière ne se souvient pas des pierres qu'elle a traversées. C'est pour ça qu'elle se cogne encore.","Décider trop vite, c'est courir sans savoir où atterrir. Décider trop lentement, c'est rater le sol.","La victoire appartient à celui qui attend. La défaite aussi. C'est ce qu'on appelle l'équilibre.","Ce qui ne te tue pas te rend plus fort. Ce qui te tue, par contre, te rend beaucoup moins présent.","Le vrai maître ne demande jamais son chemin. Il demande si le chemin se souvient de lui.","Une épée dans l'ombre coupe aussi bien qu'une épée au soleil. Mais ça fait moins de photo.","Si tu dois choisir entre deux maux, c'est que tu n'as pas encore bien cherché le troisième.","L'ombre n'a pas d'opinion. C'est ce qui fait sa force. Et aussi sa faiblesse. Mais surtout sa force.","On ne traverse pas le Shadowfell à reculons. Enfin, si. Mais on arrive à l'envers.","La méditation sans discipline, c'est juste quelqu'un d'assis qui réfléchit à rien de concret.","Il ne faut jamais répondre à une question par une autre question. Sauf si la réponse est une question.","Agir dans l'urgence, c'est prendre une décision avec les dés de quelqu'un d'autre.","Le vide n'est pas l'absence de tout. C'est la présence de rien. Ce n'est pas pareil. Enfin, presque.","Frapper vite, c'est bien. Frapper juste, c'est mieux. Ne pas frapper et laisser l'autre s'effondrer, c'est de la philosophie.","La patience est une vertu. L'impatience aussi, dans les situations où attendre vous tue.","Tout chemin mène quelque part. C'est l'inconvénient des chemins.","Le guerrier qui rit de ses erreurs vit plus longtemps. Sauf de cette erreur-là précisément.","Si tu regardes trop longtemps l'abîme, c'est que tu n'as probablement rien de mieux à faire.","Trois vérités valent mieux qu'un mensonge. Mais deux vérités et un mensonge, personne ne sait lequel c'est.","Ce qui est fait est fait. Ce qui n'est pas fait non plus.","Un pas dans l'ombre vaut deux pas dans la lumière. Sauf pour lire.","Le destin est une rivière. Certains nagent. Certains coulent. D'autres se demandent si c'est bien une rivière.","Il n'y a pas de mauvaise décision. Il n'y a que des bonnes décisions qu'on regrette au mauvais moment.","L'équilibre parfait, c'est comme l'horizon : on s'en approche, on ne l'atteint jamais, et pourtant tout le monde sait où il est.","Quand on ne peut pas choisir, c'est souvent parce que les deux options sont la même chose vue d'angles différents.","La mort n'est que le début d'une longue période sans activité.","On ne réveille pas l'ombre. L'ombre, elle, ne dort pas.","Le tonnerre prévient. L'éclair, non. C'est pour ça que tout le monde a peur de l'éclair.","Une bonne infiltration, c'est comme un bon repas : on ne devrait pas savoir qu'il y a eu de la préparation.","Ce qui compte, ce n'est pas la destination. C'est d'arriver en vie. Ou pas loin.","Je ne dis pas qu'il ne faut pas décider. Je dis qu'il faut savoir pourquoi on décide avant de décider quoi décider.","L'ombre n'a jamais trahi personne. C'est la lumière qui révèle.","Rien n'est impossible. Certaines choses sont simplement très improbables à des horaires que je n'ai pas consultés.","La force ne réside pas dans le coup qu'on porte, mais dans celui qu'on choisit de ne pas porter. Mais parfois il faut quand même taper.","Un ennemi vaincu sans combat, c'est un ennemi qu'on n'a pas vu venir. Ce n'est pas forcément un succès.","La sagesse ne se prend pas. Elle se mérite. Et encore.","Chaque question porte en elle sa réponse. Encore faut-il poser la bonne question.","Le silence parle. Encore faut-il savoir l'entendre. Encore faut-il vouloir écouter. Encore faut-il être là.","Ce n'est pas parce qu'on ne voit pas l'ombre qu'elle n'est pas là. Elle attend, elle aussi.","La précipitation est le luxe de ceux qui n'ont pas encore eu à regretter.","Il est plus facile de marcher dans les pas d'un autre que dans les siens. C'est pour ça qu'on s'épuise moins à suivre.","Quand tout le monde regarde à gauche, le sage regarde à droite. Quand tout le monde regarde à droite, le sage ferme les yeux.","Un mensonge dit assez souvent finit par ressembler à une vérité. La vérité, elle, ne change pas d'avis.","L'ennemi parfait est celui qu'on ne reconnaît pas comme tel. L'ami parfait aussi, d'ailleurs.","On ne devient pas maître de l'ombre en refusant la lumière. On en devient maître en comprenant pourquoi la lumière jette une ombre."];
-
-function drawProverb(){ const box=document.getElementById('proverb-box'); box.classList.remove('show'); void box.offsetWidth; box.textContent=PROVERBS[Math.floor(Math.random()*PROVERBS.length)]; box.classList.add('show'); }
+async function drawProverb(){
+  const box=document.getElementById('proverb-box');
+  const btn=document.querySelector('.proverb-btn');
+  box.classList.remove('show');
+  box.textContent='';
+  btn.textContent='...';
+  btn.disabled=true;
+  const styles=[
+    "absurde et kaamelottien, phrase qui part dans tous les sens avec une logique interne implacable",
+    "cynique et sec, verite crue sans menagement",
+    "poetique et melancolique, beau mais triste, lie aux ombres",
+    "faussement profond, ressemble a une grande verite mais est vide",
+    "guerrier et stoique, sur le combat la discipline la mort",
+    "philosophique absurde, digne de Camus mais dit par quelqu un qui s en fout",
+    "mordant et ironique, une pique deguisee en sagesse",
+    "mysterieux et shadar-kai, lie aux ombres au Voile Gris a la frontiere entre vie et mort",
+    "pragmatique brutal, conseil concret delivre comme sentence universelle",
+    "tendre mais desabuse, quelqu un qui a voulu croire et a arrete"
+  ];
+  const style=styles[Math.floor(Math.random()*styles.length)];
+  const sys="Tu es Shen Varath, moine shadar-kai taciturne. Genere UNE sentence courte (1 a 3 phrases max). Style : "+style+". Inspire du Shadowfell. Pas d introduction. Juste la sentence. En francais.";
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:120,system:sys,messages:[{role:'user',content:'Une sentence.'}]})});
+    const data=await res.json();
+    const text=(data.content&&data.content[0]&&data.content[0].text||'').trim()||'Le silence aussi est une reponse.';
+    box.textContent='"'+text+'"';
+    box.classList.add('show');
+  }catch(e){
+    box.textContent='"Le silence aussi est une reponse."';
+    box.classList.add('show');
+  }
+  btn.textContent='🎲 Une sentence au hasard';
+  btn.disabled=false;
+}
 
 
 function resetCharacter(){
@@ -1575,56 +1606,56 @@ const HARDCODED_CHRONIQUES = [
     titre: "Dimanche 7 juin 2026",
     date: "2026-06-07T18:00:00.000Z",
     data: {
-      resume_narratif: "Havre-Fer, ville pionnière de 18 ans sur les côtes du continent de l’Aube, gouvernée par Lyra Ashenvale. Shen, Torvin, Guidéon et Elara se retrouvent à la taverne de la Veine d’Or, convoqués par Raël. L’explorateur arrive en retard, une entaille au cou, et pose sur la table une pierre gravée de runes trouvée dans un ours mutant abattu à deux jours de marche. Mission proposée : 15 PO/jour + 20 PO de bonus.\n\nPendant la discussion, Shen repère un sbire du Fond qui fixe Raël. Il crée une illusion mineure, s’interpose, et l’assomme d’une frappe étourdissante. La situation dégénère, les demi-trolls éjectent le sbire qui lance une menace explicite.\n\nEn route le lendemain, Guidéon détecte une illusion qui les suit. Embuscade : Cluk, kobold magicien en rite de passage, blessé par Elara, soigné, rejoint le groupe. Aux abords de la pyramide, toute faune absente dans un rayon de 50 m. La pierre de Raël correspond au morceau manquant de la structure, arraché il y a 5-6 ans.\n\nLe groupe explore l’intérieur. Shen repère et désamorce une lame en métal bleué imputrescible. Un campement récent livré une potion et une fiole inconnue. Au fond, une manticore endormie réveillée accidentellement. Combat victorieux. Giuu fuit, rattrapé par Shen. En mourant, la manticore libère une pierre bleuée identique à la lame. Guidéon découvre un atelier : les runes servent à créer des hybrides. La manticore en était la preuve. L’ours mutant, la prochaine.",
+      resume_narratif: "Havre-Fer, ville pionniere de 18 ans sur les cotes du continent de l Aube, gouvernee par Lyra Ashenvale. Shen, Torvin, Guideon et Elara se retrouvent a la taverne de la Veine d Or, convoques par Rael. L explorateur arrive en retard, une entaille au cou, et pose sur la table une pierre gravee de runes trouvee dans un ours mutant abattu a deux jours de marche. Mission proposee : 15 PO/jour + 20 PO de bonus.\n\nPendant la discussion, Shen repere un sbire du Fond qui fixe Rael. Il cree une illusion mineure, s interpose, et l assomme d une frappe etourdissante. La situation degenere, les demi-trolls ejectent le sbire qui lance une menace explicite.\n\nEn route le lendemain, Guideon detecte une illusion qui les suit. Embuscade : Cluk, kobold magicien en rite de passage, blesse par Elara, soigne, rejoint le groupe. Aux abords de la pyramide, toute faune absente dans un rayon de 50 m. La pierre de Rael correspond au morceau manquant de la structure, arrache il y a 5-6 ans.\n\nLe groupe explore l interieur. Shen repere et desamorce une lame en metal bleue imputrescible. Un campement recent livre une potion et une fiole inconnue. Au fond, une manticore endormie reveilee accidentellement. Combat victorieux. Giuu fuit, rattrape par Shen. En mourant, la manticore libere une pierre bleue identique a la lame. Guideon decouvre un atelier : les runes servent a creer des hybrides. La manticore en etait la preuve. L ours mutant, la prochaine.",
       personnages: [
-        {nom:"Shen Varath",type:"PJ",role:"Moine Shadar-Kaï — Assomme le sbire, repère et désamorce le piège, combat la manticore, frappe Giuu en opportunité."},
-        {nom:"Torvin",type:"PJ",role:"Gnome bricoleur — Enquête sur la pierre, aide au désamorçage, combat à distance."},
-        {nom:"Guidéon",type:"PJ",role:"Gnome druide — Identifie la magie, détecte Cluk, constate l’absence de faune, analyse le bureau, sort d’acide final."},
-        {nom:"Elara",type:"PJ",role:"Éclaireuse humaine — Blesse Cluk d’un carreau d’arbalète. Combat à l’épée contre la manticore."},
-        {nom:"Raël",type:"PNJ",role:"Explorateur demi-elfe, commanditaire — Mandate le groupe, arrive blessé au cou, reste au camp."},
-        {nom:"Cluk",type:"PNJ",role:"Kobold magicien en rite de passage — Suivait en invisible pour voler à manger. Blessé, soigné, rejoint le groupe. Invisibilité 2x/jour."},
-        {nom:"Giuu",type:"PNJ",role:"Kobold accompagnateur — Fuit en invisible pendant le combat. Rattrapé par Shen."},
-        {nom:"Le sbire du Fond",type:"PNJ",role:"Homme de main — Assommé par Shen à la taverne. Menace le groupe en partant."},
-        {nom:"Britta",type:"PNJ",role:"Tenancière draïoïde — Informe sur les runes des mines. Bannit le groupe pour la soirée."},
-        {nom:"Lyra Ashenvale",type:"PNJ",role:"Gouverneure de Havre-Fer — A mandaté Raël pour évaluer la forêt."}
+        {nom:"Shen Varath",type:"PJ",role:"Moine Shadar-Kai - Assomme le sbire, repere et desamorce le piege, combat la manticore, frappe Giuu en opportunite."},
+        {nom:"Torvin",type:"PJ",role:"Gnome bricoleur - Enquete sur la pierre, aide au desamorcage, combat a distance."},
+        {nom:"Guideon",type:"PJ",role:"Gnome druide - Identifie la magie, detecte Cluk, constate l absence de faune, analyse le bureau, sort d acide final."},
+        {nom:"Elara",type:"PJ",role:"Eclaireuse humaine - Blesse Cluk d un carreau d arbalete. Combat a l epee contre la manticore."},
+        {nom:"Rael",type:"PNJ",role:"Explorateur demi-elfe, commanditaire - Mandate le groupe, arrive blesse au cou, reste au camp."},
+        {nom:"Cluk",type:"PNJ",role:"Kobold magicien en rite de passage - Suivait en invisible pour voler. Blesse, soigne, rejoint le groupe. Invisibilite 2x/jour."},
+        {nom:"Giuu",type:"PNJ",role:"Kobold accompagnateur - Fuit en invisible pendant le combat. Rattrape par Shen."},
+        {nom:"Le sbire du Fond",type:"PNJ",role:"Homme de main - Assomme par Shen a la taverne. Menace le groupe en partant."},
+        {nom:"Britta",type:"PNJ",role:"Tenanciere dracoide - Informe sur les runes des mines. Bannit le groupe pour la soiree."},
+        {nom:"Lyra Ashenvale",type:"PNJ",role:"Gouverneure de Havre-Fer - A mandate Rael pour evaluer la foret."}
       ],
       lieux: [
-        {nom:"Havre-Fer",description:"Ville pionnière de 18 ans. +1000 hab., trois mines, fonderie, milice, temple panthéon, palissade en bois."},
-        {nom:"La Veine d’Or",description:"Taverne de Britta. Lieu du rendez-vous avec Raël. Deux demi-trolls videurs."},
-        {nom:"La pyramide (abords)",description:"7-8 m, couverte de runes. Faune absente à 50 m. Morceau arraché il y a 5-6 ans. Magie de transport."},
-        {nom:"Couloir principal",description:"Escalier descendant, piège à lame bleuée, trois embranchements."},
-        {nom:"Campement intérieur",description:"Propre et récent. Quelqu’un l’utilise activement."},
-        {nom:"Bureau de recherche",description:"Atelier de création d’hybrides par fusion runes et faune locale."}
+        {nom:"Havre-Fer",description:"Ville pionniere de 18 ans. +1000 hab., trois mines, fonderie, milice, temple pantheon, palissade en bois."},
+        {nom:"La Veine d Or",description:"Taverne de Britta la dracoide. Lieu du rendez-vous avec Rael. Deux demi-trolls videurs."},
+        {nom:"La pyramide (abords)",description:"7-8 m, couverte de runes. Faune absente a 50 m. Morceau arrache il y a 5-6 ans. Magie de transport."},
+        {nom:"Couloir principal",description:"Escalier descendant, piege a lame bleue, trois embranchements."},
+        {nom:"Campement interieur",description:"Propre et recent. Quelqu un l utilise activement."},
+        {nom:"Bureau de recherche",description:"Atelier de creation d hybrides par fusion runes et faune locale."}
       ],
       evenements: [
-        {titre:"Réunion à la Veine d’Or",description:"Raël présente la pierre runique et mandate le groupe. 15 PO/jour + 20 PO de bonus."},
-        {titre:"Le sbire du Fond",description:"Assommé par Shen. Réclamait la pierre pour le Fond. Menace explicite au départ."},
-        {titre:"Bagarre à la taverne",description:"Dispute publique. Demi-trolls interviennent. Groupe banni de la Veine d’Or."},
-        {titre:"Rencontre de Cluk",description:"Kobold blessé par Elara, soigné, rejoint le groupe. Invisibilité 2x/jour."},
-        {titre:"Analyse de la pyramide",description:"Absence de faune à 50 m. Magie de transport. La pierre = morceau manquant de la pyramide."},
-        {titre:"Le piège de Shen",description:"Lame en métal bleué imputrescible désamorcée et récupérée par Shen."},
-        {titre:"Le campement intérieur",description:"Potion de soins + fiole inconnue récupérées. Présence humaine récente."},
-        {titre:"Combat : la manticore",description:"Réveillée accidentellement. Victoire du groupe. Giuu fuit, rattrapé par Shen."},
-        {titre:"La pierre bleuée",description:"Tombe du corps de la manticore. Même teinte que la lame. Lien inconnu."},
-        {titre:"Révélation de Guidéon",description:"Bureau = atelier d’hybrides. Une deuxième créature était en cours de fabrication."}
+        {titre:"Reunion a la Veine d Or",description:"Rael presente la pierre runique et mandate le groupe. 15 PO/jour + 20 PO de bonus."},
+        {titre:"Le sbire du Fond",description:"Assomme par Shen. Reclamait la pierre pour le Fond. Menace explicite au depart."},
+        {titre:"Bagarre a la taverne",description:"Dispute publique. Demi-trolls interviennent. Groupe banni de la Veine d Or."},
+        {titre:"Rencontre de Cluk",description:"Kobold blesse par Elara, soigne, rejoint le groupe. Invisibilite 2x/jour."},
+        {titre:"Analyse de la pyramide",description:"Absence de faune a 50 m. Magie de transport. La pierre = morceau manquant de la pyramide."},
+        {titre:"Le piege de Shen",description:"Lame en metal bleue imputrescible desamorcee et recuperee par Shen."},
+        {titre:"Le campement interieur",description:"Potion de soins + fiole inconnue recuperees. Presence humaine recente."},
+        {titre:"Combat : la manticore",description:"Reveilee accidentellement. Victoire du groupe. Giuu fuit, rattrape par Shen."},
+        {titre:"La pierre bleue",description:"Tombe du corps de la manticore. Meme teinte que la lame. Lien inconnu."},
+        {titre:"Revelation de Guideon",description:"Bureau = atelier d hybrides. Une deuxieme creature etait en cours de fabrication."}
       ],
       objets: [
-        {nom:"Pierre runique",note:"Trouvée dans l’ours mutant. Correspond au morceau manquant de la pyramide. Le Fond la veut."},
-        {nom:"Lame de métal bleué",note:"Métal inconnu, imputrescible. Même couleur que la pierre de la manticore."},
-        {nom:"Potion de soins",note:"Récupérée dans le campement."},
-        {nom:"Fiole non identifiée",note:"Contenu inconnu. Récupérée dans le campement."}
+        {nom:"Pierre runique",note:"Trouvee dans l ours mutant. Correspond au morceau manquant de la pyramide. Le Fond la veut."},
+        {nom:"Lame de metal bleue",note:"Metal inconnu, imputrescible. Meme couleur que la pierre de la manticore."},
+        {nom:"Potion de soins",note:"Recuperee dans le campement."},
+        {nom:"Fiole non identifiee",note:"Contenu inconnu. Recuperee dans le campement."}
       ],
       intrigues: [
-        {titre:"Le Fond veut la pierre",statut:"ouvert",description:"Baron criminel de Havre-Fer. Sbire envoyé. Menace explicite contre le groupe."},
-        {titre:"Qui a arraché la pyramide ?",statut:"ouvert",description:"Morceau arraché il y a 5-6 ans. C’est la pierre de Raël. Pourquoi l’ours l’avait-il avalé ?"},
-        {titre:"Qui tient le campement ?",statut:"ouvert",description:"Quelqu’un étudie les runes et n’était pas là lors de la visite."},
-        {titre:"La pierre bleuée",statut:"ouvert",description:"Même couleur que la lame. Connexion inconnue."},
-        {titre:"L’ours mutant",statut:"ouvert",description:"Était en cours de transformation. Est-il encore vivant ?"},
-        {titre:"La magie de la pyramide",statut:"ouvert",description:"Magie de transport. Zone de sécurité. Qui l’a bâtie ?"},
-        {titre:"La mission de Raël",statut:"ouvert",description:"La gouverneure veut envoyer des bûcherons. La pyramide est potentiellement un obstacle."}
+        {titre:"Le Fond veut la pierre",statut:"ouvert",description:"Baron criminel de Havre-Fer. Sbire envoye. Menace explicite contre le groupe."},
+        {titre:"Qui a arrache la pyramide ?",statut:"ouvert",description:"Morceau arrache il y a 5-6 ans. C est la pierre de Rael. Pourquoi l ours l avait-il avale ?"},
+        {titre:"Qui tient le campement ?",statut:"ouvert",description:"Quelqu un etudie les runes et n etait pas la lors de la visite."},
+        {titre:"La pierre bleue",statut:"ouvert",description:"Meme couleur que la lame. Connexion inconnue."},
+        {titre:"L ours mutant",statut:"ouvert",description:"Etait en cours de transformation. Est-il encore vivant ?"},
+        {titre:"La magie de la pyramide",statut:"ouvert",description:"Magie de transport. Zone de securite. Qui l a batie ?"},
+        {titre:"La mission de Rael",statut:"ouvert",description:"La gouverneure veut envoyer des bucherons. La pyramide est potentiellement un obstacle."}
       ]
     }
-  },
+  }
 ];
 
 function renderChroniques() {
@@ -1634,7 +1665,7 @@ function renderChroniques() {
   const all = [...HARDCODED_CHRONIQUES, ...sessions];
 
   if (!all.length) {
-    container.innerHTML = `<div class="chron-empty"><div class="chron-empty-icon">📖</div><div class="chron-empty-text">Aucune session enregistrée.<br>Analyse ta première session dans l'onglet Session !</div></div>`;
+    container.innerHTML = '<div class="chron-empty"><div class="chron-empty-icon">📖</div><div class="chron-empty-text">Aucune session enregistree.</div></div>';
     return;
   }
 
