@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
+<!-- saved from url=(0039)https://bambiduff.github.io/shenvarath/ -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Shen Varath — Fiche D&D 5e</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>影</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <title>Shen Varath — Fiche D&amp;D 5e</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,&lt;svg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 100 100&#39;&gt;&lt;text y=&#39;.9em&#39; font-size=&#39;90&#39;&gt;%E5%BD%B1&lt;/text&gt;&lt;/svg&gt;">
+  <link href="./index_files/css2" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; }
@@ -338,7 +338,7 @@
     .new-ability-name { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--text); }
     .new-ability-desc { font-size:13px; color:#4A4070; line-height:1.5; }
   </style>
-</head>
+<style type="text/css"></style></head>
 <body>
 <div id="app">
 
@@ -377,12 +377,12 @@
       <div class="card">
         <div class="card-title">Caractéristiques</div>
         <div class="stats-grid">
-          <div class="stat-box" data-stat="str"><div class="stat-label">Force</div><div class="stat-mod neg">−1</div><div class="stat-score">8</div></div>
+          <div class="stat-box" data-stat="str"><div class="stat-label">Force</div><div class="stat-mod neg">-1</div><div class="stat-score">8</div></div>
           <div class="stat-box" data-stat="dex"><div class="stat-label">Dextérité</div><div class="stat-mod pos">+4</div><div class="stat-score">18</div></div>
           <div class="stat-box" data-stat="con"><div class="stat-label">Constitution</div><div class="stat-mod pos">+2</div><div class="stat-score">14</div></div>
-          <div class="stat-box" data-stat="int"><div class="stat-label">Intelligence</div><div class="stat-mod">+0</div><div class="stat-score">10</div></div>
+          <div class="stat-box" data-stat="int"><div class="stat-label">Intelligence</div><div class="stat-mod ">+0</div><div class="stat-score">10</div></div>
           <div class="stat-box" data-stat="wis"><div class="stat-label">Sagesse</div><div class="stat-mod pos">+3</div><div class="stat-score">16</div></div>
-          <div class="stat-box" data-stat="cha"><div class="stat-label">Charisme</div><div class="stat-mod">+0</div><div class="stat-score">10</div></div>
+          <div class="stat-box" data-stat="cha"><div class="stat-label">Charisme</div><div class="stat-mod ">+0</div><div class="stat-score">10</div></div>
         </div>
       </div>
       <div class="card">
@@ -403,15 +403,23 @@
         <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Perception</span><span class="skill-attr">SAG</span><span class="skill-val" data-skill="perception">+5</span></div>
         <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Perspicacité</span><span class="skill-attr">SAG</span><span class="skill-val" data-skill="insight">+5</span></div>
         <div class="skill-row"><div class="prof-dot prof"></div><span class="skill-name">Religion</span><span class="skill-attr">INT</span><span class="skill-val" data-skill="religion">+2</span></div>
-        <div class="skill-row"><div class="prof-dot"></div><span class="skill-name">Athlétisme</span><span class="skill-attr">FOR</span><span class="skill-val" data-skill="athletics">−1</span></div>
+        <div class="skill-row"><div class="prof-dot"></div><span class="skill-name">Athlétisme</span><span class="skill-attr">FOR</span><span class="skill-val" data-skill="athletics">-1</span></div>
       </div>
       <div id="feats-display"></div>
       <div class="card" id="saves-card">
         <div class="card-title">Points de sauvegarde</div>
-        <button onclick="createSave()" style="width:100%;padding:11px;border:1.5px solid var(--teal);border-radius:var(--rs);background:var(--teal-bg);color:var(--teal);font-family:'Cinzel',serif;font-size:13px;letter-spacing:.04em;cursor:pointer;margin-bottom:12px">
+        <button onclick="createSave()" style="width:100%;padding:11px;border:1.5px solid var(--teal);border-radius:var(--rs);background:var(--teal-bg);color:var(--teal);font-family:&#39;Cinzel&#39;,serif;font-size:13px;letter-spacing:.04em;cursor:pointer;margin-bottom:12px">
           💾 Sauvegarder l'état actuel
         </button>
-        <div id="saves-list"></div>
+        <div id="saves-list">
+    <div style="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--border)" data-sname="N3">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">N3</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">Niv.3 · 30/05/2026 03:07</div>
+      </div>
+      <button onclick="loadSave(this.parentElement.dataset.sname)" style="flex-shrink:0;padding:6px 10px;border:1px solid var(--teal);border-radius:var(--rs);background:var(--teal-bg);color:var(--teal);font-size:12px;font-family:&#39;Cinzel&#39;,serif;cursor:pointer">Charger</button>
+      <button onclick="deleteSave(this.parentElement.dataset.sname)" style="flex-shrink:0;width:28px;height:28px;border:1px solid var(--coral-bg);border-radius:var(--rs);background:var(--coral-bg);color:var(--coral);font-size:14px;cursor:pointer">✕</button>
+    </div></div>
       </div>
       <div class="card">
         <div class="card-title">Progression</div>
@@ -447,7 +455,7 @@
         <div class="combat-row">
           <div class="cs"><div class="cs-val" id="c-prof">+2</div><div class="cs-lbl">Maîtrise</div></div>
           <div class="cs"><div class="cs-val" id="c-martial">1d6</div><div class="cs-lbl">Dé martial</div></div>
-          <div class="cs"><div class="cs-val" id="c-kidc">DD 14</div><div class="cs-lbl">Seuil Ki</div></div>
+          <div class="cs"><div class="cs-val" id="c-kidc">DD 13</div><div class="cs-lbl">Seuil Ki</div></div>
         </div>
       </div>
       <div class="card">
@@ -460,11 +468,11 @@
         <div class="attack-item">
           <div class="atk-icon">⚡</div>
           <div class="atk-info"><div class="atk-name">Déluge de frappes</div><div class="atk-detail">2 attaques bonus · 1 ki</div></div>
-          <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg atk-dmg-martial">1d6+4 ×2</div></div>
+          <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg atk-dmg-martial">1d6+4</div></div>
         </div>
         <div class="attack-item">
           <div class="atk-icon">🌑</div>
-          <div class="atk-info"><div class="atk-name">Frappe étourdissante</div><div class="atk-detail" id="atk-stun-detail">DD 14 CON au toucher · 1 ki</div></div>
+          <div class="atk-info"><div class="atk-name">Frappe étourdissante</div><div class="atk-detail" id="atk-stun-detail">DD 13 CON au toucher · 1 ki</div></div>
           <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg">Étourdi</div></div>
         </div>
         <div class="attack-item">
@@ -490,8 +498,8 @@
       </div>
       <div class="card">
         <div class="card-title">Jets de mort</div>
-        <div class="death-row"><span class="death-lbl s">Succès</span><div class="dd-dots"><div class="dd s" onclick="this.classList.toggle('on')"></div><div class="dd s" onclick="this.classList.toggle('on')"></div><div class="dd s" onclick="this.classList.toggle('on')"></div></div></div>
-        <div class="death-row"><span class="death-lbl f">Échecs</span><div class="dd-dots"><div class="dd f" onclick="this.classList.toggle('on')"></div><div class="dd f" onclick="this.classList.toggle('on')"></div><div class="dd f" onclick="this.classList.toggle('on')"></div></div></div>
+        <div class="death-row"><span class="death-lbl s">Succès</span><div class="dd-dots"><div class="dd s" onclick="this.classList.toggle(&#39;on&#39;)"></div><div class="dd s" onclick="this.classList.toggle(&#39;on&#39;)"></div><div class="dd s" onclick="this.classList.toggle(&#39;on&#39;)"></div></div></div>
+        <div class="death-row"><span class="death-lbl f">Échecs</span><div class="dd-dots"><div class="dd f" onclick="this.classList.toggle(&#39;on&#39;)"></div><div class="dd f" onclick="this.classList.toggle(&#39;on&#39;)"></div><div class="dd f" onclick="this.classList.toggle(&#39;on&#39;)"></div></div></div>
       </div>
       <div class="card">
         <div class="card-title">Repos</div>
@@ -506,7 +514,7 @@
     <div class="panel" id="panel-ki">
       <div class="card">
         <div class="card-title">Points de Ki</div>
-        <div class="ki-dots" id="ki-dots"></div>
+        <div class="ki-dots" id="ki-dots"><div class="ki-dot on">氣</div><div class="ki-dot on">氣</div><div class="ki-dot on">氣</div></div>
         <div class="ki-lbl" id="ki-lbl">3 / 3 — Récupérés au repos court ou long</div>
       </div>
       <div class="card">
@@ -524,9 +532,9 @@
       </div>
       <div class="card">
         <div class="card-title">Capacités passives</div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Défense sans armure</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc" id="ac-formula">CA = 10 + DEX (+4) + SAG (+3) = 17. Sans armure ni bouclier.</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déviation des projectiles</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc" id="deflect-desc">Réduit les dégâts d'une attaque à distance de 1d10+7. Si réduit à 0 : renvoyer (+6, 1d6+4).</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Chute ralentie</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc" id="fall-desc">Réduit les dégâts de chute de 15 (niveau × 5).</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Défense sans armure</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc" id="ac-formula">CA = 10 + DEX (+4) + SAG (+3) = 17. Sans armure.</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déviation des projectiles</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc" id="deflect-desc">Réduit les dégâts d'une attaque à distance de 1d10+6. Si réduit à 0 : renvoyer (+6, 1d6+4).</div></div>
+        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Chute ralentie</span><span class="ab-tag t-re">Réaction</span></div><div class="ab-desc" id="fall-desc">Réduit les dégâts de chute de 15 (niveau 3 × 5).</div></div>
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déplacement +10 ft</span><span class="ab-tag t-pa">Passif</span></div><div class="ab-desc">Vitesse totale : 40 ft sans armure.</div></div>
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Résistance nécrotique</span><span class="ab-tag t-sh">Shadar-Kaï</span></div><div class="ab-desc">Résistance aux dégâts nécrotiques. Vision dans le noir 60 ft.</div></div>
       </div>
@@ -554,7 +562,7 @@
       <div class="card">
         <div class="card-title">Équipement</div>
         <div class="eq-row"><div class="eq-icon">✊</div><div><div class="eq-name">Frappes à mains nues</div><div class="eq-desc" id="eq-fists">+6 · 1d6+4 contondant</div></div></div>
-        <div class="eq-row"><div class="eq-icon">🗡️</div><div><div class="eq-name">Bâton de marche</div><div class="eq-desc" id="eq-staff">Arme de moine · +6 · 1d6+4 contondant ou perforant</div></div></div>
+        <div class="eq-row"><div class="eq-icon">🗡️</div><div><div class="eq-name">Bâton de marche</div><div class="eq-desc" id="eq-staff">Arme de moine · +6 · 1d6+4 contondant/perforant</div></div></div>
         <div class="eq-row"><div class="eq-icon">🎒</div><div><div class="eq-name">Sac d'ermite</div><div class="eq-desc">Couverture, briquet, rations ×10, torches ×10, outre d'eau, tente</div></div></div>
         <div class="eq-row"><div class="eq-icon">📜</div><div><div class="eq-name">Parchemin de la Découverte</div><div class="eq-desc">Rédigé lors d'années de réclusion. Son contenu, lui seul le sait.</div></div></div>
         <div class="eq-row"><div class="eq-icon">💰</div><div><div class="eq-name">Bourse</div><div class="eq-desc">15 po · 3 pa · 8 pc</div></div></div>
@@ -571,7 +579,7 @@
       <div class="card">
         <div class="card-title">Danger Zone</div>
         <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px">Réinitialise le personnage à son état de départ (niveau 3, PV et Ki de base). Les Chroniques de session ne sont pas effacées.</p>
-        <button onclick="resetCharacter()" style="width:100%;padding:12px;border:1px solid var(--coral);border-radius:var(--rs);background:var(--coral-bg);color:var(--coral);font-family:'Cinzel',serif;font-size:13px;letter-spacing:.04em;cursor:pointer;">⚠️ Réinitialiser le personnage</button>
+        <button onclick="resetCharacter()" style="width:100%;padding:12px;border:1px solid var(--coral);border-radius:var(--rs);background:var(--coral-bg);color:var(--coral);font-family:&#39;Cinzel&#39;,serif;font-size:13px;letter-spacing:.04em;cursor:pointer;">⚠️ Réinitialiser le personnage</button>
       </div>
     </div>
 
@@ -605,13 +613,13 @@
 
   <!-- TAB NAV -->
   <nav class="tab-nav" role="tablist">
-    <button class="tab-btn active" onclick="switchTab('stats',this)"><span class="tab-icon">⚔️</span><span>Stats</span></button>
-    <button class="tab-btn" onclick="switchTab('combat',this)"><span class="tab-icon">🩸</span><span>Combat</span></button>
-    <button class="tab-btn" onclick="switchTab('ki',this)"><span class="tab-icon">🌑</span><span>Ki</span></button>
-    <button class="tab-btn" onclick="switchTab('histoire',this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
-    <button class="tab-btn" onclick="switchTab('des',this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
-    <button class="tab-btn" onclick="switchTab('equip',this)"><span class="tab-icon">🎒</span><span>Équipement</span></button>
-    <button class="tab-btn" onclick="switchTab('chroniques',this)"><span class="tab-icon">📖</span><span>Chroniques</span></button>
+    <button class="tab-btn active" onclick="switchTab(&#39;stats&#39;,this)"><span class="tab-icon">⚔️</span><span>Stats</span></button>
+    <button class="tab-btn" onclick="switchTab(&#39;combat&#39;,this)"><span class="tab-icon">🩸</span><span>Combat</span></button>
+    <button class="tab-btn" onclick="switchTab(&#39;ki&#39;,this)"><span class="tab-icon">🌑</span><span>Ki</span></button>
+    <button class="tab-btn" onclick="switchTab(&#39;histoire&#39;,this)"><span class="tab-icon">📜</span><span>Histoire</span></button>
+    <button class="tab-btn" onclick="switchTab(&#39;des&#39;,this)"><span class="tab-icon">🎲</span><span>Dés</span></button>
+    <button class="tab-btn" onclick="switchTab(&#39;equip&#39;,this)"><span class="tab-icon">🎒</span><span>Équipement</span></button>
+    <button class="tab-btn" onclick="switchTab(&#39;chroniques&#39;,this)"><span class="tab-icon">📖</span><span>Chroniques</span></button>
   </nav>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -625,34 +633,84 @@
         <div class="money-grid">
           <div class="money-item">
             <div class="money-label">🪙 PO</div>
-            <input class="money-input" type="number" id="money-po" min="0" value="15" onchange="setMoney('po',this.value)" inputmode="numeric">
+            <input class="money-input" type="number" id="money-po" min="0" value="15" onchange="setMoney(&#39;po&#39;,this.value)" inputmode="numeric">
             <div class="money-btns">
-              <button class="money-btn" onclick="adjMoney('po',-1)">−</button>
-              <button class="money-btn" onclick="adjMoney('po',+1)">+</button>
+              <button class="money-btn" onclick="adjMoney(&#39;po&#39;,-1)">−</button>
+              <button class="money-btn" onclick="adjMoney(&#39;po&#39;,+1)">+</button>
             </div>
           </div>
           <div class="money-item">
             <div class="money-label">🥈 PA</div>
-            <input class="money-input" type="number" id="money-pa" min="0" value="3" onchange="setMoney('pa',this.value)" inputmode="numeric">
+            <input class="money-input" type="number" id="money-pa" min="0" value="3" onchange="setMoney(&#39;pa&#39;,this.value)" inputmode="numeric">
             <div class="money-btns">
-              <button class="money-btn" onclick="adjMoney('pa',-1)">−</button>
-              <button class="money-btn" onclick="adjMoney('pa',+1)">+</button>
+              <button class="money-btn" onclick="adjMoney(&#39;pa&#39;,-1)">−</button>
+              <button class="money-btn" onclick="adjMoney(&#39;pa&#39;,+1)">+</button>
             </div>
           </div>
           <div class="money-item">
             <div class="money-label">🟤 PC</div>
-            <input class="money-input" type="number" id="money-pc" min="0" value="8" onchange="setMoney('pc',this.value)" inputmode="numeric">
+            <input class="money-input" type="number" id="money-pc" min="0" value="8" onchange="setMoney(&#39;pc&#39;,this.value)" inputmode="numeric">
             <div class="money-btns">
-              <button class="money-btn" onclick="adjMoney('pc',-1)">−</button>
-              <button class="money-btn" onclick="adjMoney('pc',+1)">+</button>
+              <button class="money-btn" onclick="adjMoney(&#39;pc&#39;,-1)">−</button>
+              <button class="money-btn" onclick="adjMoney(&#39;pc&#39;,+1)">+</button>
             </div>
           </div>
         </div>
-        <div class="money-total" id="money-total"></div>
+        <div class="money-total" id="money-total">Total ≈ 1538 PC · 15.4 PO</div>
       </div>
 
       <div class="card" id="equip-card">
-        <div id="equip-categories"></div>
+        <div id="equip-categories"><div class="equip-cat">
+      <div class="equip-cat-header"><span class="equip-cat-icon">⚔️</span><span class="equip-cat-title">Armes</span></div>
+      <div id="items-armes"><div class="item-row" id="item-1">
+    <div class="item-content">
+      <div class="item-name">Bâton de marche</div>
+      <div class="item-desc">Arme de moine · 1d6+4 contondant ou perforant</div>
+    </div>
+    
+    <div class="item-actions">
+      <button class="ibtn" onclick="editItem(1)" title="Modifier">✏️</button>
+      <button class="ibtn del" onclick="deleteItem(1)" title="Supprimer">✕</button>
+    </div>
+  </div></div>
+      <button class="add-item-btn" onclick="addItem(&#39;armes&#39;)">+ Ajouter un objet</button>
+    </div><div style="border-top:1px solid var(--border);margin:12px 0"></div><div class="equip-cat">
+      <div class="equip-cat-header"><span class="equip-cat-icon">🛡️</span><span class="equip-cat-title">Armures</span></div>
+      <div id="items-armures"><div class="no-items">Aucun objet</div></div>
+      <button class="add-item-btn" onclick="addItem(&#39;armures&#39;)">+ Ajouter un objet</button>
+    </div><div style="border-top:1px solid var(--border);margin:12px 0"></div><div class="equip-cat">
+      <div class="equip-cat-header"><span class="equip-cat-icon">🎒</span><span class="equip-cat-title">Équipement</span></div>
+      <div id="items-equipement"><div class="item-row" id="item-2">
+    <div class="item-content">
+      <div class="item-name">Sac d'ermite</div>
+      <div class="item-desc">Couverture, briquet, rations ×10, torches ×10, outre, tente</div>
+    </div>
+    
+    <div class="item-actions">
+      <button class="ibtn" onclick="editItem(2)" title="Modifier">✏️</button>
+      <button class="ibtn del" onclick="deleteItem(2)" title="Supprimer">✕</button>
+    </div>
+  </div></div>
+      <button class="add-item-btn" onclick="addItem(&#39;equipement&#39;)">+ Ajouter un objet</button>
+    </div><div style="border-top:1px solid var(--border);margin:12px 0"></div><div class="equip-cat">
+      <div class="equip-cat-header"><span class="equip-cat-icon">💎</span><span class="equip-cat-title">Bijoux</span></div>
+      <div id="items-bijoux"><div class="no-items">Aucun objet</div></div>
+      <button class="add-item-btn" onclick="addItem(&#39;bijoux&#39;)">+ Ajouter un objet</button>
+    </div><div style="border-top:1px solid var(--border);margin:12px 0"></div><div class="equip-cat">
+      <div class="equip-cat-header"><span class="equip-cat-icon">📦</span><span class="equip-cat-title">Objets divers</span></div>
+      <div id="items-objets"><div class="item-row" id="item-3">
+    <div class="item-content">
+      <div class="item-name">Parchemin de la Découverte</div>
+      <div class="item-desc">Rédigé lors de sa réclusion. Son contenu, lui seul le sait.</div>
+    </div>
+    
+    <div class="item-actions">
+      <button class="ibtn" onclick="editItem(3)" title="Modifier">✏️</button>
+      <button class="ibtn del" onclick="deleteItem(3)" title="Supprimer">✕</button>
+    </div>
+  </div></div>
+      <button class="add-item-btn" onclick="addItem(&#39;objets&#39;)">+ Ajouter un objet</button>
+    </div></div>
       </div>
 
     </div>
@@ -781,7 +839,16 @@ const INITIAL = {
 let S = JSON.parse(JSON.stringify(INITIAL));
 
 function loadState(){
-  try{ const d=JSON.parse(localStorage.getItem('shen-v5')||'null'); if(d) S=Object.assign({},INITIAL,d); }catch(e){}
+  try{
+    const d=JSON.parse(localStorage.getItem('shen-v5')||'null');
+    if(d){
+      S=Object.assign({},INITIAL,d);
+      S.stats=Object.assign({},INITIAL.stats,d.stats||{});
+      S.featEffects=Object.assign({},INITIAL.featEffects,d.featEffects||{});
+      S.bonusSaves=Object.assign({},INITIAL.bonusSaves,d.bonusSaves||{});
+      S.money=Object.assign({},INITIAL.money,d.money||{});
+    }
+  }catch(e){}
 }
 function saveState(){
   try{ localStorage.setItem('shen-v5',JSON.stringify(S)); }catch(e){}
@@ -1508,17 +1575,75 @@ function saveCurrentSession() {
 // ═══════════════════════════════════════════════════════
 // CHRONIQUES
 // ═══════════════════════════════════════════════════════
+const HARDCODED_CHRONIQUES = [
+  {
+    titre: "Dimanche 7 juin 2026",
+    date: "2026-06-07T18:00:00.000Z",
+    data: {
+      resume_narratif: "Havre-Fer, ville pionnière de 18 ans sur les côtes du continent de l’Aube, gouvernée par Lyra Ashenvale. Shen, Torvin, Guidéon et Elara se retrouvent à la taverne de la Veine d’Or, convoqués par Raël. L’explorateur arrive en retard, une entaille au cou, et pose sur la table une pierre gravée de runes trouvée dans un ours mutant abattu à deux jours de marche. Mission proposée : 15 PO/jour + 20 PO de bonus.\n\nPendant la discussion, Shen repère un sbire du Fond qui fixe Raël. Il crée une illusion mineure, s’interpose, et l’assomme d’une frappe étourdissante. La situation dégénère, les demi-trolls éjectent le sbire qui lance une menace explicite.\n\nEn route le lendemain, Guidéon détecte une illusion qui les suit. Embuscade : Cluk, kobold magicien en rite de passage, blessé par Elara, soigné, rejoint le groupe. Aux abords de la pyramide, toute faune absente dans un rayon de 50 m. La pierre de Raël correspond au morceau manquant de la structure, arraché il y a 5-6 ans.\n\nLe groupe explore l’intérieur. Shen repère et désamorce une lame en métal bleué imputrescible. Un campement récent livré une potion et une fiole inconnue. Au fond, une manticore endormie réveillée accidentellement. Combat victorieux. Giuu fuit, rattrapé par Shen. En mourant, la manticore libère une pierre bleuée identique à la lame. Guidéon découvre un atelier : les runes servent à créer des hybrides. La manticore en était la preuve. L’ours mutant, la prochaine.",
+      personnages: [
+        {nom:"Shen Varath",type:"PJ",role:"Moine Shadar-Kaï — Assomme le sbire, repère et désamorce le piège, combat la manticore, frappe Giuu en opportunité."},
+        {nom:"Torvin",type:"PJ",role:"Gnome bricoleur — Enquête sur la pierre, aide au désamorçage, combat à distance."},
+        {nom:"Guidéon",type:"PJ",role:"Gnome druide — Identifie la magie, détecte Cluk, constate l’absence de faune, analyse le bureau, sort d’acide final."},
+        {nom:"Elara",type:"PJ",role:"Éclaireuse humaine — Blesse Cluk d’un carreau d’arbalète. Combat à l’épée contre la manticore."},
+        {nom:"Raël",type:"PNJ",role:"Explorateur demi-elfe, commanditaire — Mandate le groupe, arrive blessé au cou, reste au camp."},
+        {nom:"Cluk",type:"PNJ",role:"Kobold magicien en rite de passage — Suivait en invisible pour voler à manger. Blessé, soigné, rejoint le groupe. Invisibilité 2x/jour."},
+        {nom:"Giuu",type:"PNJ",role:"Kobold accompagnateur — Fuit en invisible pendant le combat. Rattrapé par Shen."},
+        {nom:"Le sbire du Fond",type:"PNJ",role:"Homme de main — Assommé par Shen à la taverne. Menace le groupe en partant."},
+        {nom:"Britta",type:"PNJ",role:"Tenancière draïoïde — Informe sur les runes des mines. Bannit le groupe pour la soirée."},
+        {nom:"Lyra Ashenvale",type:"PNJ",role:"Gouverneure de Havre-Fer — A mandaté Raël pour évaluer la forêt."}
+      ],
+      lieux: [
+        {nom:"Havre-Fer",description:"Ville pionnière de 18 ans. +1000 hab., trois mines, fonderie, milice, temple panthéon, palissade en bois."},
+        {nom:"La Veine d’Or",description:"Taverne de Britta. Lieu du rendez-vous avec Raël. Deux demi-trolls videurs."},
+        {nom:"La pyramide (abords)",description:"7-8 m, couverte de runes. Faune absente à 50 m. Morceau arraché il y a 5-6 ans. Magie de transport."},
+        {nom:"Couloir principal",description:"Escalier descendant, piège à lame bleuée, trois embranchements."},
+        {nom:"Campement intérieur",description:"Propre et récent. Quelqu’un l’utilise activement."},
+        {nom:"Bureau de recherche",description:"Atelier de création d’hybrides par fusion runes et faune locale."}
+      ],
+      evenements: [
+        {titre:"Réunion à la Veine d’Or",description:"Raël présente la pierre runique et mandate le groupe. 15 PO/jour + 20 PO de bonus."},
+        {titre:"Le sbire du Fond",description:"Assommé par Shen. Réclamait la pierre pour le Fond. Menace explicite au départ."},
+        {titre:"Bagarre à la taverne",description:"Dispute publique. Demi-trolls interviennent. Groupe banni de la Veine d’Or."},
+        {titre:"Rencontre de Cluk",description:"Kobold blessé par Elara, soigné, rejoint le groupe. Invisibilité 2x/jour."},
+        {titre:"Analyse de la pyramide",description:"Absence de faune à 50 m. Magie de transport. La pierre = morceau manquant de la pyramide."},
+        {titre:"Le piège de Shen",description:"Lame en métal bleué imputrescible désamorcée et récupérée par Shen."},
+        {titre:"Le campement intérieur",description:"Potion de soins + fiole inconnue récupérées. Présence humaine récente."},
+        {titre:"Combat : la manticore",description:"Réveillée accidentellement. Victoire du groupe. Giuu fuit, rattrapé par Shen."},
+        {titre:"La pierre bleuée",description:"Tombe du corps de la manticore. Même teinte que la lame. Lien inconnu."},
+        {titre:"Révélation de Guidéon",description:"Bureau = atelier d’hybrides. Une deuxième créature était en cours de fabrication."}
+      ],
+      objets: [
+        {nom:"Pierre runique",note:"Trouvée dans l’ours mutant. Correspond au morceau manquant de la pyramide. Le Fond la veut."},
+        {nom:"Lame de métal bleué",note:"Métal inconnu, imputrescible. Même couleur que la pierre de la manticore."},
+        {nom:"Potion de soins",note:"Récupérée dans le campement."},
+        {nom:"Fiole non identifiée",note:"Contenu inconnu. Récupérée dans le campement."}
+      ],
+      intrigues: [
+        {titre:"Le Fond veut la pierre",statut:"ouvert",description:"Baron criminel de Havre-Fer. Sbire envoyé. Menace explicite contre le groupe."},
+        {titre:"Qui a arraché la pyramide ?",statut:"ouvert",description:"Morceau arraché il y a 5-6 ans. C’est la pierre de Raël. Pourquoi l’ours l’avait-il avalé ?"},
+        {titre:"Qui tient le campement ?",statut:"ouvert",description:"Quelqu’un étudie les runes et n’était pas là lors de la visite."},
+        {titre:"La pierre bleuée",statut:"ouvert",description:"Même couleur que la lame. Connexion inconnue."},
+        {titre:"L’ours mutant",statut:"ouvert",description:"Était en cours de transformation. Est-il encore vivant ?"},
+        {titre:"La magie de la pyramide",statut:"ouvert",description:"Magie de transport. Zone de sécurité. Qui l’a bâtie ?"},
+        {titre:"La mission de Raël",statut:"ouvert",description:"La gouverneure veut envoyer des bûcherons. La pyramide est potentiellement un obstacle."}
+      ]
+    }
+  },
+];
+
 function renderChroniques() {
   const container = document.getElementById('chron-list');
   let sessions = [];
   try { sessions = JSON.parse(localStorage.getItem('shen-chroniques') || '[]'); } catch(e){}
+  const all = [...HARDCODED_CHRONIQUES, ...sessions];
 
-  if (!sessions.length) {
+  if (!all.length) {
     container.innerHTML = `<div class="chron-empty"><div class="chron-empty-icon">📖</div><div class="chron-empty-text">Aucune session enregistrée.<br>Analyse ta première session dans l'onglet Session !</div></div>`;
     return;
   }
 
-  container.innerHTML = sessions.map((s, i) => {
+  container.innerHTML = all.map((s, i) => {
     const d = new Date(s.date);
     const dateStr = d.toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
     const data = s.data || {};
@@ -1554,7 +1679,7 @@ function renderChroniques() {
 
     return `<div class="chron-item" id="chron-${i}">
       <div class="chron-item-header" onclick="toggleChron(${i})">
-        <div class="chron-num">#${sessions.length - i}</div>
+        <div class="chron-num">#${all.length - i}</div>
         <div><div class="chron-title">${esc(s.titre)}</div><div class="chron-date">${dateStr}${s.fileName ? ` · ${esc(s.fileName)}` : ''}</div></div>
         <div class="chron-chevron">▼</div>
       </div>
@@ -1596,5 +1721,6 @@ function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg
 loadState(); renderAll(); renderEquipment(); renderSaves();
 document.getElementById('levelup-modal').addEventListener('click',e=>{ if(e.target===document.getElementById('levelup-modal')) closeModal(); });
 </script>
-</body>
-</html>
+
+
+</body></html>
