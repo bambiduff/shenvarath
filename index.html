@@ -470,11 +470,7 @@
           <div class="atk-info"><div class="atk-name">Déluge de frappes</div><div class="atk-detail">2 attaques bonus · 1 ki</div></div>
           <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg atk-dmg-martial">1d6+4</div></div>
         </div>
-        <div class="attack-item">
-          <div class="atk-icon">🌑</div>
-          <div class="atk-info"><div class="atk-name">Frappe étourdissante</div><div class="atk-detail" id="atk-stun-detail">DD 13 CON au toucher · 1 ki</div></div>
-          <div class="atk-stats"><div class="atk-bonus-val atk-bonus">+6</div><div class="atk-dmg">Étourdi</div></div>
-        </div>
+
         <div class="attack-item">
           <div class="atk-icon">🏹</div>
           <div class="atk-info"><div class="atk-name">Projectile renvoyé</div><div class="atk-detail">Réaction · après déviation</div></div>
@@ -522,7 +518,7 @@
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Déluge de frappes</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — 2 frappes à mains nues supplémentaires immédiatement après une attaque au corps à corps.</div></div>
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Défense patiente</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — Esquiver jusqu'au début de votre prochain tour. Les attaques contre vous ont le désavantage.</div></div>
         <div class="ability-item"><div class="ab-hd"><span class="ab-name">Pas du vent</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Action bonus — Se désengager ou foncer. Distance de saut doublée jusqu'à la fin du tour.</div></div>
-        <div class="ability-item"><div class="ab-hd"><span class="ab-name">Frappe étourdissante</span><span class="ab-tag t-ki">1 ki</span></div><div class="ab-desc">Avant une attaque de mêlée qui touche — DD variable CON ou étourdi jusqu'à votre prochain tour.</div></div>
+
       </div>
       <div class="card">
         <div class="card-title">Arts de l'Ombre</div>
@@ -930,7 +926,6 @@ function renderAll(){
   const ab=atkBonus(), dmg=`1d${S.martialDie}+${mod(S.stats.dex)}`;
   document.querySelectorAll('.atk-bonus').forEach(el=>el.textContent=fmt(ab));
   document.querySelectorAll('.atk-dmg-martial').forEach(el=>el.textContent=dmg);
-  document.getElementById('atk-stun-detail').textContent=`DD ${kiDC()} CON au toucher · 1 ki`;
   document.getElementById('ac-formula').textContent=`CA = 10 + DEX (${fmt(mod(S.stats.dex))}) + SAG (${fmt(mod(S.stats.wis))}) = ${acVal()}. Sans armure.`;
   document.getElementById('deflect-desc').textContent=`Réduit les dégâts d'une attaque à distance de 1d10+${mod(S.stats.dex)+pb}. Si réduit à 0 : renvoyer (${fmt(ab)}, ${dmg}).`;
   document.getElementById('fall-desc').textContent=`Réduit les dégâts de chute de ${S.level*5} (niveau ${S.level} × 5).`;
