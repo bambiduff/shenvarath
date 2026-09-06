@@ -1400,39 +1400,124 @@ function esc(str){ return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;')
 // ═══════════════════════════════════════════════════════
 function rollDice(s){ const r=Math.ceil(Math.random()*s); const el=document.getElementById('dice-result'); el.innerHTML=`<span>${r}</span><span class="dice-lbl">d${s}</span>`; toast(`d${s} → ${r}`); }
 
-async function drawProverb(){
+const PROVERB_TEMPLATES={
+  "absurde et kaamelottien":[
+    {slots:[
+      ["marches assez longtemps dans la même direction","poses la même question à trois personnes différentes","attends assez longtemps devant une porte fermée","cherches la vérité dans les yeux d'un menteur","suis un chemin que personne n'a tracé"],
+      ["revenir devant toi-même","obtenir trois réponses différentes","comprendre qu'elle ne s'ouvrira jamais","trouver un mensonge plus beau que la vérité","arriver exactement là où tu ne voulais pas aller"],
+      ["mathématique","écrit quelque part, je ne sais plus où","un principe shadar-kai que personne ne m'a expliqué","une évidence que personne n'ose dire tout haut","la loi la plus simple du monde, et la plus ignorée"]
+    ], build:(a,b,c)=>`Si tu ${a}, tu finis toujours par ${b}. C'est ${c}.`},
+    {slots:[
+      ["un homme discuter avec une pierre","un roi demander pardon à son cheval","un voleur rendre plus qu'il n'avait pris","un mort donner de meilleurs conseils qu'un vivant","deux ombres se battre pour la même place au soleil"],
+      ["La pierre avait raison plus souvent que lui.","Le cheval n'a rien dit, ce qui était déjà beaucoup.","Personne ne l'a cru, et pourtant c'est arrivé.","Ça n'a choqué que moi, apparemment.","Il n'y avait pas de soleil, ça n'a gêné personne."]
+    ], build:(d,e)=>`J'ai déjà vu ${d}. ${e}`}
+  ],
+  "cynique et sec":[
+    {slots:[
+      ["La vérité","Le malheur","La trahison","L'échec","Le mensonge"],
+      ["d'être laide","de tout gâcher","de porter un joli nom","d'arriver au pire moment","de sembler raisonnable"]
+    ], build:(a,b)=>`${a} ne demande jamais la permission ${b}.`},
+    {slots:[
+      ["Tout le monde ment","Tout le monde trahit, un jour ou l'autre","Tout le monde a peur","Tout le monde espère","Tout le monde se ment à lui-même"],
+      ["le prix","le sourire qu'on garde en le faisant","le temps que ça prend","qui ose l'admettre","l'excuse qu'on choisit"]
+    ], build:(c,d)=>`${c}. La seule différence, c'est ${d}.`}
+  ],
+  "poétique et mélancolique":[
+    {slots:[
+      ["Les ombres","Les pierres du monastère","Les blessures","Les portes closes","Les nuits sans lune"],
+      ["Elles se contentent de s'allonger, un peu plus, chaque soir.","Elles se contentent de durer.","Elles se contentent de peser un peu plus lourd.","Elles gardent tout, sans jamais rien rendre.","Elles attendent juste que quelqu'un se souvienne."]
+    ], build:(a,b)=>`${a} ne pleurent jamais. ${b}`},
+    {slots:[
+      ["silences","matins","visages","chemins","adieux"],
+      ["des adieux qu'on n'a pas eu le courage de dire","des promesses qu'on savait déjà brisées","des questions sans personne pour y répondre","des portes qu'on referme sans bruit, par respect","des noms qu'on n'ose plus prononcer"]
+    ], build:(c,d)=>`Il y a des ${c} qui ressemblent à ${d}.`}
+  ],
+  "faussement profond":[
+    {slots:[
+      [["Le vide","vide"],["Le silence","silencieux"],["Le hasard","hasardeux"],["Le destin","écrit"],["L'ombre","sombre"]],
+      ["très discret","occupé ailleurs","poli","patient","de mauvaise humeur, parfois"]
+    ], build:(ab,c)=>`${ab[0]} n'est pas ${ab[1]}. Il est juste ${c}.`},
+    {slots:[
+      ["lié","écrit d'avance","une question de patience","affaire d'équilibre","affaire de timing"],
+      ["ça, c'est déjà lié aussi","ça aussi, c'était prévu","ça aussi, ça demande d'attendre","ça aussi, ça finit par s'ajuster","ça aussi, c'est une question de timing"]
+    ], build:(d,e)=>`Tout est ${d}. Sauf ce qui ne l'est pas, mais ${e}.`}
+  ],
+  "guerrier et stoïque":[
+    {slots:[
+      ["la mort","la douleur","la peur","le destin","un ennemi qui ne recule pas"],
+      ["la salue, et on continue de frapper","la regarde en face, et on avance","l'accueille, et on ne recule pas","en fait un allié, à force","apprend à marcher à côté d'elle"]
+    ], build:(a,b)=>`On ne discute pas avec ${a}. On ${b}.`},
+    {slots:[
+      ["La discipline","L'entraînement","Le courage","La patience","La technique"],
+      ["du coup","de la chute","de la peur","de la défaite","de la douleur"],
+      ["comment on l'encaisse","comment on se relève","avec quelle dignité on tombe","combien de temps on tient","ce qu'on en fait ensuite"]
+    ], build:(c,d,e)=>`${c} ne protège pas ${d}. Elle décide juste ${e}.`}
+  ],
+  "philosophique absurde":[
+    {slots:[
+      ["La vie","Le combat","Le voyage","Ce monde","Tout ceci"],
+      ["la seule chose qu'elle fait bien","ce qui le rend supportable","ce qui devrait te rassurer","sa qualité la plus fiable","sans doute son seul mérite"]
+    ], build:(a,b)=>`${a} n'a pas de sens. C'est même ${b}.`},
+    {slots:[
+      ["continue","marche encore","me bats","cherche","espère, un peu"],
+      ["ne pas comprendre","me tromper","chercher une raison qui n'existe peut-être pas","regarder ailleurs","faire semblant que ça a un but"]
+    ], build:(c,d)=>`On me demande pourquoi je ${c}. Je réponds : parce que je n'ai pas encore fini de ${d}.`}
+  ],
+  "mordant et ironique":[
+    {slots:[
+      ["Quelle sagesse","Quelle belle intention","Quelle magnifique décision","Quelle assurance","Quelle clairvoyance"],
+      ["qu'elle arrive toujours après les dégâts","qu'elle ne dure jamais très longtemps","qu'elle ne change jamais rien","qu'elle n'ait convaincu que toi","qu'elle arrive dix ans trop tard"]
+    ], build:(a,b)=>`${a}. Dommage ${b}.`},
+    {slots:[
+      ["tu contrôles la situation","tu as toujours raison","personne ne t'a menti","tout se passe comme prévu","tu es le premier à qui ça arrive"],
+      ["depuis le début","plus que tu ne le penses","sincèrement","plus que ça ne devrait","à chaque fois un peu plus"]
+    ], build:(c,d)=>`Continue à croire que ${c}. Ça m'amuse ${d}.`}
+  ],
+  "mystérieux et shadar-kai":[
+    {slots:[
+      ["traversé le Voile Gris","marché dans le Shadowfell sans torche","parlé à une ombre qui me ressemblait","dormi dans un endroit sans nom","vu ma propre absence"],
+      ["Il ne m'a pas rendu tout ce qu'il a pris.","Elle avait de meilleures réponses que moi.","Je n'en suis pas complètement revenu.","Je n'y suis pas retourné depuis, par choix.","Ça ne se raconte pas, ça se porte."]
+    ], build:(a,b)=>`J'ai déjà ${a}. ${b}`},
+    {slots:[
+      ["Le Shadowfell","Le Voile Gris","Le silence de mon ordre","Ce que j'ai perdu","Ce que je suis devenu"],
+      ["me taire correctement","marcher sans bruit","ne plus rien attendre","regarder l'obscurité sans reculer","porter mes ombres sans les montrer"]
+    ], build:(c,d)=>`${c} ne m'a pas brisé. Il m'a juste appris à ${d}.`}
+  ],
+  "pragmatique brutal":[
+    {slots:[
+      ["Si ça saigne, ça se soigne","N'explique jamais deux fois la même chose à quelqu'un qui n'écoute pas","Un problème sans solution n'est pas un problème","La meilleure stratégie est souvent la plus simple","Ce qui ne peut pas être réparé doit être accepté"],
+      ["Si ça ne saigne pas, ce n'est pas grave.","Frappe plus fort la première fois.","C'est un fait. Vis avec.","Recule, respire, recommence, frappe.","Vite, et sans grand discours."]
+    ], build:(a,b)=>`${a}. ${b}`},
+    {slots:[
+      ["quand ça peut se trancher au couteau","quand la discussion ne mène nulle part","quand personne ne veut décider","quand tout le monde hésite","quand le temps presse"],
+      ["tranche","avance quand même","décide à leur place","choisis, n'importe quoi, mais choisis","frappe d'abord, explique ensuite"]
+    ], build:(c,d)=>`Même ${c}, ${d}.`}
+  ],
+  "tendre mais désabusé":[
+    {slots:[
+      ["cru","aimé, vraiment","espéré très fort","fait confiance sans réfléchir","voulu rester"],
+      ["Ça m'a coûté cher, mais au moins j'ai su à quoi ça ressemblait.","Je ne le regrette pas, seulement le prix que ça a eu.","Ça ne s'oublie pas, ça se range juste ailleurs.","Je n'ai pas recommencé depuis, mais je n'ai pas fermé la porte non plus.","Ce n'était pas une erreur. C'était juste trop tôt, ou trop tard."]
+    ], build:(a,b)=>`J'ai ${a}, une fois. ${b}`},
+    {slots:[
+      ["'toujours'","'jamais'","'je vais bien'","'ça ira'","'je suis prêt'"],
+      ["'pour l'instant'","'pas encore'","'ça peut aller'","'on verra'","'je fais ce que je peux'"]
+    ], build:(c,d)=>`Je ne dis plus ${c}. Je dis ${d}, c'est plus honnête.`}
+  ]
+};
+
+function pickFrom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function drawProverb(){
   const box=document.getElementById('proverb-box');
-  const btn=document.querySelector('.proverb-btn');
   box.classList.remove('show');
-  box.textContent='';
-  btn.textContent='...';
-  btn.disabled=true;
-  const styles=[
-    "absurde et kaamelottien, phrase qui part dans tous les sens avec une logique interne implacable",
-    "cynique et sec, verite crue sans menagement",
-    "poetique et melancolique, beau mais triste, lie aux ombres",
-    "faussement profond, ressemble a une grande verite mais est vide",
-    "guerrier et stoique, sur le combat la discipline la mort",
-    "philosophique absurde, digne de Camus mais dit par quelqu un qui s en fout",
-    "mordant et ironique, une pique deguisee en sagesse",
-    "mysterieux et shadar-kai, lie aux ombres au Voile Gris a la frontiere entre vie et mort",
-    "pragmatique brutal, conseil concret delivre comme sentence universelle",
-    "tendre mais desabuse, quelqu un qui a voulu croire et a arrete"
-  ];
-  const style=styles[Math.floor(Math.random()*styles.length)];
-  const sys="Tu es Shen Varath, moine shadar-kai taciturne. Genere UNE sentence courte (1 a 3 phrases max). Style : "+style+". Inspire du Shadowfell. Pas d introduction. Juste la sentence. En francais.";
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:120,system:sys,messages:[{role:'user',content:'Une sentence.'}]})});
-    const data=await res.json();
-    const text=(data.content&&data.content[0]&&data.content[0].text||'').trim()||'Le silence aussi est une reponse.';
-    box.textContent='"'+text+'"';
-    box.classList.add('show');
-  }catch(e){
-    box.textContent='"Le silence aussi est une reponse."';
-    box.classList.add('show');
-  }
-  btn.textContent='🎲 Une sentence au hasard';
-  btn.disabled=false;
+  const styleKeys=Object.keys(PROVERB_TEMPLATES);
+  const style=styleKeys[Math.floor(Math.random()*styleKeys.length)];
+  const templates=PROVERB_TEMPLATES[style];
+  const t=templates[Math.floor(Math.random()*templates.length)];
+  const args=t.slots.map(pickFrom);
+  const text=t.build(...args);
+  box.textContent='"'+text+'"';
+  requestAnimationFrame(()=>box.classList.add('show'));
 }
 
 
